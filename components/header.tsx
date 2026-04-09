@@ -22,7 +22,7 @@ export default function Header() {
   const [itemHovered, setItemHovered] = useState<ItemHovered | null>(null);
 
   return (
-    <header className="m-5 mx-auto flex max-w-4xl items-center justify-between rounded-full p-1.5 shadow-[0_0_5px_0_rgba(0,0,0,0.2)]">
+    <header className="m-5 mx-auto flex max-w-4xl items-center justify-between rounded-full p-1.5 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.2)]">
       <Image src="/logo.svg" alt="logo" width={37} height={36} />
 
       <nav className="flex gap-7 text-[#6C6C6C]">
@@ -59,7 +59,7 @@ export default function Header() {
         ))}
       </nav>
 
-      <button className="bg-foreground text-background font-inter cursor-pointer rounded-full p-1 px-4 font-medium">
+      <button className="text-background font-inter cursor-pointer rounded-full border border-neutral-900 bg-linear-to-b from-neutral-900 to-black p-1 px-4 font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
         See Pricing
       </button>
     </header>

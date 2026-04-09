@@ -23,8 +23,22 @@ export default function Home() {
         </h2>
 
         <div className="flex gap-8 pt-5">
-          <button className="text-background font-inter cursor-pointer rounded-full bg-gradient-to-b from-[#FF2500] to-[#FF9900] p-1 px-4 text-lg font-medium inset-shadow-sm inset-shadow-[#FF2500]">
-            Book an Intro call
+          <button className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
+            <span
+              className="absolute inset-0 bg-gradient-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
+              aria-hidden
+            />
+            <span
+              className="absolute inset-0 bg-gradient-to-t from-[#FF9900] from-30% via-80% to-[#FF2500] to-120% opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute inset-0 rounded-full inset-shadow-sm inset-shadow-[#FF2500]"
+              aria-hidden
+            />
+            <span className="relative z-10 text-shadow-[#FF2500] text-shadow-xs">
+              Book an Intro call
+            </span>
           </button>
           <button className="font-medium">Recent works</button>
         </div>
