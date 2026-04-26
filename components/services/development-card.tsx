@@ -33,7 +33,7 @@ function ChakraOrbit() {
           return (
             <div
               key={i}
-              className="absolute rounded-full bg-white/35"
+              className="absolute rounded-full bg-white/35 shadow-sm inset-shadow-2xs inset-shadow-white/40"
               style={{
                 width: CIRCLE_SIZE,
                 height: CIRCLE_SIZE,
@@ -57,7 +57,7 @@ export function DevelopmentCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative flex size-[400px] flex-col items-center justify-center overflow-hidden rounded-2xl bg-white p-5"
+      className="relative flex size-[400px] flex-col overflow-hidden rounded-2xl bg-white"
     >
       <ChakraOrbit />
       <div className="flex-1">
@@ -69,18 +69,21 @@ export function DevelopmentCard() {
           className="absolute inset-x-0 top-1/4 m-auto"
         />
       </div>
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-2">
-          <div className="rounded-full bg-[#7D5103]/80 px-2.5 py-0.5 text-sm font-medium text-white">
+      <div className="w-full px-5">
+        <div className="flex items-center justify-start gap-2 pb-0.5">
+          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
             Automation
           </div>
-          <div className="rounded-full bg-[#7D5103]/80 px-2.5 py-0.5 text-sm font-medium text-white">
+          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
             Web & App
           </div>
-          <div className="rounded-full bg-[#7D5103]/80 px-2.5 py-0.5 text-sm font-medium text-white">
+          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
             MVP
           </div>
         </div>
+      </div>
+
+      <div className="flex w-full flex-col gap-2 p-5 pt-4">
         <h4 className="text-2xl font-medium">Development</h4>
         <p>
           We craft beautiful, intuitive interfaces for websites, apps, and

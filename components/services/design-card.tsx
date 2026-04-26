@@ -93,7 +93,7 @@ export function DesignCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="pointer-events-none relative flex size-[400px] flex-col overflow-hidden rounded-2xl"
+      className="relative flex size-[400px] flex-col overflow-hidden rounded-2xl"
     >
       <div className="pt-5">
         <InlineMarquee direction="right" duration={22}>
