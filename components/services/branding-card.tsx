@@ -94,11 +94,8 @@ export function BrandingCard() {
                   : cardHovered === 0
                     ? 20
                     : cardHovered === 2
-                      ? -10
+                      ? -15
                       : 0,
-                // isInactive(cardHovered, 1)
-                //   ? -10
-                //   : 0,
                 y: isActive(cardHovered, 1)
                   ? -44
                   : isInactive(cardHovered, 1)
@@ -114,7 +111,7 @@ export function BrandingCard() {
                   : cardHovered === 0
                     ? 2
                     : cardHovered === 2
-                      ? -10
+                      ? -8
                       : -4,
                 opacity: isInactive(cardHovered, 1) ? 0.85 : 1,
                 zIndex: isActive(cardHovered, 1)
@@ -185,8 +182,6 @@ export function BrandingCard() {
           <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-transparent to-[#21823C] blur-[80px]" />
           <div className="relative z-20">
             <div className="px-5">
-              {/* <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[240px] bg-linear-to-b from-transparent via-emerald-950/15 to-emerald-950/75" /> */}
-
               <div className="relative z-10 flex items-center gap-2 pb-0.5">
                 <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
                   Logo & Brand Identity
