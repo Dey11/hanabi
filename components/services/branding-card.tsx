@@ -50,7 +50,7 @@ export function BrandingCard() {
                     ? -8
                     : 0,
                 y: isActive(cardHovered, 0)
-                  ? -34
+                  ? -50
                   : isInactive(cardHovered, 0)
                     ? 10
                     : 0,
@@ -91,9 +91,14 @@ export function BrandingCard() {
               animate={{
                 x: isActive(cardHovered, 1)
                   ? 0
-                  : isInactive(cardHovered, 1)
-                    ? -10
-                    : 0,
+                  : cardHovered === 0
+                    ? 20
+                    : cardHovered === 2
+                      ? -10
+                      : 0,
+                // isInactive(cardHovered, 1)
+                //   ? -10
+                //   : 0,
                 y: isActive(cardHovered, 1)
                   ? -44
                   : isInactive(cardHovered, 1)
@@ -106,9 +111,11 @@ export function BrandingCard() {
                     : 1,
                 rotate: isActive(cardHovered, 1)
                   ? 0
-                  : isInactive(cardHovered, 1)
-                    ? -10
-                    : -4,
+                  : cardHovered === 0
+                    ? 2
+                    : cardHovered === 2
+                      ? -10
+                      : -4,
                 opacity: isInactive(cardHovered, 1) ? 0.85 : 1,
                 zIndex: isActive(cardHovered, 1)
                   ? 30
@@ -138,7 +145,7 @@ export function BrandingCard() {
                     ? 12
                     : 0,
                 y: isActive(cardHovered, 2)
-                  ? -34
+                  ? -55
                   : isInactive(cardHovered, 2)
                     ? 10
                     : 0,
