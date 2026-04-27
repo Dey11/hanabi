@@ -2,6 +2,12 @@ import { DesignCard } from "./design-card";
 import { DevelopmentCard } from "./development-card";
 import { BrandingCard } from "./branding-card";
 import { EMAIL } from "@/lib/constants";
+import { Sawarabi_Gothic } from "next/font/google";
+
+const sawarabiGothic = Sawarabi_Gothic({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export default function ServiceCards() {
   return (
@@ -23,6 +29,28 @@ export default function ServiceCards() {
           same-day response.
         </span>
       </p>
+
+      <div className="my-20 flex flex-row items-center justify-between gap-40">
+        <div className="flex h-[250px] w-[450px] -rotate-8 flex-col overflow-hidden rounded-lg border-4 border-dashed border-[#FF6600] bg-black">
+          <div className="flex h-full w-full flex-col rounded-[7px] bg-white px-4 py-3 shadow-[inset_0_0_10px_rgba(0,0,0)]">
+            <div className="flex-1" />
+            <div className="flex items-center justify-between">
+              <div className={sawarabiGothic.className}>JJ Joson</div>
+              <div className={sawarabiGothic.className}>JJ</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex h-[250px] w-[450px] rotate-8 flex-col overflow-hidden rounded-lg border-4 border-dashed border-[#FF6600] bg-black">
+          <div className="flex h-full w-full flex-col rounded-[7px] bg-black px-4 py-3 shadow-[inset_0_0_10px_rgba(0,0,0)]">
+            <div className="flex-1" />
+            <div className="flex items-center justify-between text-white">
+              <div className={sawarabiGothic.className}>JJ Joson</div>
+              <div className={sawarabiGothic.className}>JJ</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
