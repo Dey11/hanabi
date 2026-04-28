@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${geistMono.variable} font-inter -tracking-[0.04em] antialiased overflow-x-clip`}
+        className={`${inter.variable} ${geistMono.variable} font-inter overflow-x-clip tracking-[-0.04em] antialiased`}
       >
         {children}
       </body>

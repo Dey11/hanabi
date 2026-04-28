@@ -461,18 +461,29 @@ export default function WhyUsCards() {
   return (
     <div className="w-full max-w-6xl pt-10">
       <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-6">
-        {top.map((item, idx) => (
+        {top.map((item, idx) => {
+          const isQuality = item.icon === "quality";
+          const orderClass = isQuality
+            ? "order-1 md:order-2"
+            : "order-2 md:order-1";
+
+          return (
           <Reveal
             key={item.title}
             delay={Math.min(0.05 * idx, 0.12)}
-            className={idx === 1 ? "-mt-px md:mt-0" : ""}
+            className={[
+              orderClass,
+              // Stack seam on mobile (bottom item pulls up by 1px)
+              !isQuality ? "-mt-px md:mt-0" : "",
+            ].join(" ")}
           >
             <WhyUsTopCard
               item={item}
-              mobileStack={idx === 0 ? "top" : idx === 1 ? "bottom" : undefined}
+              mobileStack={isQuality ? "top" : "bottom"}
             />
           </Reveal>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">

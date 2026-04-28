@@ -5,17 +5,19 @@ import ServiceCards from "@/components/services/service-cards";
 import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
+import FooterReveal from "@/components/footer-reveal";
 
 export default function Home() {
   return (
-    <main className="font-inter">
-      <section
-        id="hero"
-        className="flex min-h-screen flex-col items-center justify-center text-center text-pretty"
-      >
-        <div className="absolute top-0 left-0 z-50 w-full">
-          <Header />
-        </div>
+    <FooterReveal>
+      <main className="font-inter">
+        <section
+          id="hero"
+          className="flex min-h-screen flex-col items-center justify-center text-center text-pretty"
+        >
+          <div className="absolute top-0 left-0 z-50 w-full">
+            <Header />
+          </div>
 
         <div className="relative z-0 flex flex-col items-center">
           <Reveal delay={0}>
@@ -130,6 +132,8 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </main>
+
+      </main>
+    </FooterReveal>
   );
 }

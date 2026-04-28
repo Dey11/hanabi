@@ -29,7 +29,7 @@ export default function WorkCard({
         </div>
       </div>
 
-      <div className="flex items-center justify-center rounded-t-none rounded-b-2xl border border-[#E0E0E0] bg-[#F9F9F9] px-5 py-4 sm:px-8 sm:py-5">
+      <div className="flex items-center justify-center rounded-t-none rounded-b-2xl border border-[#E0E0E0] bg-[#F9F9F9] px-5 py-3 sm:px-8">
         <p className="font-inter max-w-2xl text-center text-base leading-relaxed font-normal text-[#1a1a1a] sm:text-[17px]">
           {description}
         </p>
