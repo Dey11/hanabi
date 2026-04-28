@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
+import { Reveal } from "@/components/reveal";
 
 type WhyUsItem = {
   title: string;
@@ -441,14 +442,18 @@ export default function WhyUsCards() {
   return (
     <div className="w-full max-w-6xl pt-10">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
-        {top.map((item) => (
-          <WhyUsTopCard key={item.title} item={item} />
+        {top.map((item, idx) => (
+          <Reveal key={item.title} delay={Math.min(0.05 * idx, 0.12)}>
+            <WhyUsTopCard item={item} />
+          </Reveal>
         ))}
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
-        {bottom.map((item) => (
-          <WhyUsBottomCard key={item.title} item={item} />
+        {bottom.map((item, idx) => (
+          <Reveal key={item.title} delay={Math.min(0.05 * idx, 0.12)}>
+            <WhyUsBottomCard item={item} />
+          </Reveal>
         ))}
       </div>
     </div>
