@@ -15,15 +15,15 @@ function MarqueeSet({
   suffix?: string;
 }) {
   return (
-    <div className="flex shrink-0 items-center gap-10 py-10">
+    <div className="flex shrink-0 items-center gap-6 py-6 sm:gap-10 sm:py-10">
       {items.map((item, idx) => (
         <Image
           key={`${item}-${idx}${suffix}`}
           src={`/hero-projects/${item}.png`}
           alt={item}
-          width={300}
-          height={100}
-          className="h-80 w-auto shrink-0 object-cover"
+          width={260}
+          height={90}
+          className="h-52 w-auto shrink-0 object-cover sm:h-72 md:h-80"
         />
       ))}
     </div>

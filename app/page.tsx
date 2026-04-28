@@ -13,13 +13,13 @@ export default function Home() {
         id="hero"
         className="flex min-h-screen flex-col items-center justify-center text-center text-pretty"
       >
-        <div className="absolute top-0 left-0 w-full">
+        <div className="absolute top-0 left-0 z-50 w-full">
           <Header />
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="relative z-0 flex flex-col items-center">
           <Reveal delay={0}>
-            <h1 className="font-inter mt-60 max-w-xl text-5xl font-medium">
+            <h1 className="font-inter mt-40 max-w-xl px-4 text-4xl font-medium md:mt-60 md:px-0 md:text-5xl">
               Your Digital Impression. Simple and Beautiful
             </h1>
           </Reveal>
@@ -67,13 +67,13 @@ export default function Home() {
         className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
       >
         <Reveal>
-          <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">
+          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
             Our Services
           </h3>
         </Reveal>
 
         <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
+          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
             We specialise in making things
             <br />
             <span className="italic">simply beautiful.</span>
@@ -85,16 +85,16 @@ export default function Home() {
 
       <section
         id="why-us"
-        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
+        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-10 pb-20"
       >
         <Reveal>
-          <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">
+          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
             Why Us
           </h3>
         </Reveal>
 
         <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
+          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
             The Hanabi Difference
           </h2>
         </Reveal>
@@ -104,16 +104,16 @@ export default function Home() {
 
       <section
         id="works"
-        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
+        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-14 pb-10"
       >
         <Reveal>
-          <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">
+          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
             Our Works
           </h3>
         </Reveal>
 
         <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
+          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
             A Curated Collection
           </h2>
         </Reveal>

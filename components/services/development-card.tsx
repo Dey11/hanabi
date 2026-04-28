@@ -164,7 +164,7 @@ export function DevelopmentCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative flex size-[400px] flex-col overflow-hidden rounded-2xl bg-white"
+      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl bg-white sm:h-[400px] sm:max-w-[400px]"
     >
       <ChakraOrbit />
       <div className="flex-1">
@@ -177,20 +177,20 @@ export function DevelopmentCard() {
         />
       </div>
       <div className="w-full px-5">
-        <div className="flex items-center justify-start gap-2 pb-0.5">
-          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
+        <div className="flex items-center justify-start gap-1.5 pb-0.5">
+          <div className="rounded-full bg-emerald-950/55 px-3 py-1 text-xs font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs sm:px-4 sm:text-sm">
             Automation
           </div>
-          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
+          <div className="rounded-full bg-emerald-950/55 px-3 py-1 text-xs font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs sm:px-4 sm:text-sm">
             Web & App
           </div>
-          <div className="rounded-full bg-emerald-950/55 px-4 py-1 text-sm font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs">
+          <div className="rounded-full bg-emerald-950/55 px-3 py-1 text-xs font-medium text-white shadow-sm inset-shadow-2xs inset-shadow-white/10 backdrop-blur-sm text-shadow-2xs sm:px-4 sm:text-sm">
             MVP
           </div>
         </div>
       </div>
 
-      <div className="flex w-full flex-col gap-2 p-5 pt-4">
+      <div className="flex w-full flex-col gap-2 p-5 pt-2 sm:pt-4">
         <h4 className="text-2xl font-medium">Development</h4>
         <p>
           We craft beautiful, intuitive interfaces for websites, apps, and

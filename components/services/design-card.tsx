@@ -93,15 +93,15 @@ export function DesignCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative flex size-[400px] flex-col overflow-hidden rounded-2xl"
+      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl sm:h-[400px] sm:max-w-[400px]"
     >
-      <div className="pt-5">
+      <div className="pt-6 pb-3 sm:pt-7 sm:pb-3">
         <InlineMarquee direction="right" duration={22}>
           <div className="flex shrink-0 gap-2 pr-2 pb-0.5">
             {DESIGN_TOP_BADGES.map((badge) => (
               <span
                 key={badge}
-                className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-black/70 shadow-sm inset-shadow-2xs inset-shadow-white/15 backdrop-blur-sm text-shadow-2xs"
+                className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-black/70 shadow-sm inset-shadow-2xs inset-shadow-white/15 backdrop-blur-sm text-shadow-2xs sm:text-sm"
               >
                 {badge}
               </span>
@@ -110,20 +110,20 @@ export function DesignCard() {
         </InlineMarquee>
       </div>
 
-      <div className="flex flex-1 items-center overflow-hidden">
+      <div className="flex flex-1 items-center overflow-hidden py-3">
         <InlineMarquee direction="left" duration={16}>
           <div className="flex shrink-0 items-center gap-3 pr-3">
             {DESIGN_PROJECTS.map((project) => (
               <div
                 key={project}
                 className="shrink-0 overflow-hidden rounded-lg"
-                style={{ width: 220, height: 160 }}
+                style={{ width: 180, height: 130 }}
               >
                 <Image
                   src={`/hero-projects/${project}.png`}
                   alt={project}
-                  width={220}
-                  height={160}
+                  width={180}
+                  height={130}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -132,13 +132,13 @@ export function DesignCard() {
         </InlineMarquee>
       </div>
 
-      <div>
+      <div className="pt-3 pb-1 sm:pb-0">
         <InlineMarquee direction="right" duration={18}>
           <div className="flex shrink-0 gap-2 pr-2 pb-0.5">
             {DESIGN_TOOLS.map((tool) => (
               <span
                 key={tool.label}
-                className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-black/70 shadow-sm inset-shadow-2xs inset-shadow-white/15 backdrop-blur-sm text-shadow-2xs"
+                className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-black/70 shadow-sm inset-shadow-2xs inset-shadow-white/15 backdrop-blur-sm text-shadow-2xs sm:text-sm"
               >
                 {tool.icon === "illustrator" ? (
                   <IllustratorMark className="size-4 -translate-y-px text-black/70" />
@@ -155,7 +155,7 @@ export function DesignCard() {
         </InlineMarquee>
       </div>
 
-      <div className="flex flex-col gap-2 p-5 pt-4">
+      <div className="flex flex-col gap-2 p-5 pt-2 sm:pt-4">
         <h4 className="text-2xl font-medium">Design</h4>
         <p>
           We craft beautiful, intuitive interfaces for websites, apps, and

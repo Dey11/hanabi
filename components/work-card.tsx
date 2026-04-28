@@ -15,10 +15,10 @@ export default function WorkCard({
   images,
 }: WorkCardProps) {
   return (
-    <article className="flex w-full flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start justify-between gap-4 font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[#6C6C6C] sm:text-xs">
-          <span className="min-w-0 text-pretty">{title}</span>
+    <article className="flex w-full flex-col gap-2 sm:gap-3">
+      <div className="flex flex-col gap-1">
+        <div className="flex items-start justify-between gap-4 font-mono text-sm font-medium tracking-[0.06em] text-[#6C6C6C] uppercase sm:text-sm">
+          <span className="min-w-0 text-pretty text-black">{title}</span>
           <span className="shrink-0 text-right">{category}</span>
         </div>
 

@@ -30,7 +30,7 @@ export function InlineMarquee({ direction, duration, children }: InlineMarqueePr
 
   return (
     <div
-      className="overflow-hidden"
+      className="w-full overflow-hidden"
       onMouseEnter={() => playbackRef.current?.pause()}
       onMouseLeave={() => playbackRef.current?.play()}
     >

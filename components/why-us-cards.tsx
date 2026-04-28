@@ -18,17 +18,6 @@ type WhyUsItem = {
 
 const WHY_US_ITEMS: WhyUsItem[] = [
   {
-    title: "Clean Code",
-    description: "Total transparency, zero surprises.",
-    image: {
-      src: "/whyus/code.png",
-      alt: "Clean code gradient with code icon",
-    },
-    icon: "code",
-    iconClassName: "text-[#FF3D00]/70",
-    variant: "top",
-  },
-  {
     title: "Quality",
     description: "Total transparency, zero surprises.",
     image: {
@@ -37,6 +26,17 @@ const WHY_US_ITEMS: WhyUsItem[] = [
     },
     icon: "quality",
     iconClassName: "text-[#22C55E]/70",
+    variant: "top",
+  },
+  {
+    title: "Clean Code",
+    description: "Total transparency, zero surprises.",
+    image: {
+      src: "/whyus/code.png",
+      alt: "Clean code gradient with code icon",
+    },
+    icon: "code",
+    iconClassName: "text-[#FF3D00]/70",
     variant: "top",
   },
   {
@@ -319,7 +319,13 @@ function WhyUsIcon({
   }
 }
 
-function WhyUsTopCard({ item }: { item: WhyUsItem }) {
+function WhyUsTopCard({
+  item,
+  mobileStack,
+}: {
+  item: WhyUsItem;
+  mobileStack?: "top" | "bottom";
+}) {
   const isQuality = item.icon === "quality";
   const reduceMotion = useReducedMotion();
 
@@ -327,6 +333,8 @@ function WhyUsTopCard({ item }: { item: WhyUsItem }) {
     <div
       className={[
         "w-full overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)]",
+        mobileStack === "top" ? "rounded-b-none md:rounded-2xl" : "",
+        mobileStack === "bottom" ? "rounded-t-none md:rounded-2xl" : "",
         // Keep padding consistent with bottom cards.
         "p-3.5",
       ].join(" ")}
@@ -421,9 +429,20 @@ function WhyUsBottomCard({ item }: { item: WhyUsItem }) {
             </div>
           </div>
         </div>
+
+        {/* Mobile: keep text inside the card */}
+        <div className="px-2 pt-4 md:hidden">
+          <div className="font-inter text-lg leading-tight font-semibold tracking-[-0.01em]">
+            {item.title}
+          </div>
+          <div className="pt-0.5 font-mono text-sm leading-snug font-medium text-[#6C6C6C]">
+            {item.description}
+          </div>
+        </div>
       </div>
 
-      <div className="px-2 pt-4">
+      {/* Desktop: keep text below */}
+      <div className="hidden px-2 pt-4 md:block">
         <div className="font-inter text-lg leading-tight font-semibold tracking-[-0.01em]">
           {item.title}
         </div>
@@ -441,10 +460,17 @@ export default function WhyUsCards() {
 
   return (
     <div className="w-full max-w-6xl pt-10">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+      <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-6">
         {top.map((item, idx) => (
-          <Reveal key={item.title} delay={Math.min(0.05 * idx, 0.12)}>
-            <WhyUsTopCard item={item} />
+          <Reveal
+            key={item.title}
+            delay={Math.min(0.05 * idx, 0.12)}
+            className={idx === 1 ? "-mt-px md:mt-0" : ""}
+          >
+            <WhyUsTopCard
+              item={item}
+              mobileStack={idx === 0 ? "top" : idx === 1 ? "bottom" : undefined}
+            />
           </Reveal>
         ))}
       </div>
