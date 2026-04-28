@@ -1,11 +1,12 @@
+import FooterReveal from "@/components/footer-reveal";
 import Header from "@/components/header";
+import HeroKites from "@/components/hero-kites";
 import MarqueeComponent from "@/components/marquee-component";
 import { Reveal } from "@/components/reveal";
 import ServiceCards from "@/components/services/service-cards";
 import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
-import FooterReveal from "@/components/footer-reveal";
 
 export default function Home() {
   return (
@@ -13,126 +14,130 @@ export default function Home() {
       <main className="font-inter">
         <section
           id="hero"
-          className="flex min-h-screen flex-col items-center justify-center text-center text-pretty"
+          className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden text-center text-pretty"
         >
           <div className="absolute top-0 left-0 z-50 w-full">
             <Header />
           </div>
 
-        <div className="relative z-0 flex flex-col items-center">
-          <Reveal delay={0}>
-            <h1 className="font-inter mt-40 max-w-xl px-4 text-4xl font-medium md:mt-60 md:px-0 md:text-5xl">
-              Your Digital Impression. Simple and Beautiful
-            </h1>
+          <HeroKites />
+
+          <div className="relative z-20 flex flex-col items-center bg-white/40 md:bg-transparent">
+            <div className="mx-4 mt-40 rounded-3xl px-4 py-4 md:mx-0 md:mt-60 md:max-w-2xl md:px-0 md:py-0">
+              <Reveal delay={0}>
+                <h1 className="font-inter max-w-xl text-4xl font-medium md:text-5xl">
+                  Your Digital Impression. Simple and Beautiful
+                </h1>
+              </Reveal>
+
+              <Reveal delay={0.08}>
+                <h2 className="max-w-2xl pt-5 text-lg font-medium text-[#6C6C6C]">
+                  We build refreshingly simple and beautiful websites and
+                  digital experiences that captivate your audience and elevate
+                  your brand.
+                </h2>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.16}>
+              <div className="flex gap-8 pt-5">
+                <button className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
+                  <span
+                    className="absolute inset-0 bg-linear-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
+                    aria-hidden
+                  />
+                  <span
+                    className="absolute inset-0 bg-linear-to-t from-[#FF9900] from-30% via-80% to-[#FF2500] to-120% opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                    aria-hidden
+                  />
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full inset-shadow-sm inset-shadow-[#FF2500]"
+                    aria-hidden
+                  />
+                  <span className="relative z-10 text-shadow-[#FF2500] text-shadow-xs">
+                    Book an Intro call
+                  </span>
+                </button>
+                <button className="font-medium">Recent works</button>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.24}>
+              <div className="mt-10">
+                <MarqueeComponent />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section
+          id="services"
+          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
+        >
+          <Reveal>
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+              Our Services
+            </h3>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <h2 className="max-w-2xl pt-5 text-lg font-medium text-[#6C6C6C]">
-              We build refreshingly simple and beautiful websites and digital
-              experiences that captivate your audience and elevate your brand.
+          <Reveal delay={0.06}>
+            <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
+              We specialise in making things
+              <br />
+              <span className="italic">simply beautiful.</span>
             </h2>
           </Reveal>
 
-          <Reveal delay={0.16}>
-            <div className="flex gap-8 pt-5">
-              <button className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
-                <span
-                  className="absolute inset-0 bg-linear-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
-                  aria-hidden
-                />
-                <span
-                  className="absolute inset-0 bg-linear-to-t from-[#FF9900] from-30% via-80% to-[#FF2500] to-120% opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
-                  aria-hidden
-                />
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full inset-shadow-sm inset-shadow-[#FF2500]"
-                  aria-hidden
-                />
-                <span className="relative z-10 text-shadow-[#FF2500] text-shadow-xs">
-                  Book an Intro call
-                </span>
-              </button>
-              <button className="font-medium">Recent works</button>
-            </div>
+          <ServiceCards />
+        </section>
+
+        <section
+          id="why-us"
+          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-10 pb-20"
+        >
+          <Reveal>
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+              Why Us
+            </h3>
           </Reveal>
 
-          <Reveal delay={0.24}>
-            <div className="mt-10">
-              <MarqueeComponent />
-            </div>
+          <Reveal delay={0.06}>
+            <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
+              The Hanabi Difference
+            </h2>
           </Reveal>
-        </div>
-      </section>
 
-      <section
-        id="services"
-        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
-      >
-        <Reveal>
-          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
-            Our Services
-          </h3>
-        </Reveal>
+          <WhyUsCards />
+        </section>
 
-        <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
-            We specialise in making things
-            <br />
-            <span className="italic">simply beautiful.</span>
-          </h2>
-        </Reveal>
+        <section
+          id="works"
+          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-14 pb-10"
+        >
+          <Reveal>
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+              Our Works
+            </h3>
+          </Reveal>
 
-        <ServiceCards />
-      </section>
+          <Reveal delay={0.06}>
+            <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
+              A Curated Collection
+            </h2>
+          </Reveal>
 
-      <section
-        id="why-us"
-        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-10 pb-20"
-      >
-        <Reveal>
-          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
-            Why Us
-          </h3>
-        </Reveal>
-
-        <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
-            The Hanabi Difference
-          </h2>
-        </Reveal>
-
-        <WhyUsCards />
-      </section>
-
-      <section
-        id="works"
-        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-14 pb-10"
-      >
-        <Reveal>
-          <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
-            Our Works
-          </h3>
-        </Reveal>
-
-        <Reveal delay={0.06}>
-          <h2 className="pt-4 text-center text-4xl leading-tight font-medium md:text-4xl">
-            A Curated Collection
-          </h2>
-        </Reveal>
-
-        <div className="mt-12 flex w-full max-w-6xl flex-col items-center gap-16 md:gap-20">
-          {workProjects.map((project, idx) => (
-            <Reveal
-              key={project.title}
-              className="w-full"
-              delay={Math.min(0.04 * idx, 0.16)}
-            >
-              <WorkCard {...project} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
+          <div className="mt-12 flex w-full max-w-6xl flex-col items-center gap-16 md:gap-20">
+            {workProjects.map((project, idx) => (
+              <Reveal
+                key={project.title}
+                className="w-full"
+                delay={Math.min(0.04 * idx, 0.16)}
+              >
+                <WorkCard {...project} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
       </main>
     </FooterReveal>
   );
