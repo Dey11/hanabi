@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import Image from "next/image";
+import RevealImage from "@/components/reveal-image";
 
 const marqueeItems = ["nectar", "pdx", "tuf"];
 
@@ -17,7 +17,7 @@ function MarqueeSet({
   return (
     <div className="flex shrink-0 items-center gap-6 py-6 sm:gap-10 sm:py-10">
       {items.map((item, idx) => (
-        <Image
+        <RevealImage
           key={`${item}-${idx}${suffix}`}
           src={`/hero-projects/${item}.png`}
           alt={item}

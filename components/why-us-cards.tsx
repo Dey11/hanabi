@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
+import RevealImage from "@/components/reveal-image";
 
 type WhyUsItem = {
   title: string;
@@ -361,12 +361,14 @@ function WhyUsTopCard({
           isQuality ? "-mb-3.5" : "-mt-3.5",
         ].join(" ")}
       >
-        <Image
+        <RevealImage
           src={item.image.src}
           alt={item.image.alt}
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
           priority
+          wrapperClassName="absolute inset-0"
         />
         <div
           className="pointer-events-none absolute inset-0 grid place-items-center"
@@ -414,11 +416,13 @@ function WhyUsBottomCard({ item }: { item: WhyUsItem }) {
     >
       <div className="w-full overflow-hidden rounded-2xl border border-black/5 bg-white p-3.5 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
         <div className="relative h-44 w-full overflow-hidden rounded-xl">
-          <Image
+          <RevealImage
             src={item.image.src}
             alt={item.image.alt}
             fill
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
+            wrapperClassName="absolute inset-0"
           />
           <div
             className="pointer-events-none absolute inset-0 grid place-items-center"
@@ -468,20 +472,20 @@ export default function WhyUsCards() {
             : "order-2 md:order-1";
 
           return (
-          <Reveal
-            key={item.title}
-            delay={Math.min(0.05 * idx, 0.12)}
-            className={[
-              orderClass,
-              // Stack seam on mobile (bottom item pulls up by 1px)
-              !isQuality ? "-mt-px md:mt-0" : "",
-            ].join(" ")}
-          >
-            <WhyUsTopCard
-              item={item}
-              mobileStack={isQuality ? "top" : "bottom"}
-            />
-          </Reveal>
+            <Reveal
+              key={item.title}
+              delay={Math.min(0.05 * idx, 0.12)}
+              className={[
+                orderClass,
+                // Stack seam on mobile (bottom item pulls up by 1px)
+                !isQuality ? "-mt-px md:mt-0" : "",
+              ].join(" ")}
+            >
+              <WhyUsTopCard
+                item={item}
+                mobileStack={isQuality ? "top" : "bottom"}
+              />
+            </Reveal>
           );
         })}
       </div>

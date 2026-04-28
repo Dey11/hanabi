@@ -1,7 +1,7 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 
 import type { WorkProjectImage } from "@/data/work-projects";
+import RevealImage from "@/components/reveal-image";
 
 type GalleryProps = {
   images: readonly WorkProjectImage[];
@@ -22,12 +22,13 @@ function TileFill({
 }) {
   return (
     <div className={`relative h-full min-h-0 w-full ${shell}`}>
-      <Image
+      <RevealImage
         src={image.src}
         alt={image.alt}
         fill
         sizes={sizes}
         className="object-cover object-top"
+        wrapperClassName="absolute inset-0"
       />
     </div>
   );
