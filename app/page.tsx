@@ -2,6 +2,8 @@ import Header from "@/components/header";
 import MarqueeComponent from "@/components/marquee-component";
 import ServiceCards from "@/components/services/service-cards";
 import WhyUsCards from "@/components/why-us-cards";
+import WorkCard from "@/components/work-card";
+import { workProjects } from "@/data/work-projects";
 
 export default function Home() {
   return (
@@ -53,11 +55,11 @@ export default function Home() {
         id="services"
         className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
       >
-        <h3 className="font-mono text-2xl font-medium text-[#6C6C6C]">
+        <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">
           Our Services
         </h3>
 
-        <h2 className="pt-8 text-center text-4xl font-medium leading-tight">
+        <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
           We specialise in making things
           <br />
           <span className="italic">simply beautiful.</span>
@@ -70,15 +72,32 @@ export default function Home() {
         id="why-us"
         className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
       >
-        <h3 className="font-mono text-2xl font-medium text-[#6C6C6C]">
-          Why Us
-        </h3>
+        <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">Why Us</h3>
 
-        <h2 className="pt-8 text-center text-4xl font-medium leading-tight">
+        <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
           The Hanabi Difference
         </h2>
 
         <WhyUsCards />
+      </section>
+
+      <section
+        id="works"
+        className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
+      >
+        <h3 className="font-mono text-xl font-medium text-[#6C6C6C]">
+          Our Works
+        </h3>
+
+        <h2 className="pt-4 text-center text-4xl leading-tight font-medium">
+          A Curated Collection
+        </h2>
+
+        <div className="mt-12 flex w-full max-w-6xl flex-col items-center gap-16 md:gap-20">
+          {workProjects.map((project) => (
+            <WorkCard key={project.title} {...project} />
+          ))}
+        </div>
       </section>
     </main>
   );
