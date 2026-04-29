@@ -18,7 +18,7 @@ const DESIGN_TOP_BADGES = [
   "Branding",
 ];
 
-const DESIGN_PROJECTS = ["nectar", "pdx", "tuf"];
+
 
 type DesignTool = {
   label: string;
@@ -84,7 +84,7 @@ function IllustratorMark({ className }: { className?: string }) {
   );
 }
 
-export function DesignCard() {
+export function DesignCard({ projects }: { projects: string[] }) {
   return (
     <div
       style={{
@@ -113,7 +113,7 @@ export function DesignCard() {
       <div className="flex flex-1 items-center overflow-hidden py-3">
         <InlineMarquee direction="left" duration={16}>
           <div className="flex shrink-0 items-center gap-3 pr-3">
-            {DESIGN_PROJECTS.map((project) => (
+            {projects.map((project) => (
               <div
                 key={project}
                 className="shrink-0 overflow-hidden rounded-lg"

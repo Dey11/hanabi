@@ -158,7 +158,7 @@ export default function Footer() {
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30" />
               <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
             </span>
-            <span className="text-white">Now accepting projects</span>
+            <span className="text-white tracking-tight">Now accepting projects</span>
           </div>
         </div>
 

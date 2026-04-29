@@ -10,7 +10,11 @@ const sawarabiGothic = Sawarabi_Gothic({
   weight: ["400"],
 });
 
-export default function ServiceCards() {
+export default function ServiceCards({
+  heroProjects,
+}: {
+  heroProjects: string[];
+}) {
   return (
     <div className="flex w-full flex-col items-center justify-center pt-10">
       <div className="grid w-full max-w-6xl grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -18,7 +22,7 @@ export default function ServiceCards() {
           <DevelopmentCard />
         </Reveal>
         <Reveal delay={0.06}>
-          <DesignCard />
+          <DesignCard projects={heroProjects} />
         </Reveal>
         <Reveal delay={0.12} className="sm:col-span-2 lg:col-span-1">
           <BrandingCard />

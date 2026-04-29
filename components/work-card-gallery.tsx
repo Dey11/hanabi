@@ -11,7 +11,7 @@ type GalleryProps = {
 const galleryViewport = "relative h-[320px] w-full sm:h-[440px] md:h-[540px]";
 
 const shell =
-  "overflow-hidden rounded-xl bg-neutral-900 ring-1 ring-black/[0.06]";
+  "overflow-hidden rounded-2xl";
 
 function TileFill({
   image,
@@ -22,14 +22,28 @@ function TileFill({
 }) {
   return (
     <div className={`relative h-full min-h-0 w-full ${shell}`}>
-      <RevealImage
-        src={image.src}
-        alt={image.alt}
-        fill
-        sizes={sizes}
-        className="object-cover object-top"
-        wrapperClassName="absolute inset-0"
-      />
+      {image.mobileSrc && (
+        <div className="absolute inset-0 block sm:hidden">
+          <RevealImage
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes={sizes}
+            className="rounded-2xl object-contain"
+            wrapperClassName="absolute inset-0"
+          />
+        </div>
+      )}
+      <div className={`absolute inset-0 ${image.mobileSrc ? "hidden sm:block" : ""}`}>
+        <RevealImage
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes={sizes}
+          className="rounded-2xl object-contain"
+          wrapperClassName="absolute inset-0"
+        />
+      </div>
     </div>
   );
 }
@@ -37,7 +51,7 @@ function TileFill({
 /**
  * Layout rules (wireframe):
  * 1 — single large tile centered with margin.
- * 2 — img[0] top-left back (larger); img[1] bottom-right front (overlaps).
+ * 2 — side-by-side on desktop, stacked vertically on mobile.
  * 3 — stacked collage; img[2] foremost at bottom.
  * 4 — 2×2 grid.
  */
@@ -58,14 +72,12 @@ function GalleryTwo({
   images: readonly [WorkProjectImage, WorkProjectImage];
 }) {
   return (
-    <div className="relative h-full w-full px-2 pt-1 pb-2 sm:px-4 sm:pb-4 md:px-5 md:pb-5">
-      {/* Back — top-left, larger */}
-      <div className="absolute top-[4%] left-[3%] z-10 aspect-16/10 h-[66%] w-auto max-w-[78%]">
-        <TileFill image={images[0]} sizes="48vw" />
+    <div className="flex h-full w-full flex-col gap-3 p-3 sm:flex-row sm:gap-4 sm:p-4 md:p-5">
+      <div className="relative flex-1">
+        <TileFill image={images[0]} sizes="(max-width: 640px) 85vw, 42vw" />
       </div>
-      {/* Front — bottom-right, sits on top with overlap */}
-      <div className="absolute right-[3%] bottom-[4%] z-20 aspect-16/10 h-[60%] w-auto max-w-[74%]">
-        <TileFill image={images[1]} sizes="48vw" />
+      <div className="relative flex-1">
+        <TileFill image={images[1]} sizes="(max-width: 640px) 85vw, 42vw" />
       </div>
     </div>
   );
@@ -77,15 +89,20 @@ function GalleryThree({
   images: readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage];
 }) {
   return (
-    <div className="relative h-full w-full px-2 pt-1 pb-2 sm:px-4 sm:pb-4 md:px-5 md:pb-5">
-      <div className="absolute top-[4%] left-[3%] z-10 aspect-16/10 h-[58%] w-auto max-w-[72%]">
+    <div className="flex h-full w-full flex-col gap-3 p-3 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-2 sm:p-4 md:p-5">
+      {/* Image 1 — always visible */}
+      <div className="relative min-h-0">
         <TileFill image={images[0]} sizes="42vw" />
       </div>
-      <div className="absolute top-[12%] right-[2%] z-20 aspect-16/10 h-[56%] w-auto max-w-[70%] sm:top-[14%]">
+      {/* Image 2 — desktop only */}
+      <div className="relative hidden min-h-0 sm:block">
         <TileFill image={images[1]} sizes="42vw" />
       </div>
-      <div className="absolute bottom-[3%] left-[14%] z-30 aspect-16/10 h-[56%] w-auto max-w-[70%] sm:left-[18%]">
-        <TileFill image={images[2]} sizes="42vw" />
+      {/* Image 3 — always visible, full width on mobile, centered on desktop */}
+      <div className="relative col-span-1 min-h-0 sm:col-span-2 sm:flex sm:justify-center">
+        <div className="relative h-full w-full sm:w-3/5">
+          <TileFill image={images[2]} sizes="42vw" />
+        </div>
       </div>
     </div>
   );
