@@ -17,14 +17,14 @@ export default function ServiceCards({
 }) {
   return (
     <div className="mb-16 flex w-full flex-col items-center justify-center pt-10">
-      <div className="grid w-full max-w-6xl grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Reveal delay={0}>
+      <div className="flex w-full max-w-[1248px] flex-wrap justify-center gap-6">
+        <Reveal delay={0} className="w-full max-w-[400px]">
           <DevelopmentCard />
         </Reveal>
-        <Reveal delay={0.06}>
+        <Reveal delay={0.06} className="w-full max-w-[400px]">
           <DesignCard projects={heroProjects} />
         </Reveal>
-        <Reveal delay={0.12} className="sm:col-span-2 lg:col-span-1">
+        <Reveal delay={0.12} className="w-full max-w-[400px]">
           <BrandingCard />
         </Reveal>
       </div>

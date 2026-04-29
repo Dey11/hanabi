@@ -18,9 +18,9 @@ export default function HeroKites() {
     mass: 0.4,
   });
 
-  const leftY = useTransform(smoothProgress, [0, 1], ["0%", "150%"]);
+  const leftY = useTransform(smoothProgress, [0, 1], ["0%", "185%"]);
   const rightY = useTransform(smoothProgress, [0, 1], ["0%", "88%"]);
-  const leftRotate = useTransform(smoothProgress, [0, 1], [0, -16]);
+  const leftRotate = useTransform(smoothProgress, [0, 1], [0, -22]);
   const rightRotate = useTransform(smoothProgress, [0, 1], [0, 18]);
 
   return (

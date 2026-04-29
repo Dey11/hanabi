@@ -57,10 +57,6 @@ export const workProjects: readonly WorkProject[] = [
         src: "/projects/ballaratboxsports2.png",
         alt: "Ballarat Box Sports feature section",
       },
-      {
-        src: "/projects/ballaratboxsports3.png",
-        alt: "Ballarat Box Sports overview",
-      },
     ],
   },
   {

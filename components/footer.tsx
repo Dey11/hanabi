@@ -179,12 +179,12 @@ export default function Footer() {
             seedKey="footer-dots-mobile"
             cols={28}
             rows={8}
-            className="h-20 w-full"
+            className="h-20 w-full overflow-hidden"
           />
           <Link
             href={BOOK_A_CALL}
             target="_blank"
-            className="bg-background font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
+            className="bg-background font-inter absolute top-1/2 left-1/2 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-center text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
           >
             Book an Intro call
           </Link>
@@ -197,13 +197,13 @@ export default function Footer() {
           <DotField
             seedKey="footer-dots-left"
             cols={44}
-            className="h-7 flex-1"
+            className="h-10 min-w-0 flex-1 overflow-hidden"
           />
 
           <Link
             href={BOOK_A_CALL}
             target="_blank"
-            className="bg-background font-inter relative cursor-pointer overflow-hidden rounded-md border border-white/10 px-2 py-1 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
+            className="bg-background font-inter relative shrink-0 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
           >
             Book an Intro call
           </Link>
@@ -211,7 +211,7 @@ export default function Footer() {
           <DotField
             seedKey="footer-dots-right"
             cols={44}
-            className="h-7 flex-1"
+            className="h-10 min-w-0 flex-1 overflow-hidden"
           />
         </div>
 
