@@ -7,8 +7,11 @@ import ServiceCards from "@/components/services/service-cards";
 import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
+import { getHeroProjects } from "@/lib/hero-projects";
 
 export default function Home() {
+  const heroProjects = getHeroProjects();
+
   return (
     <FooterReveal>
       <main className="font-inter">
@@ -64,7 +67,7 @@ export default function Home() {
 
             <Reveal delay={0.24}>
               <div className="mt-10">
-                <MarqueeComponent />
+                <MarqueeComponent items={heroProjects} />
               </div>
             </Reveal>
           </div>
@@ -72,10 +75,10 @@ export default function Home() {
 
         <section
           id="services"
-          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 py-10"
+          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 py-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
               Our Services
             </h3>
           </Reveal>
@@ -88,15 +91,15 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <ServiceCards />
+          <ServiceCards heroProjects={heroProjects} />
         </section>
 
         <section
           id="why-us"
-          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-10 pb-20"
+          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-10 pb-20"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
               Why Us
             </h3>
           </Reveal>
@@ -112,10 +115,10 @@ export default function Home() {
 
         <section
           id="works"
-          className="flex flex-col items-center justify-center bg-[#F4F3F3] px-5 pt-14 pb-10"
+          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-14 pb-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
               Our Works
             </h3>
           </Reveal>
