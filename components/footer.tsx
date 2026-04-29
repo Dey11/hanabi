@@ -1,5 +1,3 @@
-"use client";
-
 import {
   BOOK_A_CALL,
   EMAIL,
@@ -7,90 +5,69 @@ import {
   LINKEDIN,
   TELEGRAM,
 } from "@/lib/constants";
+import type { CSSProperties } from "react";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
 
 const sawarabiGothic = Sawarabi_Gothic({
   weight: "400",
   subsets: ["latin"],
 });
 
-function mulberry32(seed: number) {
-  return function () {
-    let t = (seed += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function hashStringToSeed(input: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < input.length; i++) {
-    h ^= input.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return h >>> 0;
-}
-
-const DOT_COLORS = [
-  "bg-[#FF2500]",
-  "bg-[#FF9900]",
-  "bg-emerald-400",
-  "bg-sky-400",
-  "bg-cyan-400",
-  "bg-fuchsia-400",
-  "bg-violet-400",
-  "bg-rose-400",
-  "bg-amber-300",
-  "bg-lime-300",
-  "bg-white/70",
-] as const;
-
 const ROW_CLASS: Record<number, string> = {
   4: "grid-rows-4",
   8: "grid-rows-8",
+};
+
+type FooterDotStyle = CSSProperties & {
+  "--footer-dot-col": number;
+  "--footer-dot-pos": number;
 };
 
 function DotField({
   seedKey,
   cols,
   rows = 4,
+  direction = "left-to-right",
   className,
 }: {
   seedKey: string;
   cols: number;
   rows?: 4 | 8;
+  direction?: "left-to-right" | "right-to-left";
   className?: string;
 }) {
-  const dots = useMemo(() => {
-    const rand = mulberry32(hashStringToSeed(seedKey));
-    const total = rows * cols;
-    return Array.from({ length: total }, () => {
-      const idx = Math.floor(rand() * DOT_COLORS.length);
-      const opacity = 0.55 + rand() * 0.45;
-      return { color: DOT_COLORS[idx], opacity };
-    });
-  }, [cols, rows, seedKey]);
+  const total = rows * cols;
 
   return (
     <div
       className={[
-        "grid grid-flow-col content-center gap-x-1 gap-y-1",
+        "footer-dotmatrix grid grid-flow-col content-center gap-x-1 gap-y-1 text-white",
         ROW_CLASS[rows],
         className,
       ].join(" ")}
-      aria-hidden
+      aria-hidden="true"
     >
-      {dots.map((d, i) => (
-        <span
-          key={`${seedKey}-${i}`}
-          className={`h-1.5 w-1.5 rounded-full ${d.color}`}
-          style={{ opacity: d.opacity }}
-        />
-      ))}
+      {Array.from({ length: total }, (_, index) => {
+        const row = index % rows;
+        const col = Math.floor(index / rows);
+        const columnProgress = cols > 1 ? col / (cols - 1) : 0;
+        const position = col % 2 === 0 ? rows - 1 - row : row;
+        const style: FooterDotStyle = {
+          "--footer-dot-col":
+            direction === "right-to-left" ? 1 - columnProgress : columnProgress,
+          "--footer-dot-pos": rows > 1 ? position / (rows - 1) : 0,
+        };
+
+        return (
+          <span
+            key={`${seedKey}-${index}`}
+            className="footer-dotmatrix-dot h-1.5 w-1.5 rounded-full"
+            style={style}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -211,6 +188,7 @@ export default function Footer() {
           <DotField
             seedKey="footer-dots-right"
             cols={44}
+            direction="right-to-left"
             className="h-10 min-w-0 flex-1 overflow-hidden"
           />
         </div>
