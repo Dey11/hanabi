@@ -1,7 +1,15 @@
 "use client";
 
+import {
+  BOOK_A_CALL,
+  EMAIL,
+  INSTAGRAM,
+  LINKEDIN,
+  TELEGRAM,
+} from "@/lib/constants";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo } from "react";
 
 const sawarabiGothic = Sawarabi_Gothic({
@@ -94,7 +102,7 @@ export default function Footer() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-white/85">
             <a
-              href="#"
+              href={INSTAGRAM}
               aria-label="Instagram"
               className="transition-opacity hover:opacity-100"
               target="_blank"
@@ -109,7 +117,7 @@ export default function Footer() {
               />
             </a>
             <a
-              href="#"
+              href={LINKEDIN}
               aria-label="LinkedIn"
               className="transition-opacity hover:opacity-100"
               target="_blank"
@@ -124,7 +132,7 @@ export default function Footer() {
               />
             </a>
             <a
-              href="mailto:hello@hanabi.co"
+              href={`mailto:${EMAIL}`}
               aria-label="Email"
               className="transition-opacity hover:opacity-100"
             >
@@ -137,7 +145,7 @@ export default function Footer() {
               />
             </a>
             <a
-              href="#"
+              href={TELEGRAM}
               aria-label="Telegram"
               className="transition-opacity hover:opacity-100"
               target="_blank"
@@ -154,11 +162,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-2 text-sm text-white/80">
-            <span className="relative flex size-2">
+            <span className="relative flex size-2 animate-pulse">
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30" />
               <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
             </span>
-            <span className="text-white tracking-tight">Now accepting projects</span>
+            <span className="text-white">Now accepting projects</span>
           </div>
         </div>
 
@@ -173,9 +181,16 @@ export default function Footer() {
             rows={8}
             className="h-20 w-full"
           />
-          <button className="bg-background font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
+          <Link
+            href={BOOK_A_CALL}
+            target="_blank"
+            className="bg-background font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
+          >
             Book an Intro call
-          </button>
+          </Link>
+          {/* <button className="bg-background font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
+            Book an Intro call
+          </button> */}
         </div>
 
         <div className="mt-8 hidden items-center gap-3 sm:flex">
@@ -185,9 +200,13 @@ export default function Footer() {
             className="h-7 flex-1"
           />
 
-          <button className="bg-background font-inter relative cursor-pointer overflow-hidden rounded-md border border-white/10 px-2 py-1 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
+          <Link
+            href={BOOK_A_CALL}
+            target="_blank"
+            className="bg-background font-inter relative cursor-pointer overflow-hidden rounded-md border border-white/10 px-2 py-1 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
+          >
             Book an Intro call
-          </button>
+          </Link>
 
           <DotField
             seedKey="footer-dots-right"

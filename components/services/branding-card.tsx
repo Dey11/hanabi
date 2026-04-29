@@ -82,7 +82,7 @@ export function BrandingCard() {
                 width={1024}
                 height={768}
                 className="h-full w-full object-cover"
-                priority
+                loading="lazy"
               />
             </motion.div>
 
@@ -129,7 +129,7 @@ export function BrandingCard() {
                 width={1024}
                 height={768}
                 className="h-full w-full object-cover"
-                priority
+                loading="lazy"
               />
             </motion.div>
 
@@ -172,7 +172,7 @@ export function BrandingCard() {
                 width={1024}
                 height={768}
                 className="h-full w-full object-cover"
-                priority
+                loading="lazy"
               />
             </motion.div>
           </div>

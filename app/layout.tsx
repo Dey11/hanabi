@@ -1,6 +1,8 @@
 import { Analytics } from "@vercel/analytics/next";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,7 +33,7 @@ export default function RootLayout({
         className={`${inter.variable} ${geistMono.variable} font-inter overflow-x-clip tracking-[-0.04em] antialiased`}
       >
         <Analytics />
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );

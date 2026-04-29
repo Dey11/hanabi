@@ -18,10 +18,10 @@ export default function HeroKites() {
     mass: 0.4,
   });
 
-  const leftY = useTransform(smoothProgress, [0, 1], ["0%", "140%"]);
-  const rightY = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
+  const leftY = useTransform(smoothProgress, [0, 1], ["0%", "150%"]);
+  const rightY = useTransform(smoothProgress, [0, 1], ["0%", "88%"]);
   const leftRotate = useTransform(smoothProgress, [0, 1], [0, -16]);
-  const rightRotate = useTransform(smoothProgress, [0, 1], [0, 12]);
+  const rightRotate = useTransform(smoothProgress, [0, 1], [0, 18]);
 
   return (
     <div
@@ -47,7 +47,8 @@ export default function HeroKites() {
             alt=""
             width={152}
             height={317}
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="h-auto w-full select-none"
           />
         </motion.div>
@@ -71,7 +72,8 @@ export default function HeroKites() {
             alt=""
             width={152}
             height={317}
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="h-auto w-full select-none"
           />
         </motion.div>

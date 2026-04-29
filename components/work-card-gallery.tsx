@@ -10,8 +10,7 @@ type GalleryProps = {
 /** Shared canvas — taller so tiles read at portfolio scale */
 const galleryViewport = "relative h-[320px] w-full sm:h-[440px] md:h-[540px]";
 
-const shell =
-  "overflow-hidden rounded-2xl";
+const shell = "overflow-hidden rounded-2xl";
 
 function TileFill({
   image,
@@ -72,14 +71,26 @@ function GalleryTwo({
   images: readonly [WorkProjectImage, WorkProjectImage];
 }) {
   return (
-    <div className="flex h-full w-full flex-col gap-3 p-3 sm:flex-row sm:gap-4 sm:p-4 md:p-5">
-      <div className="relative flex-1">
-        <TileFill image={images[0]} sizes="(max-width: 640px) 85vw, 42vw" />
+    <>
+      <div className="flex h-full w-full flex-col gap-3 p-3 sm:flex-row sm:gap-4 sm:p-4 md:hidden">
+        <div className="relative flex-1">
+          <TileFill image={images[0]} sizes="(max-width: 640px) 85vw, 42vw" />
+        </div>
+        <div className="relative flex-1">
+          <TileFill image={images[1]} sizes="(max-width: 640px) 85vw, 42vw" />
+        </div>
       </div>
-      <div className="relative flex-1">
-        <TileFill image={images[1]} sizes="(max-width: 640px) 85vw, 42vw" />
+
+      <div className="relative hidden h-full w-full md:block">
+        <div className="absolute top-[4%] left-[4%] z-10 h-[72%] w-[56%]">
+          <TileFill image={images[0]} sizes="(max-width: 1152px) 56vw, 640px" />
+        </div>
+
+        <div className="absolute right-[4%] bottom-[4%] z-20 h-[72%] w-[56%]">
+          <TileFill image={images[1]} sizes="(max-width: 1152px) 56vw, 640px" />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -89,22 +100,38 @@ function GalleryThree({
   images: readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage];
 }) {
   return (
-    <div className="flex h-full w-full flex-col gap-3 p-3 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-2 sm:p-4 md:p-5">
-      {/* Image 1 — always visible */}
-      <div className="relative min-h-0">
-        <TileFill image={images[0]} sizes="42vw" />
-      </div>
-      {/* Image 2 — desktop only */}
-      <div className="relative hidden min-h-0 sm:block">
-        <TileFill image={images[1]} sizes="42vw" />
-      </div>
-      {/* Image 3 — always visible, full width on mobile, centered on desktop */}
-      <div className="relative col-span-1 min-h-0 sm:col-span-2 sm:flex sm:justify-center">
-        <div className="relative h-full w-full sm:w-3/5">
-          <TileFill image={images[2]} sizes="42vw" />
+    <>
+      <div className="flex h-full w-full flex-col gap-3 p-3 sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-2 sm:p-4 md:hidden">
+        {/* Image 1 — always visible */}
+        <div className="relative min-h-0">
+          <TileFill image={images[0]} sizes="42vw" />
+        </div>
+        {/* Image 2 — tablet only */}
+        <div className="relative hidden min-h-0 sm:block">
+          <TileFill image={images[1]} sizes="42vw" />
+        </div>
+        {/* Image 3 — always visible, full width on mobile, centered on tablet */}
+        <div className="relative col-span-1 min-h-0 sm:col-span-2 sm:flex sm:justify-center">
+          <div className="relative h-full w-full sm:w-3/5">
+            <TileFill image={images[2]} sizes="42vw" />
+          </div>
         </div>
       </div>
-    </div>
+
+      <div className="relative hidden h-full w-full md:block">
+        <div className="absolute top-[3%] left-[3%] z-10 h-[55%] w-[52%]">
+          <TileFill image={images[0]} sizes="(max-width: 1152px) 52vw, 600px" />
+        </div>
+
+        <div className="absolute top-[10%] right-[3%] z-20 h-[55%] w-[52%]">
+          <TileFill image={images[1]} sizes="(max-width: 1152px) 52vw, 600px" />
+        </div>
+
+        <div className="absolute bottom-[3%] left-[18%] z-30 h-[55%] w-[52%]">
+          <TileFill image={images[2]} sizes="(max-width: 1152px) 52vw, 600px" />
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -7,24 +7,31 @@ const BASE_DURATION = 20; // seconds for ~3 items
 
 function MarqueeSet({
   items,
+  eagerCount = 0,
   suffix = "",
 }: {
   items: string[];
+  eagerCount?: number;
   suffix?: string;
 }) {
   return (
     <div className="flex shrink-0 items-center gap-6 py-6 sm:gap-10 sm:py-10">
-      {items.map((item, idx) => (
-        <Image
-          key={`${item}-${idx}${suffix}`}
-          src={`/hero-projects/${item}.png`}
-          alt={item}
-          width={260}
-          height={90}
-          className="h-52 w-auto shrink-0 rounded-lg object-cover sm:h-72 md:h-80"
-          priority={idx < 4}
-        />
-      ))}
+      {items.map((item, idx) => {
+        const isAboveFold = idx < eagerCount;
+
+        return (
+          <Image
+            key={`${item}-${idx}${suffix}`}
+            src={`/hero-projects/${item}.png`}
+            alt={item}
+            width={260}
+            height={90}
+            className="h-52 w-auto shrink-0 rounded-lg object-cover sm:h-72 md:h-80"
+            loading={isAboveFold ? "eager" : "lazy"}
+            fetchPriority={isAboveFold ? "high" : "auto"}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -50,7 +57,7 @@ export default function MarqueeComponent({ items }: { items: string[] }) {
             : undefined
         }
       >
-        <MarqueeSet items={items} />
+        <MarqueeSet items={items} eagerCount={4} />
         <MarqueeSet items={items} suffix="-dup" />
         <MarqueeSet items={items} suffix="-dup-2" />
         <MarqueeSet items={items} suffix="-dup-3" />

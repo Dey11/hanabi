@@ -8,6 +8,7 @@ import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
 import { getHeroProjects } from "@/lib/hero-projects";
+import Link from "next/link";
 
 export default function Home() {
   const heroProjects = getHeroProjects();
@@ -26,15 +27,15 @@ export default function Home() {
           <HeroKites />
 
           <div className="relative z-20 flex flex-col items-center bg-white/40 md:bg-transparent">
-            <div className="mx-4 mt-40 rounded-3xl px-4 py-4 md:mx-0 md:mt-60 md:max-w-2xl md:px-0 md:py-0">
+            <div className="mx-4 mt-40 w-full max-w-2xl rounded-3xl px-4 py-4 md:mx-0 md:mt-60 md:px-0 md:py-0">
               <Reveal delay={0}>
-                <h1 className="font-inter max-w-xl text-4xl font-medium md:text-5xl">
+                <h1 className="font-inter mx-auto max-w-xl text-4xl leading-tight font-medium text-balance md:text-5xl">
                   Your Digital Impression. Simple and Beautiful
                 </h1>
               </Reveal>
 
               <Reveal delay={0.08}>
-                <h2 className="max-w-2xl pt-5 text-lg font-medium text-[#6C6C6C]">
+                <h2 className="mx-auto max-w-2xl pt-5 text-lg font-medium text-pretty text-[#6C6C6C]">
                   We build refreshingly simple and beautiful websites and
                   digital experiences that captivate your audience and elevate
                   your brand.
@@ -61,7 +62,12 @@ export default function Home() {
                     Book an Intro call
                   </span>
                 </button>
-                <button className="font-medium">Recent works</button>
+                <Link
+                  href="#works"
+                  className="inline-flex items-center font-medium hover:underline"
+                >
+                  Recent works
+                </Link>
               </div>
             </Reveal>
 
@@ -78,7 +84,7 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 py-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Our Services
             </h3>
           </Reveal>
@@ -99,7 +105,7 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-10 pb-20"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Why Us
             </h3>
           </Reveal>
@@ -118,7 +124,7 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-14 pb-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium uppercase text-[#6C6C6C] sm:text-xl">
+            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Our Works
             </h3>
           </Reveal>
