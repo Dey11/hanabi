@@ -8,10 +8,12 @@ import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
 import { getHeroProjects } from "@/lib/hero-projects";
+import { shuffleArray } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Home() {
   const heroProjects = getHeroProjects();
+  const shuffledHeroProjects = shuffleArray(heroProjects);
 
   return (
     <FooterReveal>
@@ -73,7 +75,7 @@ export default function Home() {
 
             <Reveal delay={0.24}>
               <div className="mt-10">
-                <MarqueeComponent items={heroProjects} />
+                <MarqueeComponent items={shuffledHeroProjects} />
               </div>
             </Reveal>
           </div>

@@ -23,6 +23,14 @@ export const metadata: Metadata = {
   title: "Hanabi",
   description:
     "Ignite your brand with stunning design and seamless web experiences — Hanabi, your creative digital partner.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

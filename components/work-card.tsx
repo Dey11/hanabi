@@ -22,14 +22,14 @@ export default function WorkCard({
           <span className="shrink-0 text-right">{category}</span>
         </div>
 
-        <div className="overflow-hidden rounded-t-2xl rounded-b-none border border-[#E0E0E0] bg-[#F9F9F9]">
+        <div className="overflow-hidden rounded-t-xl rounded-b-none border border-[#E0E0E0] bg-[#F9F9F9]">
           <div className="p-4 sm:p-5 md:p-6">
             <WorkCardGallery images={images} />
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-center rounded-t-none rounded-b-2xl border border-[#E0E0E0] bg-[#F9F9F9] px-5 py-3 sm:px-8">
+      <div className="flex items-center justify-center rounded-t-none rounded-b-xl border border-[#E0E0E0] bg-[#F9F9F9] px-5 py-3 sm:px-8">
         <p className="font-inter max-w-2xl text-center text-base leading-relaxed font-normal text-[#1a1a1a] sm:text-[17px]">
           {description}
         </p>

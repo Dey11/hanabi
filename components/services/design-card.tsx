@@ -116,7 +116,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
             {projects.map((project) => (
               <div
                 key={project}
-                className="shrink-0 overflow-hidden rounded-lg"
+                className="shrink-0 overflow-hidden rounded-sm"
                 style={{ width: 180, height: 130 }}
               >
                 <Image
