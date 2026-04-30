@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
-const BASE_DURATION = 20; // seconds for ~3 items
+const BASE_DURATION = 20;
 
-function MarqueeSet({
+const MarqueeSet = memo(function MarqueeSet({
   items,
   eagerCount = 0,
   suffix = "",
@@ -26,15 +26,16 @@ function MarqueeSet({
             alt={item}
             width={260}
             height={90}
+            sizes="(max-width: 640px) 65vw, (max-width: 768px) 45vw, 260px"
             className="h-52 w-auto shrink-0 rounded-lg object-cover sm:h-72 md:h-80"
             loading={isAboveFold ? "eager" : "lazy"}
-            fetchPriority={isAboveFold ? "high" : "auto"}
+            priority={isAboveFold}
           />
         );
       })}
     </div>
   );
-}
+});
 
 export default function MarqueeComponent({ items }: { items: string[] }) {
   const duration = Math.max(20, (BASE_DURATION * items.length) / 3);
@@ -46,9 +47,9 @@ export default function MarqueeComponent({ items }: { items: string[] }) {
   }, []);
 
   return (
-    <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden">
+    <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden px-4 sm:px-8">
       <div
-        className="flex w-max"
+        className="flex w-max will-change-transform"
         style={
           isReady
             ? {

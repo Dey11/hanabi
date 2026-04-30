@@ -7,9 +7,9 @@ export type WorkProjectImage = {
 /**
  * Layout follows image count (see `work-card-gallery.tsx`):
  * 1 — centered inset tile
- * 2 — top-left (back) + bottom-right (front)
- * 3 — top-left, middle-right, bottom-left (front)
- * 4 — 2×2 grid, row order: [0][1] / [2][3]
+ * 2 — side-by-side on desktop, stacked on mobile.
+ * 3 — 2 side-by-side on top, 1 centered below.
+ * 4 — 2×2 grid.
  */
 export type WorkProjectImages =
   | readonly [WorkProjectImage]
@@ -37,9 +37,16 @@ export const workProjects: readonly WorkProject[] = [
       "A fresh landing experience designed to capture the brand's coastal calm and community-driven story.",
     images: [
       {
-        src: "/projects/DownTheCove.png",
-        alt: "Down The Cove landing page preview",
-        mobileSrc: "/projects/downthecoveSmall.png",
+        src: "/projects/dtc1.png",
+        alt: "Down The Cove hero screen",
+      },
+      {
+        src: "/projects/dtc2.png",
+        alt: "Down The Cove feature section",
+      },
+      {
+        src: "/projects/dtc3.png",
+        alt: "Down The Cove overview",
       },
     ],
   },
@@ -57,21 +64,57 @@ export const workProjects: readonly WorkProject[] = [
         src: "/projects/ballaratboxsports2.png",
         alt: "Ballarat Box Sports feature section",
       },
+      {
+        src: "/projects/ballaratboxsports3.png",
+        alt: "Ballarat Box Sports overview",
+      },
     ],
   },
   {
-    title: "TRADE MOAI",
+    title: "GOT NEXT",
     category: "WEB APP | PRODUCT UI",
     description:
-      "A sleek trading interface designed for clarity under pressure—where every data point and decision matters.",
+      "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
     images: [
       {
-        src: "/projects/tradeMoai1.png",
-        alt: "Trade Moai dashboard overview",
+        src: "/projects/gotnextHero.png",
+        alt: "Got Next hero screen",
       },
       {
-        src: "/projects/tradeMoai2.png",
-        alt: "Trade Moai analytics panel",
+        src: "/projects/gotnextDashboard.png",
+        alt: "Got Next dashboard overview",
+      },
+    ],
+  },
+  {
+    title: "LEADLY",
+    category: "WEB APP | PRODUCT UI",
+    description:
+      "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
+    images: [
+      {
+        src: "/projects/leadly1.png",
+        alt: "Leadly dashboard overview",
+      },
+      {
+        src: "/projects/leadly2.png",
+        alt: "Leadly lead details view",
+      },
+    ],
+  },
+  {
+    title: "THOMAS BEWICK",
+    category: "WEBSITE | BRANDING",
+    description:
+      "A refined editorial web presence honouring the legacy of a master engraver—balancing heritage craft with modern digital storytelling.",
+    images: [
+      {
+        src: "/projects/thomasbewick1.png",
+        alt: "Thomas Bewick hero and gallery",
+      },
+      {
+        src: "/projects/thomasbewick2.png",
+        alt: "Thomas Bewick engraving detail",
       },
     ],
   },
