@@ -1,6 +1,6 @@
 "use client";
 
-import { BOOK_A_CALL } from "@/lib/constants";
+import { CalPopupButton } from "@/components/cal-popup-button";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,12 +68,9 @@ export default function Header() {
           ))}
         </nav>
 
-        <a
-          href={BOOK_A_CALL}
-          className="text-background font-inter inline-flex cursor-pointer items-center rounded-full border border-neutral-900 bg-linear-to-b from-neutral-900 to-black p-1 px-4 font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95"
-        >
+        <CalPopupButton className="text-background font-inter inline-flex cursor-pointer items-center rounded-full border border-neutral-900 bg-linear-to-b from-neutral-900 to-black p-1 px-4 font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
           Book a Call
-        </a>
+        </CalPopupButton>
       </header>
 
       {/* Mobile header */}
@@ -87,12 +84,9 @@ export default function Header() {
               </div>
             </div>
 
-            <a
-              href={BOOK_A_CALL}
-              className="text-background font-inter inline-flex items-center justify-center rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95"
-            >
+            <CalPopupButton className="text-background font-inter inline-flex items-center justify-center rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
               Book a Call
-            </a>
+            </CalPopupButton>
           </div>
         </div>
       </header>

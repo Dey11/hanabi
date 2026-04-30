@@ -16,11 +16,11 @@ export type WorkProjectImages =
   | readonly [WorkProjectImage, WorkProjectImage]
   | readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage]
   | readonly [
-      WorkProjectImage,
-      WorkProjectImage,
-      WorkProjectImage,
-      WorkProjectImage,
-    ];
+    WorkProjectImage,
+    WorkProjectImage,
+    WorkProjectImage,
+    WorkProjectImage,
+  ];
 
 export type WorkProject = {
   title: string;
@@ -106,7 +106,7 @@ export const workProjects: readonly WorkProject[] = [
     title: "THOMAS BEWICK",
     category: "WEBSITE | BRANDING",
     description:
-      "A refined editorial web presence honouring the legacy of a master engraver—balancing heritage craft with modern digital storytelling.",
+      "A refined editorial web presence honouring the legacy of a master engraver - balancing heritage craft with modern digital storytelling.",
     images: [
       {
         src: "/projects/thomasbewick1.png",

@@ -1,14 +1,8 @@
-import {
-  BOOK_A_CALL,
-  EMAIL,
-  INSTAGRAM,
-  LINKEDIN,
-  TELEGRAM,
-} from "@/lib/constants";
+import { EMAIL, INSTAGRAM, LINKEDIN, TELEGRAM } from "@/lib/constants";
+import { CalPopupButton } from "@/components/cal-popup-button";
 import type { CSSProperties } from "react";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
 
 const sawarabiGothic = Sawarabi_Gothic({
   weight: "400",
@@ -158,13 +152,9 @@ export default function Footer() {
             rows={8}
             className="h-20 w-full overflow-hidden"
           />
-          <Link
-            href={BOOK_A_CALL}
-            target="_blank"
-            className="bg-background font-inter absolute top-1/2 left-1/2 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-center text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
-          >
+          <CalPopupButton className="bg-background font-inter absolute top-1/2 left-1/2 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-center text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
             Book an Intro call
-          </Link>
+          </CalPopupButton>
           {/* <button className="bg-background font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
             Book an Intro call
           </button> */}
@@ -177,13 +167,9 @@ export default function Footer() {
             className="h-10 min-w-0 flex-1 overflow-hidden"
           />
 
-          <Link
-            href={BOOK_A_CALL}
-            target="_blank"
-            className="bg-background font-inter relative shrink-0 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]"
-          >
+          <CalPopupButton className="bg-background font-inter relative shrink-0 cursor-pointer overflow-hidden rounded-md border border-white/10 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-transform duration-75 active:scale-[0.98]">
             Book an Intro call
-          </Link>
+          </CalPopupButton>
 
           <DotField
             seedKey="footer-dots-right"

@@ -155,9 +155,18 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-clip;
   }
   html {
-    @apply font-sans;
+    @apply overflow-x-clip font-sans;
   }
+}
+
+.cal-popup-embed,
+.cal-popup-embed > div,
+.cal-popup-embed iframe {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
 }

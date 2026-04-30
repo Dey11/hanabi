@@ -19,7 +19,7 @@ type WhyUsItem = {
 const WHY_US_ITEMS: WhyUsItem[] = [
   {
     title: "Quality",
-    description: "Total transparency, zero surprises.",
+    description: "Every detail is reviewed with care before it reaches users.",
     image: {
       src: "/whyus/quality.png",
       alt: "Quality gradient with shield icon",
@@ -30,7 +30,7 @@ const WHY_US_ITEMS: WhyUsItem[] = [
   },
   {
     title: "Clean Code",
-    description: "Total transparency, zero surprises.",
+    description: "Readable, modular builds that stay easy to improve.",
     image: {
       src: "/whyus/code.png",
       alt: "Clean code gradient with code icon",
@@ -41,7 +41,7 @@ const WHY_US_ITEMS: WhyUsItem[] = [
   },
   {
     title: "Flexible",
-    description: "Total transparency, zero surprises.",
+    description: "A process that adapts as your priorities become clearer.",
     image: {
       src: "/whyus/flexible.png",
       alt: "Flexible gradient with swirl icon",
@@ -52,7 +52,7 @@ const WHY_US_ITEMS: WhyUsItem[] = [
   },
   {
     title: "Speed",
-    description: "Total transparency, zero surprises.",
+    description: "Focused execution that keeps momentum without cutting care.",
     image: { src: "/whyus/speed.png", alt: "Speed gradient with sprout icon" },
     icon: "speed",
     iconClassName: "text-[#34D399]/70",
@@ -60,7 +60,7 @@ const WHY_US_ITEMS: WhyUsItem[] = [
   },
   {
     title: "Communication",
-    description: "Total transparency, zero surprises.",
+    description: "Clear updates, honest timelines, and fewer surprises.",
     image: {
       src: "/whyus/communication.png",
       alt: "Communication gradient with waveform icon",

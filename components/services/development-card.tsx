@@ -112,7 +112,12 @@ function ChakraOrbit() {
       style={{ transform: "translateX(-50%)" }}
     >
       <motion.div
-        style={{ rotate: orbitRotate, width: 0, height: 0, position: "relative" }}
+        style={{
+          rotate: orbitRotate,
+          width: 0,
+          height: 0,
+          position: "relative",
+        }}
       >
         {orbitItems.map((logo, i) => {
           const angle = (2 * Math.PI * i) / CIRCLE_COUNT;
@@ -193,8 +198,8 @@ export function DevelopmentCard() {
       <div className="flex w-full flex-col gap-2 p-5 pt-2 sm:pt-4">
         <h4 className="text-2xl font-medium">Development</h4>
         <p>
-          We craft beautiful, intuitive interfaces for websites, apps, and
-          digital platforms.
+          We craft beautiful, intuitive interfaces for digital platforms, that
+          are easy to launch, scale, maintain.
         </p>
       </div>
     </div>

@@ -18,8 +18,6 @@ const DESIGN_TOP_BADGES = [
   "Branding",
 ];
 
-
-
 type DesignTool = {
   label: string;
   accent: string;
@@ -96,7 +94,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
       className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl sm:h-[400px] sm:max-w-[400px]"
     >
       <div className="pt-6 pb-3 sm:pt-7 sm:pb-3">
-        <InlineMarquee direction="right" duration={22}>
+        <InlineMarquee direction="right" speed={24}>
           <div className="flex shrink-0 gap-2 pr-2 pb-0.5">
             {DESIGN_TOP_BADGES.map((badge) => (
               <span
@@ -111,12 +109,12 @@ export function DesignCard({ projects }: { projects: string[] }) {
       </div>
 
       <div className="flex flex-1 items-center overflow-hidden py-3">
-        <InlineMarquee direction="left" duration={16}>
+        <InlineMarquee direction="left" speed={48}>
           <div className="flex shrink-0 items-center gap-3 pr-3">
             {projects.map((project) => (
               <div
                 key={project}
-                className="shrink-0 overflow-hidden rounded-sm"
+                className="shrink-0 overflow-hidden rounded-[2px]"
                 style={{ width: 180, height: 130 }}
               >
                 <Image
@@ -133,7 +131,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
       </div>
 
       <div className="pt-3 pb-1 sm:pb-0">
-        <InlineMarquee direction="right" duration={18}>
+        <InlineMarquee direction="right" speed={26}>
           <div className="flex shrink-0 gap-2 pr-2 pb-0.5">
             {DESIGN_TOOLS.map((tool) => (
               <span
@@ -158,8 +156,8 @@ export function DesignCard({ projects }: { projects: string[] }) {
       <div className="flex flex-col gap-2 p-5 pt-2 sm:pt-4">
         <h4 className="text-2xl font-medium">Design</h4>
         <p>
-          We craft beautiful, intuitive interfaces for websites, apps, and
-          digital platforms.
+          We design polished interfaces that feel clear, premium, and effortless
+          for the people using them.
         </p>
       </div>
     </div>

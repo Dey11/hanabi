@@ -1,3 +1,4 @@
+import { CalPopupButton } from "@/components/cal-popup-button";
 import FooterReveal from "@/components/footer-reveal";
 import Header from "@/components/header";
 import HeroKites from "@/components/hero-kites";
@@ -47,7 +48,7 @@ export default function Home() {
 
             <Reveal delay={0.16}>
               <div className="flex gap-8 pt-5">
-                <button className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
+                <CalPopupButton className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
                   <span
                     className="absolute inset-0 bg-linear-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
                     aria-hidden
@@ -63,7 +64,7 @@ export default function Home() {
                   <span className="relative z-10 text-shadow-[#FF2500] text-shadow-xs">
                     Book an Intro call
                   </span>
-                </button>
+                </CalPopupButton>
                 <Link
                   href="#works"
                   className="inline-flex items-center font-medium hover:underline"

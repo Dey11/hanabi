@@ -195,8 +195,8 @@ export function BrandingCard() {
             <div className="flex flex-col gap-2 p-5 pt-2 sm:pt-4">
               <h4 className="text-2xl font-medium text-black">Branding</h4>
               <p className="text-black/90">
-                We craft beautiful, intuitive interfaces for websites, apps, and
-                digital platforms.
+                We shape memorable brand systems with the clarity, tone, and
+                visuals your audience can trust.
               </p>
             </div>
           </div>
