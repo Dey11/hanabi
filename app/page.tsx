@@ -5,6 +5,7 @@ import HeroKites from "@/components/hero-kites";
 import MarqueeComponent from "@/components/marquee-component";
 import { Reveal } from "@/components/reveal";
 import ServiceCards from "@/components/services/service-cards";
+import StudiosQuoteSection from "@/components/studios-quote-section";
 import WhyUsCards from "@/components/why-us-cards";
 import WorkCard from "@/components/work-card";
 import { workProjects } from "@/data/work-projects";
@@ -150,6 +151,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <StudiosQuoteSection />
       </main>
     </FooterReveal>
   );

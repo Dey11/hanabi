@@ -142,7 +142,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-8 max-w-xs text-2xl text-white">
-          The studio for brands who simply can't afford to be average
+          The agency for building standout scalable digital experiences
         </p>
 
         <div className="relative mt-8 sm:hidden">
