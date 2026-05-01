@@ -7,7 +7,7 @@ import { Reveal } from "@/components/reveal";
 import ServiceCards from "@/components/services/service-cards";
 import StudiosQuoteSection from "@/components/studios-quote-section";
 import WhyUsCards from "@/components/why-us-cards";
-import WorkCard from "@/components/work-card";
+import WorkProjectsList from "@/components/work-projects-list";
 import { workProjects } from "@/data/work-projects";
 import { getHeroProjects } from "@/lib/hero-projects";
 import { shuffleArray } from "@/lib/utils";
@@ -139,17 +139,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 flex w-full max-w-6xl flex-col items-center gap-16 md:gap-20">
-            {workProjects.map((project, idx) => (
-              <Reveal
-                key={project.title}
-                className="w-full"
-                delay={Math.min(0.04 * idx, 0.16)}
-              >
-                <WorkCard {...project} />
-              </Reveal>
-            ))}
-          </div>
+          <WorkProjectsList projects={workProjects} />
         </section>
 
         <StudiosQuoteSection />
