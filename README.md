@@ -1,6 +1,6 @@
 # Hanabi
 
-Hanabi is a Next.js portfolio site built with Tailwind CSS and Bun. The homepage presents the studio story, services, why-us section, recent works, and contact flow.
+Hanabi is a Next.js portfolio site built with Tailwind CSS and Bun. The homepage presents the studio story, seamless hero marquee, services, why-us section, recent works, and contact flow.
 
 ## Development
 
@@ -34,6 +34,8 @@ bun run start
 
 - `app/page.tsx` composes the homepage sections and mounts the works section.
 - `data/work-projects.ts` is the source of truth for work project titles, categories, descriptions, and image sets.
+- `components/marquee-component.tsx` renders the homepage hero project marquee with `components/seamless-marquee.tsx`.
+- `components/seamless-marquee.tsx` provides the package-free, duplicated-track marquee used by the hero and inline service marquees.
 - `components/work-projects-list.tsx` owns the works list client interaction. It shows the first three projects initially, renders a blurred, non-interactive peek of the next project behind the rounded white "See more" button, and mounts the remaining projects on click.
 - `components/work-card.tsx` renders each work project shell and description.
 - `components/work-card-gallery.tsx` handles project image layouts based on image count.

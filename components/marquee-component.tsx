@@ -1,10 +1,11 @@
 "use client";
 
+import { SeamlessMarquee } from "@/components/seamless-marquee";
 import Image from "next/image";
 import { memo } from "react";
-import Marquee from "react-fast-marquee";
 
 const MARQUEE_SPEED = 64;
+const HERO_PROJECT_ASPECT_RATIO = "45 / 32";
 
 const MarqueeItem = memo(function MarqueeItem({
   item,
@@ -16,14 +17,16 @@ const MarqueeItem = memo(function MarqueeItem({
   const isAboveFold = index < 4;
 
   return (
-    <div className="shrink-0 pr-6 sm:pr-10">
+    <div
+      className="relative h-52 shrink-0 overflow-hidden rounded-lg sm:h-72 md:h-80"
+      style={{ aspectRatio: HERO_PROJECT_ASPECT_RATIO }}
+    >
       <Image
         src={`/hero-projects/${item}.png`}
         alt={item}
-        width={260}
-        height={90}
-        sizes="(max-width: 640px) 65vw, (max-width: 768px) 45vw, 260px"
-        className="h-52 w-auto shrink-0 rounded-lg object-cover sm:h-72 md:h-80"
+        fill
+        sizes="(max-width: 640px) 293px, (max-width: 768px) 405px, 450px"
+        className="object-cover"
         loading={isAboveFold ? "eager" : "lazy"}
         priority={isAboveFold}
       />
@@ -34,17 +37,13 @@ const MarqueeItem = memo(function MarqueeItem({
 export default function MarqueeComponent({ items }: { items: string[] }) {
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      <Marquee
-        autoFill
-        gradient={false}
-        pauseOnHover
-        speed={MARQUEE_SPEED}
-        className="will-change-transform"
-      >
-        {items.map((item, index) => (
-          <MarqueeItem key={`${item}-${index}`} item={item} index={index} />
-        ))}
-      </Marquee>
+      <SeamlessMarquee speed={MARQUEE_SPEED}>
+        <div className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6">
+          {items.map((item, index) => (
+            <MarqueeItem key={`${item}-${index}`} item={item} index={index} />
+          ))}
+        </div>
+      </SeamlessMarquee>
     </div>
   );
 }

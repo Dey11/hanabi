@@ -1,7 +1,7 @@
 "use client";
 
+import { SeamlessMarquee } from "@/components/seamless-marquee";
 import type { ReactNode } from "react";
-import Marquee from "react-fast-marquee";
 
 type InlineMarqueeProps = {
   direction: "left" | "right";
@@ -15,15 +15,12 @@ export function InlineMarquee({
   children,
 }: InlineMarqueeProps) {
   return (
-    <Marquee
-      autoFill
+    <SeamlessMarquee
       direction={direction}
-      gradient={false}
-      pauseOnHover
       speed={speed}
       className="w-full overflow-hidden"
     >
       {children}
-    </Marquee>
+    </SeamlessMarquee>
   );
 }

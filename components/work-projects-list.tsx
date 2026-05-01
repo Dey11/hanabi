@@ -53,7 +53,7 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           <button
             type="button"
             onClick={() => setIsExpanded(true)}
-            className="font-inter absolute top-6 left-1/2 z-10 inline-flex -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-linear-to-b from-white from-35% to-neutral-100 px-2 py-1 text-base font-medium text-black shadow-sm inset-shadow-2xs inset-shadow-white/70 backdrop-blur-sm transition-transform duration-75 text-shadow-2xs focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none active:scale-95"
+            className="font-inter absolute top-8 left-1/2 z-10 inline-flex -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-linear-to-b from-white from-35% to-neutral-100 px-2 py-1 text-base font-medium text-black shadow-sm inset-shadow-2xs inset-shadow-white/70 backdrop-blur-sm transition-transform duration-75 text-shadow-2xs focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none active:scale-95"
             aria-expanded={isExpanded}
           >
             See more
