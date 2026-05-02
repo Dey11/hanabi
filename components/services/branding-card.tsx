@@ -179,7 +179,6 @@ export function BrandingCard() {
         </div>
 
         <div className="relative">
-          <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-transparent to-[#21823C] blur-[80px]" />
           <div className="relative z-20">
             <div className="px-5">
               <div className="relative z-10 flex items-center gap-2 pb-0.5">

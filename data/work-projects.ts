@@ -87,6 +87,26 @@ export const workProjects: readonly WorkProject[] = [
     ],
   },
   {
+    title: "WABISABI",
+    category: "WEBSITE | BRANDING",
+    description:
+      "A calm, tactile web experience shaped around imperfect beauty, considered details, and a quietly memorable brand presence.",
+    images: [
+      {
+        src: "/projects/wabisabi1.png",
+        alt: "Wabisabi hero screen",
+      },
+      {
+        src: "/projects/wabisabi2.png",
+        alt: "Wabisabi feature section",
+      },
+      {
+        src: "/projects/wabisabi3.png",
+        alt: "Wabisabi brand detail",
+      },
+    ],
+  },
+  {
     title: "LEADLY",
     category: "WEB APP | PRODUCT UI",
     description:
