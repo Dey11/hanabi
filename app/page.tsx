@@ -31,7 +31,7 @@ export default function Home() {
           <HeroKites />
 
           <div className="relative z-20 flex flex-col items-center bg-white/40 md:bg-transparent">
-            <div className="mx-4 mt-40 w-full max-w-2xl rounded-3xl px-4 py-4 md:mx-0 md:mt-60 md:px-0 md:py-0">
+            <div className="mx-4 mt-32 w-full max-w-2xl rounded-3xl px-4 py-4 md:mx-0 md:mt-48 md:px-0 md:py-0">
               <Reveal delay={0}>
                 <h1 className="font-inter mx-auto max-w-xl text-4xl leading-tight font-medium text-balance md:text-5xl">
                   Your Digital Impression. Simple and Beautiful
@@ -76,7 +76,7 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.24}>
-              <div className="mt-10">
+              <div className="mt-14">
                 <MarqueeComponent items={shuffledHeroProjects} />
               </div>
             </Reveal>

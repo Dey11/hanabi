@@ -305,10 +305,10 @@ function WhyUsIcon({
               pathLength: reduceMotion
                 ? { duration: 0 }
                 : {
-                    duration: 0.65,
+                    duration: 1,
                     ease: [0.4, 0, 0.2, 1],
                   },
-              y: reduceMotion ? { duration: 0 } : { duration: 0.35 },
+              y: reduceMotion ? { duration: 0 } : { duration: 0.55 },
             }}
             d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"
           />
@@ -353,12 +353,7 @@ function WhyUsTopCard({
       <div
         className={[
           "relative h-44 w-full overflow-hidden",
-          isQuality
-            ? "rounded-t-xl rounded-b-none"
-            : "rounded-t-none rounded-b-xl",
-          // Keep vertical flush (top for Clean Code, bottom for Quality),
-          // but preserve left/right padding like the bottom cards.
-          isQuality ? "-mb-3.5" : "-mt-3.5",
+          "rounded-xl",
         ].join(" ")}
       >
         <RevealImage
