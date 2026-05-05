@@ -7,6 +7,9 @@ import WorkCard from "@/components/work-card";
 import type { WorkProject } from "@/data/work-projects";
 
 const INITIAL_VISIBLE_PROJECTS = 3;
+const revealToggleButtonClass =
+  "font-inter z-10 inline-flex cursor-pointer items-center justify-center rounded-full bg-linear-to-b from-[#FDFDFD] to-[#F1F1F1]/0 p-px text-base font-medium text-[#303030] shadow-[0_2px_4px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.16)] transition-transform duration-75 focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none active:scale-95";
+const revealToggleButtonInnerClass = "rounded-full bg-[#E3E3E3]/80 px-5 py-1";
 
 type WorkProjectsListProps = {
   projects: readonly WorkProject[];
@@ -83,10 +86,10 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           <button
             type="button"
             onClick={expandProjects}
-            className="font-inter absolute top-8 left-1/2 z-10 inline-flex -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-linear-to-b from-white from-35% to-neutral-100 px-2 py-1 text-base font-medium text-black shadow-sm inset-shadow-2xs inset-shadow-white/70 backdrop-blur-sm transition-transform duration-75 text-shadow-2xs focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none active:scale-95"
+            className={`absolute top-16 left-1/2 -translate-x-1/2 ${revealToggleButtonClass}`}
             aria-expanded={isExpanded}
           >
-            See more
+            <span className={revealToggleButtonInnerClass}>See more</span>
           </button>
         </div>
       )}
@@ -95,7 +98,9 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
         <div
           id="additional-work-projects"
           className={`mt-16 flex w-full flex-col items-center gap-16 transition-[opacity,transform] duration-180 ease-out md:mt-20 md:gap-20 ${
-            isCollapsing ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
+            isCollapsing
+              ? "translate-y-2 opacity-0"
+              : "translate-y-0 opacity-100"
           }`}
         >
           {additionalProjects.map((project, idx) => (
@@ -111,12 +116,12 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           <button
             type="button"
             onClick={collapseProjects}
-            className="font-inter inline-flex min-h-10 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-linear-to-b from-white from-35% to-neutral-100 px-3 py-1.5 text-base font-medium text-black shadow-sm inset-shadow-2xs inset-shadow-white/70 backdrop-blur-sm transition-transform duration-150 ease-out text-shadow-2xs hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none active:scale-[0.96]"
+            className={revealToggleButtonClass}
             aria-controls="additional-work-projects"
             aria-expanded={isExpanded}
             disabled={isCollapsing}
           >
-            See less
+            <span className={revealToggleButtonInnerClass}>See less</span>
           </button>
         </div>
       )}
