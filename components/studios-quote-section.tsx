@@ -7,6 +7,14 @@ const sawarabiGothic = Sawarabi_Gothic({
   weight: ["400"],
 });
 
+const teamMembers = [
+  { name: "Rudraksh", role: "Developer" },
+  { name: "Krish", role: "Designer" },
+  { name: "Shreyan", role: "Developer" },
+  { name: "Arsh", role: "Developer" },
+  { name: "Sagarika", role: "Designer" },
+];
+
 export default function StudiosQuoteSection() {
   return (
     <section
@@ -37,7 +45,7 @@ export default function StudiosQuoteSection() {
             Hanabi Studios
           </p>
 
-          <div className="gradient-border-4 gradient-border-from-[#FF6B52] gradient-border-to-[#FFC874] animate-gradient-border motion-reduce:animate-none [--gradient-border-duration:9s] absolute top-11 right-0 left-0 z-10 h-[180px] rounded-xl bg-[#F6F6F6] sm:top-18 sm:h-[230px] sm:rounded-2xl md:top-23 md:h-[260px]">
+          <div className="gradient-border-4 gradient-border-from-[#FF6B52] gradient-border-to-[#FFC874] animate-gradient-border motion-reduce:animate-none [--gradient-border-duration:9s] absolute top-11 right-0 left-0 z-10 h-[180px] rounded-xl bg-white sm:top-18 sm:h-[230px] sm:rounded-2xl md:top-23 md:h-[260px]">
             <div className="absolute inset-0 grid place-items-center px-6 sm:px-10">
               <blockquote
                 className={`max-w-[46ch] text-center font-sans text-[15px] leading-relaxed tracking-tight text-black sm:text-base md:text-3xl`}
@@ -55,6 +63,28 @@ export default function StudiosQuoteSection() {
             />
           </div>
         </div>
+      </Reveal>
+
+      <Reveal
+        delay={0.18}
+        className="relative z-10 mx-auto mt-8 w-full max-w-4xl sm:mt-10"
+      >
+        <ul className="grid grid-cols-2 gap-x-5 gap-y-8 min-[520px]:grid-cols-5 sm:gap-x-8">
+          {teamMembers.map((member) => (
+            <li key={member.name} className="min-w-0 text-center">
+              <div
+                className="mx-auto size-12 rounded-full bg-white ring-1 ring-black/8 sm:size-14"
+                aria-hidden="true"
+              />
+              <h4 className="mt-3 truncate text-xl leading-none font-medium text-black">
+                {member.name}
+              </h4>
+              <p className="mt-1 font-mono text-sm leading-none font-medium text-[#6C6C6C] uppercase">
+                {member.role}
+              </p>
+            </li>
+          ))}
+        </ul>
       </Reveal>
     </section>
   );
