@@ -36,7 +36,7 @@ bun run start
 - `data/work-projects.ts` is the source of truth for work project titles, categories, descriptions, and image sets.
 - `components/marquee-component.tsx` renders the homepage hero project marquee with `components/seamless-marquee.tsx`.
 - `components/seamless-marquee.tsx` provides the package-free, duplicated-track marquee used by the hero and inline service marquees.
-- `components/work-projects-list.tsx` owns the works list client interaction. It shows the first three projects initially, renders a blurred, non-interactive peek of the next project behind the rounded white "See more" button, and mounts the remaining projects on click.
+- `components/work-projects-list.tsx` owns the works list client interaction. It shows the first three projects initially, renders a blurred, non-interactive peek of the next project behind the rounded-full "See more" button with a `#E3E3E3/80` fill, light vertical gradient stroke, subtle layered shadows, and active scale feedback, then mounts the remaining projects on click.
 - `components/work-card.tsx` renders each work project shell and description.
 - `components/work-card-gallery.tsx` handles project image layouts based on image count.
 - `components/reveal.tsx` provides the viewport reveal/fade behavior used across the page and by newly mounted work projects.
@@ -45,7 +45,7 @@ bun run start
 
 Add or edit projects in `data/work-projects.ts`. Project images should live under `public/projects` and be referenced with root-relative paths such as `/projects/example.png`.
 
-The first three projects in `workProjects` are visible immediately. In the collapsed state, the next project appears only as a blurred, non-interactive peek behind "See more"; full additional projects stay unmounted until visitors click the button, so their existing `Reveal` viewport animation runs when they appear.
+The first three projects in `workProjects` are visible immediately. In the collapsed state, the next project appears only as a blurred, non-interactive peek behind "See more"; full additional projects stay unmounted until visitors click the button, so their existing `Reveal` viewport animation runs when they appear. The final revealed project anchors the hanging paper-crane garlands.
 
 ## Notes
 

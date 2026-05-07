@@ -16,11 +16,11 @@ export type WorkProjectImages =
   | readonly [WorkProjectImage, WorkProjectImage]
   | readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage]
   | readonly [
-    WorkProjectImage,
-    WorkProjectImage,
-    WorkProjectImage,
-    WorkProjectImage,
-  ];
+      WorkProjectImage,
+      WorkProjectImage,
+      WorkProjectImage,
+      WorkProjectImage,
+    ];
 
 export type WorkProject = {
   title: string;
@@ -71,22 +71,6 @@ export const workProjects: readonly WorkProject[] = [
     ],
   },
   {
-    title: "GOT NEXT",
-    category: "WEB APP | PRODUCT UI",
-    description:
-      "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
-    images: [
-      {
-        src: "/projects/gotnextHero.png",
-        alt: "Got Next hero screen",
-      },
-      {
-        src: "/projects/gotnextDashboard.png",
-        alt: "Got Next dashboard overview",
-      },
-    ],
-  },
-  {
     title: "WABISABI",
     category: "WEBSITE | BRANDING",
     description:
@@ -107,18 +91,18 @@ export const workProjects: readonly WorkProject[] = [
     ],
   },
   {
-    title: "LEADLY",
+    title: "GOT NEXT",
     category: "WEB APP | PRODUCT UI",
     description:
-      "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
+      "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
     images: [
       {
-        src: "/projects/leadly1.png",
-        alt: "Leadly dashboard overview",
+        src: "/projects/gotnextHero.png",
+        alt: "Got Next hero screen",
       },
       {
-        src: "/projects/leadly2.png",
-        alt: "Leadly lead details view",
+        src: "/projects/gotnextDashboard.png",
+        alt: "Got Next dashboard overview",
       },
     ],
   },
@@ -135,6 +119,22 @@ export const workProjects: readonly WorkProject[] = [
       {
         src: "/projects/thomasbewick2.png",
         alt: "Thomas Bewick engraving detail",
+      },
+    ],
+  },
+  {
+    title: "LEADLY",
+    category: "WEB APP | PRODUCT UI",
+    description:
+      "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
+    images: [
+      {
+        src: "/projects/leadly1.png",
+        alt: "Leadly dashboard overview",
+      },
+      {
+        src: "/projects/leadly2.png",
+        alt: "Leadly lead details view",
       },
     ],
   },
