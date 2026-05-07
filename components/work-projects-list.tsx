@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
+import HangingPaperCranes from "@/components/hanging-paper-cranes";
 import { Reveal } from "@/components/reveal";
 import WorkCard from "@/components/work-card";
 import type { WorkProject } from "@/data/work-projects";
@@ -17,39 +18,13 @@ type WorkProjectsListProps = {
 
 export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isCollapsing, setIsCollapsing] = useState(false);
-  const collapseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasMoreProjects = projects.length > INITIAL_VISIBLE_PROJECTS;
   const initialProjects = projects.slice(0, INITIAL_VISIBLE_PROJECTS);
   const additionalProjects = projects.slice(INITIAL_VISIBLE_PROJECTS);
   const nextProject = additionalProjects[0];
-  const showAdditionalProjects = isExpanded || isCollapsing;
-
-  useEffect(() => {
-    return () => {
-      if (collapseTimeoutRef.current) {
-        clearTimeout(collapseTimeoutRef.current);
-      }
-    };
-  }, []);
 
   const expandProjects = () => {
-    if (collapseTimeoutRef.current) {
-      clearTimeout(collapseTimeoutRef.current);
-      collapseTimeoutRef.current = null;
-    }
-
-    setIsCollapsing(false);
     setIsExpanded(true);
-  };
-
-  const collapseProjects = () => {
-    setIsCollapsing(true);
-    collapseTimeoutRef.current = setTimeout(() => {
-      setIsExpanded(false);
-      setIsCollapsing(false);
-      collapseTimeoutRef.current = null;
-    }, 180);
   };
 
   return (
@@ -94,35 +69,27 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
         </div>
       )}
 
-      {showAdditionalProjects && (
+      {isExpanded && (
         <div
           id="additional-work-projects"
-          className={`mt-16 flex w-full flex-col items-center gap-16 transition-[opacity,transform] duration-180 ease-out md:mt-20 md:gap-20 ${
-            isCollapsing
-              ? "translate-y-2 opacity-0"
-              : "translate-y-0 opacity-100"
-          }`}
+          className="mt-16 flex w-full flex-col items-center gap-16 md:mt-20 md:gap-20"
         >
-          {additionalProjects.map((project, idx) => (
-            <Reveal
-              key={project.title}
-              className="w-full"
-              delay={Math.min(0.04 * (idx + INITIAL_VISIBLE_PROJECTS), 0.16)}
-            >
-              <WorkCard {...project} />
-            </Reveal>
-          ))}
+          {additionalProjects.map((project, idx) => {
+            const anchorsCranes = idx === additionalProjects.length - 1;
 
-          <button
-            type="button"
-            onClick={collapseProjects}
-            className={revealToggleButtonClass}
-            aria-controls="additional-work-projects"
-            aria-expanded={isExpanded}
-            disabled={isCollapsing}
-          >
-            <span className={revealToggleButtonInnerClass}>See less</span>
-          </button>
+            return (
+              <Reveal
+                key={project.title}
+                className="w-full"
+                delay={Math.min(0.04 * (idx + INITIAL_VISIBLE_PROJECTS), 0.16)}
+              >
+                <div className={anchorsCranes ? "relative" : undefined}>
+                  <WorkCard {...project} />
+                  {anchorsCranes && <HangingPaperCranes />}
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       )}
     </div>
