@@ -319,13 +319,7 @@ function WhyUsIcon({
   }
 }
 
-function WhyUsTopCard({
-  item,
-  mobileStack,
-}: {
-  item: WhyUsItem;
-  mobileStack?: "top" | "bottom";
-}) {
+function WhyUsTopCard({ item }: { item: WhyUsItem }) {
   const isQuality = item.icon === "quality";
   const reduceMotion = useReducedMotion();
 
@@ -333,8 +327,6 @@ function WhyUsTopCard({
     <div
       className={[
         "w-full overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)]",
-        mobileStack === "top" ? "rounded-b-none md:rounded-2xl" : "",
-        mobileStack === "bottom" ? "rounded-t-none md:rounded-2xl" : "",
         // Keep padding consistent with bottom cards.
         "p-3.5",
       ].join(" ")}
@@ -351,10 +343,9 @@ function WhyUsTopCard({
       ) : null}
 
       <div
-        className={[
-          "relative h-44 w-full overflow-hidden",
-          "rounded-xl",
-        ].join(" ")}
+        className={["relative h-44 w-full overflow-hidden", "rounded-xl"].join(
+          " ",
+        )}
       >
         <RevealImage
           src={item.image.src}
@@ -459,7 +450,7 @@ export default function WhyUsCards() {
 
   return (
     <div className="w-full max-w-6xl pt-10">
-      <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-6">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
         {top.map((item, idx) => {
           const isQuality = item.icon === "quality";
           const orderClass = isQuality
@@ -470,16 +461,9 @@ export default function WhyUsCards() {
             <Reveal
               key={item.title}
               delay={Math.min(0.05 * idx, 0.12)}
-              className={[
-                orderClass,
-                // Stack seam on mobile (bottom item pulls up by 1px)
-                !isQuality ? "-mt-px md:mt-0" : "",
-              ].join(" ")}
+              className={orderClass}
             >
-              <WhyUsTopCard
-                item={item}
-                mobileStack={isQuality ? "top" : "bottom"}
-              />
+              <WhyUsTopCard item={item} />
             </Reveal>
           );
         })}

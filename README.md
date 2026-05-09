@@ -32,7 +32,7 @@ bun run start
 
 ## Project Structure
 
-- `app/page.tsx` composes the homepage sections and mounts the works section.
+- `app/page.tsx` composes the homepage sections, owns section-level spacing such as the larger services top padding before Why Us, and mounts the works section.
 - `data/work-projects.ts` is the source of truth for work project titles, categories, descriptions, and image sets.
 - `components/marquee-component.tsx` renders the homepage hero project marquee with `components/seamless-marquee.tsx`.
 - `components/seamless-marquee.tsx` provides the package-free, duplicated-track marquee used by the hero and inline service marquees.
@@ -40,6 +40,8 @@ bun run start
 - `components/work-card.tsx` renders each work project shell and description.
 - `components/work-card-gallery.tsx` handles project image layouts based on image count.
 - `components/reveal.tsx` provides the viewport reveal/fade behavior used across the page and by newly mounted work projects.
+- `components/why-us-cards.tsx` renders the Why Us cards, with separated mobile spacing for the Quality and Clean Code cards so they do not attach on narrow screens.
+- `components/studios-quote-section.tsx` renders the Studios/Who We Are quote and team list. Team avatar gradients now fill the full rounded circle while retaining the ring, inset highlight, and shadow depth matching the small circles in the Development service card.
 
 ## Updating Works
 

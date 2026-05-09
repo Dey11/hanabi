@@ -85,7 +85,7 @@ export default function Home() {
 
         <section
           id="services"
-          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 py-10"
+          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-24 pb-10"
         >
           <Reveal>
             <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">

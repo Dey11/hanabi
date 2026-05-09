@@ -12,26 +12,36 @@ const teamMembers = [
     name: "Krish",
     role: "Designer",
     avatarClass: "bg-linear-to-br from-[#51F4FF] via-[#82F8EF] to-[#B8FFF3]",
+    gradientBorderClass:
+      "gradient-border-from-[#51F4FF] gradient-border-via-[#82F8EF] gradient-border-to-[#B8FFF3]",
   },
   {
     name: "Roy",
     role: "Developer",
     avatarClass: "bg-linear-to-br from-[#F5A58E] via-[#E2A0B7] to-[#B992F0]",
+    gradientBorderClass:
+      "gradient-border-from-[#F5A58E] gradient-border-via-[#E2A0B7] gradient-border-to-[#B992F0]",
   },
   {
     name: "Dey",
     role: "Developer",
     avatarClass: "bg-linear-to-br from-[#C8F36A] via-[#7BDFA7] to-[#4FA7C8]",
+    gradientBorderClass:
+      "gradient-border-from-[#C8F36A] gradient-border-via-[#7BDFA7] gradient-border-to-[#4FA7C8]",
   },
   {
     name: "Sagarika",
     role: "Designer",
     avatarClass: "bg-linear-to-br from-[#FFE1A4] via-[#FFB078] to-[#FF6B52]",
+    gradientBorderClass:
+      "gradient-border-from-[#FFE1A4] gradient-border-via-[#FFB078] gradient-border-to-[#FF6B52]",
   },
   {
     name: "Arsh",
     role: "Developer",
     avatarClass: "bg-linear-to-br from-[#8A7CFF] via-[#B56BE8] to-[#FF8BBD]",
+    gradientBorderClass:
+      "gradient-border-from-[#8A7CFF] gradient-border-via-[#B56BE8] gradient-border-to-[#FF8BBD]",
   },
 ];
 
@@ -39,7 +49,7 @@ function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
   return (
     <li className="min-w-0 text-center">
       <div
-        className={`mx-auto size-12 rounded-full ring-1 ring-black/8 sm:size-14 ${member.avatarClass}`}
+        className={`mx-auto size-12 rounded-full shadow-sm ring-1 ring-white/45 inset-shadow-2xs inset-shadow-white/45 gradient-border-3 animate-gradient-border [--gradient-border-duration:9s] motion-reduce:animate-none sm:size-14 ${member.gradientBorderClass} ${member.avatarClass}`}
         aria-hidden="true"
       />
       <h4 className="mt-3 text-lg leading-tight font-medium text-black sm:text-xl">
