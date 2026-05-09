@@ -7,7 +7,7 @@ import {
   useReducedMotion,
   useSpring,
 } from "motion/react";
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -182,7 +182,6 @@ function Garland({
   cranes: CraneSpec[];
 }) {
   const reduceMotion = useReducedMotion();
-  const lastPointerXRef = useRef<number | null>(null);
   const releaseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stringEnd = Math.max(...cranes.map((crane) => crane.top));
   const pointTarget0 = useMotionValue(0);
@@ -270,66 +269,14 @@ function Garland({
     }, delay);
   };
 
-  const moveRope = (direction: number, force = 1) => {
-    if (reduceMotion) {
-      return;
-    }
-
-    cranes.forEach((crane, index) => {
-      const lagDirection = index % 2 === 0 ? direction : direction * 0.82;
-      const target = lagDirection * craneAmplitude(crane, stringEnd) * force;
-
-      pointTargets[index].set(target);
-      rotateTargets[index].set(target * (0.22 + index * 0.04));
-    });
-
-    releaseRope(95);
-  };
-
-  const startSwing = (direction: number) => {
-    moveRope(direction, 0.9);
-  };
-
-  const handlePointerEnter = (event: PointerEvent<HTMLDivElement>) => {
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const entersFromLeft = event.clientX < bounds.left + bounds.width / 2;
-
-    lastPointerXRef.current = event.clientX;
-    startSwing(entersFromLeft ? 1 : -1);
-  };
-
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    const previousX = lastPointerXRef.current;
-
-    if (previousX === null) {
-      lastPointerXRef.current = event.clientX;
-      return;
-    }
-
-    const deltaX = event.clientX - previousX;
-    lastPointerXRef.current = event.clientX;
-
-    if (Math.abs(deltaX) >= 2) {
-      moveRope(deltaX > 0 ? 1 : -1, Math.min(1.65, Math.abs(deltaX) / 6));
-    }
-  };
-
-  const handlePointerLeave = () => {
-    lastPointerXRef.current = null;
-    releaseRope(0);
-  };
-
   return (
     <motion.div
       className={cn(
-        "pointer-events-auto absolute top-0 h-full w-24 origin-top sm:w-32 md:w-40",
+        "pointer-events-none absolute top-0 h-full w-24 origin-top sm:w-32 md:w-40",
         side === "left"
           ? "left-[-0.65rem] sm:left-2 md:left-5 lg:left-8"
           : "right-[-0.65rem] sm:right-2 md:right-5 lg:right-8",
       )}
-      onPointerEnter={handlePointerEnter}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
     >
       <motion.svg
         className="absolute top-0 left-1/2 w-full -translate-x-1/2 overflow-visible"
