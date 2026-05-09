@@ -169,7 +169,7 @@ export function DevelopmentCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl bg-white sm:h-[400px] sm:max-w-[400px]"
+      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl inset-shadow-sm inset-shadow-orange-600 sm:h-[400px] sm:max-w-[400px]"
     >
       <ChakraOrbit />
       <div className="flex-1">

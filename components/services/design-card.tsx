@@ -91,7 +91,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl sm:h-[400px] sm:max-w-[400px]"
+      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl inset-shadow-sm inset-shadow-pink-600 sm:h-[400px] sm:max-w-[400px]"
     >
       <div className="pt-6 pb-3 sm:pt-7 sm:pb-3">
         <InlineMarquee direction="right" speed={24}>

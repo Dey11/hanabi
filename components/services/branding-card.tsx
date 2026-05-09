@@ -33,7 +33,7 @@ export function BrandingCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col rounded-2xl bg-white/70 sm:h-[400px] sm:max-w-[400px]"
+      className="relative mx-auto flex h-[380px] w-full max-w-[calc(100vw-2rem)] flex-col rounded-2xl bg-white/70 inset-shadow-sm inset-shadow-black sm:h-[400px] sm:max-w-[400px]"
     >
       <div className="relative flex flex-1 flex-col">
         <div className="relative h-full rotate-0">
