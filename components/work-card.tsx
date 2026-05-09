@@ -24,7 +24,12 @@ export default function WorkCard({
 
         <div className="overflow-hidden rounded-t-xl rounded-b-none border border-[#E0E0E0] bg-[#F9F9F9]">
           <div className="p-4 sm:p-5 md:p-6">
-            <WorkCardGallery images={images} />
+            <WorkCardGallery
+              images={images}
+              mobileThreeLayout={
+                title === "DOWN THE COVE" ? "side-by-side" : "stacked"
+              }
+            />
           </div>
         </div>
       </div>

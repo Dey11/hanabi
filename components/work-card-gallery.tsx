@@ -5,6 +5,7 @@ import RevealImage from "@/components/reveal-image";
 
 type GalleryProps = {
   images: readonly WorkProjectImage[];
+  mobileThreeLayout?: "stacked" | "side-by-side";
 };
 
 /** Shared canvas — taller so tiles read at portfolio scale */
@@ -96,23 +97,46 @@ function GalleryTwo({
 
 function GalleryThree({
   images,
+  mobileLayout = "stacked",
 }: {
   images: readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage];
+  mobileLayout?: "stacked" | "side-by-side";
 }) {
   return (
     <>
-      {/* Mobile / Tablet: phone / desktop / phone composition. */}
-      <div className="grid h-full w-full grid-cols-[0.78fr_1.55fr_0.78fr] items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
-        <div className="relative h-full min-h-0">
-          <TileFill image={images[0]} sizes="(max-width: 640px) 24vw, 24vw" />
+      {mobileLayout === "side-by-side" ? (
+        <div className="grid h-full w-full grid-cols-[0.78fr_1.55fr_0.78fr] items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
+          <div className="relative h-full min-h-0">
+            <TileFill
+              image={images[0]}
+              sizes="(max-width: 640px) 24vw, 24vw"
+            />
+          </div>
+          <div className="relative h-full min-h-0">
+            <TileFill
+              image={images[1]}
+              sizes="(max-width: 640px) 46vw, 42vw"
+            />
+          </div>
+          <div className="relative h-full min-h-0">
+            <TileFill
+              image={images[2]}
+              sizes="(max-width: 640px) 24vw, 24vw"
+            />
+          </div>
         </div>
-        <div className="relative h-full min-h-0">
-          <TileFill image={images[1]} sizes="(max-width: 640px) 46vw, 42vw" />
+      ) : (
+        <div className="flex h-full w-full flex-col gap-3 p-3 sm:gap-4 sm:p-4 md:hidden">
+          {images.map((image) => (
+            <div key={image.src} className="relative min-h-0 flex-1">
+              <TileFill
+                image={image}
+                sizes="(max-width: 640px) 82vw, 42vw"
+              />
+            </div>
+          ))}
         </div>
-        <div className="relative h-full min-h-0">
-          <TileFill image={images[2]} sizes="(max-width: 640px) 24vw, 24vw" />
-        </div>
-      </div>
+      )}
 
       {/* Desktop: 3 side by side */}
       <div className="hidden h-full w-full gap-4 p-5 md:flex">
@@ -153,7 +177,10 @@ function GalleryFour({
   );
 }
 
-export default function WorkCardGallery({ images }: GalleryProps) {
+export default function WorkCardGallery({
+  images,
+  mobileThreeLayout = "stacked",
+}: GalleryProps) {
   let inner: ReactNode;
 
   switch (images.length) {
@@ -175,6 +202,7 @@ export default function WorkCardGallery({ images }: GalleryProps) {
     case 3:
       inner = (
         <GalleryThree
+          mobileLayout={mobileThreeLayout}
           images={
             [images[0], images[1], images[2]] as readonly [
               WorkProjectImage,
