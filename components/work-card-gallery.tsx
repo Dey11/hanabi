@@ -34,7 +34,9 @@ function TileFill({
           />
         </div>
       )}
-      <div className={`absolute inset-0 ${image.mobileSrc ? "hidden sm:block" : ""}`}>
+      <div
+        className={`absolute inset-0 ${image.mobileSrc ? "hidden sm:block" : ""}`}
+      >
         <RevealImage
           src={image.src}
           alt={image.alt}
@@ -107,32 +109,20 @@ function GalleryThree({
       {mobileLayout === "side-by-side" ? (
         <div className="grid h-full w-full grid-cols-[0.78fr_1.55fr_0.78fr] items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
           <div className="relative h-full min-h-0">
-            <TileFill
-              image={images[0]}
-              sizes="(max-width: 640px) 24vw, 24vw"
-            />
+            <TileFill image={images[0]} sizes="(max-width: 640px) 24vw, 24vw" />
           </div>
           <div className="relative h-full min-h-0">
-            <TileFill
-              image={images[1]}
-              sizes="(max-width: 640px) 46vw, 42vw"
-            />
+            <TileFill image={images[1]} sizes="(max-width: 640px) 46vw, 42vw" />
           </div>
           <div className="relative h-full min-h-0">
-            <TileFill
-              image={images[2]}
-              sizes="(max-width: 640px) 24vw, 24vw"
-            />
+            <TileFill image={images[2]} sizes="(max-width: 640px) 24vw, 24vw" />
           </div>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col gap-3 p-3 sm:gap-4 sm:p-4 md:hidden">
           {images.map((image) => (
             <div key={image.src} className="relative min-h-0 flex-1">
-              <TileFill
-                image={image}
-                sizes="(max-width: 640px) 82vw, 42vw"
-              />
+              <TileFill image={image} sizes="(max-width: 640px) 82vw, 42vw" />
             </div>
           ))}
         </div>

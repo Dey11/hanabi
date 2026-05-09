@@ -42,7 +42,7 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
       </div>
 
       {hasMoreProjects && !isExpanded && (
-        <div className="relative w-full overflow-hidden pt-12">
+        <div className="relative mt-12 w-full overflow-hidden">
           {nextProject && (
             <div
               aria-hidden="true"
