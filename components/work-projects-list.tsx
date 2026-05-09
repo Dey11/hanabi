@@ -41,6 +41,12 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
         ))}
       </div>
 
+      {!isExpanded && (
+        <div className="-mt-14 -mb-8 w-full md:hidden">
+          <HangingPaperCranes className="h-[260px]" />
+        </div>
+      )}
+
       {hasMoreProjects && !isExpanded && (
         <div className="relative mt-12 w-full overflow-hidden">
           {nextProject && (
@@ -74,22 +80,18 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           id="additional-work-projects"
           className="mt-16 flex w-full flex-col items-center gap-16 md:mt-20 md:gap-20"
         >
-          {additionalProjects.map((project, idx) => {
-            const anchorsCranes = idx === additionalProjects.length - 1;
-
-            return (
-              <Reveal
-                key={project.title}
-                className="w-full"
-                delay={Math.min(0.04 * (idx + INITIAL_VISIBLE_PROJECTS), 0.16)}
-              >
-                <div className={anchorsCranes ? "relative" : undefined}>
-                  <WorkCard {...project} />
-                  {anchorsCranes && <HangingPaperCranes />}
-                </div>
-              </Reveal>
-            );
-          })}
+          {additionalProjects.map((project, idx) => (
+            <Reveal
+              key={project.title}
+              className="w-full"
+              delay={Math.min(0.04 * (idx + INITIAL_VISIBLE_PROJECTS), 0.16)}
+            >
+              <WorkCard {...project} />
+            </Reveal>
+          ))}
+          <div className="-mt-14 -mb-8 w-full md:hidden">
+            <HangingPaperCranes className="h-[260px]" />
+          </div>
         </div>
       )}
     </div>
