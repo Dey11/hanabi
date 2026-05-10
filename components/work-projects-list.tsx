@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import HangingPaperCranes from "@/components/hanging-paper-cranes";
 import { Reveal } from "@/components/reveal";
 import WorkCard from "@/components/work-card";
 import type { WorkProject } from "@/data/work-projects";
@@ -40,12 +39,6 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           </Reveal>
         ))}
       </div>
-
-      {!isExpanded && (
-        <div className="-mt-14 -mb-8 w-full md:hidden">
-          <HangingPaperCranes className="h-[260px]" />
-        </div>
-      )}
 
       {hasMoreProjects && !isExpanded && (
         <div className="relative mt-12 w-full overflow-hidden">
@@ -89,9 +82,6 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
               <WorkCard {...project} />
             </Reveal>
           ))}
-          <div className="-mt-14 -mb-8 w-full md:hidden">
-            <HangingPaperCranes className="h-[260px]" />
-          </div>
         </div>
       )}
     </div>

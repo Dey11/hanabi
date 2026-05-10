@@ -171,3 +171,38 @@
   overflow-x: hidden !important;
   width: 100% !important;
 }
+
+.footer-firefly {
+  background: #ffd76a;
+  box-shadow:
+    0 0 8px rgb(255 211 98 / 0.78),
+    0 0 18px rgb(255 149 44 / 0.28);
+  opacity: 0;
+  animation: footer-firefly var(--duration) ease-in-out var(--delay) infinite;
+}
+
+@keyframes footer-firefly {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.45);
+  }
+  14% {
+    opacity: 0.72;
+  }
+  42% {
+    opacity: 0.96;
+    transform: translate3d(var(--drift), -18px, 0) scale(1);
+  }
+  76% {
+    opacity: 0.2;
+    transform: translate3d(calc(var(--drift) * -0.35), 10px, 0) scale(0.62);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-firefly {
+    animation: none;
+    opacity: 0.52;
+  }
+}
