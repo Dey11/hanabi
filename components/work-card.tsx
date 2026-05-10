@@ -23,8 +23,8 @@ export default function WorkCard({
           <span className="shrink-0 text-right">{category}</span>
         </div>
 
-        <div className="relative flex flex-col overflow-hidden rounded-xl">
-          <div className="relative z-10 overflow-hidden rounded-t-xl rounded-b-none bg-white shadow-xs inset-shadow-sm inset-shadow-black/20">
+        <div className="relative flex flex-col overflow-visible rounded-xl">
+          <div className="relative z-50 overflow-hidden rounded-t-xl rounded-b-none bg-[#FFF] shadow-sm inset-shadow-sm inset-shadow-black/20">
             <HangingPaperCranes
               seed={title}
               variant="card"
@@ -45,7 +45,7 @@ export default function WorkCard({
             className="relative z-40 h-2 bg-[#F6F6F6] sm:h-3"
           />
 
-          <div className="relative z-10 flex items-center justify-center rounded-t-none rounded-b-xl bg-white px-5 py-3 shadow-[0_4px_14px_rgba(0,0,0,0.055)] ring-1 ring-black/5 sm:px-8">
+          <div className="relative z-10 flex items-center justify-center rounded-t-none rounded-b-xl bg-[#FFF] px-5 py-3 shadow-sm inset-shadow-sm inset-shadow-black/20 sm:px-8">
             <p className="font-inter max-w-2xl text-center text-base leading-relaxed font-normal text-[#1a1a1a] sm:text-[17px]">
               {description}
             </p>

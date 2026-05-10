@@ -6,6 +6,7 @@ import { memo } from "react";
 
 const MARQUEE_SPEED = 64;
 const HERO_PROJECT_ASPECT_RATIO = "45 / 32";
+const KNOWN_LCP_ITEMS = new Set(["gotnextConcept"]);
 
 const MarqueeItem = memo(function MarqueeItem({
   item,
@@ -14,7 +15,7 @@ const MarqueeItem = memo(function MarqueeItem({
   item: string;
   index: number;
 }) {
-  const isAboveFold = index < 4;
+  const shouldLoadImmediately = index < 4 || KNOWN_LCP_ITEMS.has(item);
 
   return (
     <div
@@ -27,8 +28,8 @@ const MarqueeItem = memo(function MarqueeItem({
         fill
         sizes="(max-width: 640px) 293px, (max-width: 768px) 405px, 450px"
         className="object-cover"
-        loading={isAboveFold ? "eager" : "lazy"}
-        priority={isAboveFold}
+        loading={shouldLoadImmediately ? "eager" : "lazy"}
+        priority={shouldLoadImmediately}
       />
     </div>
   );
