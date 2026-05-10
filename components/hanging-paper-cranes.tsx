@@ -3,7 +3,6 @@
 import {
   motion,
   useMotionValue,
-  useMotionValueEvent,
   useReducedMotion,
   useSpring,
 } from "motion/react";
@@ -29,10 +28,10 @@ type CraneSpec = {
 
 const leftCranes: CraneSpec[] = [
   {
-    top: 34,
+    top: 48,
     offset: 0,
-    rotate: -8,
-    scale: 0.84,
+    rotate: -4,
+    scale: 0.82,
     palette: {
       wing: "#FFB39F",
       wingShadow: "#FF6B52",
@@ -41,10 +40,10 @@ const leftCranes: CraneSpec[] = [
     },
   },
   {
-    top: 124,
+    top: 112,
     offset: 0,
-    rotate: 5,
-    scale: 0.78,
+    rotate: 3,
+    scale: 0.8,
     flip: true,
     palette: {
       wing: "#FFC874",
@@ -54,9 +53,9 @@ const leftCranes: CraneSpec[] = [
     },
   },
   {
-    top: 216,
+    top: 176,
     offset: 0,
-    rotate: -4,
+    rotate: -3,
     scale: 0.82,
     palette: {
       wing: "#FF8A6F",
@@ -66,10 +65,10 @@ const leftCranes: CraneSpec[] = [
     },
   },
   {
-    top: 310,
+    top: 240,
     offset: 0,
-    rotate: 8,
-    scale: 0.76,
+    rotate: 4,
+    scale: 0.8,
     flip: true,
     palette: {
       wing: "#FFE0A7",
@@ -82,10 +81,10 @@ const leftCranes: CraneSpec[] = [
 
 const rightCranes: CraneSpec[] = [
   {
-    top: 58,
+    top: 60,
     offset: 0,
-    rotate: 7,
-    scale: 0.82,
+    rotate: 4,
+    scale: 0.81,
     flip: true,
     palette: {
       wing: "#FFD0BF",
@@ -95,10 +94,10 @@ const rightCranes: CraneSpec[] = [
     },
   },
   {
-    top: 166,
+    top: 150,
     offset: 0,
-    rotate: -7,
-    scale: 0.79,
+    rotate: -4,
+    scale: 0.8,
     palette: {
       wing: "#FFAA52",
       wingShadow: "#FF6A00",
@@ -107,10 +106,10 @@ const rightCranes: CraneSpec[] = [
     },
   },
   {
-    top: 274,
+    top: 240,
     offset: 0,
     rotate: 3,
-    scale: 0.84,
+    scale: 0.82,
     flip: true,
     palette: {
       wing: "#FF765F",
@@ -129,7 +128,44 @@ const ropeSpring = {
 
 /** Shared vertical layout for `card` garlands. */
 const CARD_VIEW_BOX_HEIGHT = 600;
-const cardCranePalettePool = [...leftCranes, ...rightCranes];
+const cardCranePalettePool: CranePalette[] = [
+  {
+    wing: "#FFB39F",
+    wingShadow: "#FF6B52",
+    body: "#FFD4C9",
+    fold: "#FF8A6F",
+  },
+  {
+    wing: "#FFC874",
+    wingShadow: "#FF9900",
+    body: "#FFE2A9",
+    fold: "#FFB452",
+  },
+  {
+    wing: "#E8A7D6",
+    wingShadow: "#C86AAD",
+    body: "#F4D5EC",
+    fold: "#DD8BC7",
+  },
+  {
+    wing: "#F3A4C5",
+    wingShadow: "#E05F99",
+    body: "#F9D4E5",
+    fold: "#EE8AB7",
+  },
+  {
+    wing: "#F6B9B0",
+    wingShadow: "#EA735F",
+    body: "#F9D8D2",
+    fold: "#F19C8C",
+  },
+  {
+    wing: "#FFE0A7",
+    wingShadow: "#FFB24D",
+    body: "#FFF0C9",
+    fold: "#FFC874",
+  },
+];
 
 function hashString(value: string) {
   let hash = 2166136261;
@@ -162,6 +198,13 @@ function randomInt(random: () => number, min: number, max: number) {
   return Math.floor(randomBetween(random, min, max + 1));
 }
 
+function shuffledPalettes(random: () => number) {
+  return cardCranePalettePool
+    .map((palette) => ({ palette, sort: random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ palette }) => palette);
+}
+
 function buildCardCraneColumn({
   count,
   random,
@@ -169,47 +212,33 @@ function buildCardCraneColumn({
   count: number;
   random: () => number;
 }) {
-  const firstTop = randomBetween(random, 24, 68);
-  const lastTop = randomBetween(random, 520, 568);
-  const gapWeights = Array.from({ length: count - 1 }, () =>
-    randomBetween(random, 0.55, 1.95),
-  );
-  const totalGapWeight = gapWeights.reduce(
-    (total, weight) => total + weight,
-    0,
-  );
+  const firstTop = randomBetween(random, 48, 60);
+  const craneGap = 114;
+  const palettes = shuffledPalettes(random);
   let runningTop = firstTop;
 
   return Array.from({ length: count }, (_, index) => {
     if (index > 0) {
-      runningTop +=
-        ((lastTop - firstTop) * gapWeights[index - 1]) / totalGapWeight;
+      runningTop += craneGap + randomBetween(random, -8, 8);
     }
 
-    const template =
-      cardCranePalettePool[
-        randomInt(random, 0, cardCranePalettePool.length - 1)
-      ];
-
     return {
-      ...template,
       top: Math.round(runningTop),
-      offset: Math.round(randomBetween(random, -7, 7)),
-      rotate: Math.round(randomBetween(random, -9, 9)),
-      scale: Number(randomBetween(random, 0.72, 0.86).toFixed(2)),
+      offset: 0,
+      rotate: Math.round(randomBetween(random, -4, 4)),
+      scale: Number(randomBetween(random, 0.79, 0.83).toFixed(2)),
       flip: random() > 0.5,
+      palette: palettes[index % palettes.length],
     };
   });
 }
 
 function buildCardCraneSets(seed: string) {
   const countRandom = seededRandom(hashString(`${seed}:counts`));
-  const leftCount = randomInt(countRandom, 4, 6);
-  let rightCount = randomInt(countRandom, 3, 5);
-
-  if (leftCount === rightCount) {
-    rightCount = rightCount === 3 ? 4 : rightCount - 1;
-  }
+  const leftCount = randomInt(countRandom, 3, 4);
+  const rightMin = Math.max(3, leftCount - 2);
+  const rightMax = Math.min(4, leftCount + 2);
+  const rightCount = randomInt(countRandom, rightMin, rightMax);
 
   return {
     left: buildCardCraneColumn({
@@ -229,28 +258,6 @@ function craneAmplitude(crane: CraneSpec, stringEnd: number) {
   return 7 + Math.pow(falloff, 1.5) * 48;
 }
 
-function ropePath(points: { x: number; y: number }[]) {
-  if (points.length < 2) {
-    return "";
-  }
-
-  const [first, ...rest] = points;
-  const path = [`M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`];
-
-  rest.forEach((point, index) => {
-    const previous = points[index];
-    const midY = previous.y + (point.y - previous.y) * 0.5;
-
-    path.push(
-      `C ${previous.x.toFixed(2)} ${midY.toFixed(2)}, ${point.x.toFixed(
-        2,
-      )} ${midY.toFixed(2)}, ${point.x.toFixed(2)} ${point.y.toFixed(2)}`,
-    );
-  });
-
-  return path.join(" ");
-}
-
 export default function HangingPaperCranes({
   className,
   seed = "paper-cranes",
@@ -268,7 +275,7 @@ export default function HangingPaperCranes({
       aria-hidden="true"
       className={cn(
         variant === "card"
-          ? "pointer-events-none absolute inset-0 z-30 h-full w-full overflow-hidden"
+          ? "pointer-events-none absolute inset-0 z-20 h-full w-full overflow-hidden"
           : "pointer-events-none relative z-10 h-[330px] w-full sm:h-[390px] md:h-[430px]",
         className,
       )}
@@ -388,48 +395,6 @@ function Garland({
     };
   }, []);
 
-  const buildRopePath = () => {
-    const points =
-      variant === "card"
-        ? [
-            { x: 80, y: 0 },
-            ...cranes.map((crane, index) => ({
-              x: 80 + pointSprings[index].get(),
-              y: crane.top,
-            })),
-            { x: 80, y: CARD_VIEW_BOX_HEIGHT },
-          ]
-        : [
-            { x: 80, y: 0 },
-            ...cranes.map((crane, index) => ({
-              x: 80 + pointSprings[index].get(),
-              y: crane.top,
-            })),
-          ];
-    return ropePath(points);
-  };
-
-  const [pathD, setPathD] = useState(() => buildRopePath());
-
-  useMotionValueEvent(pointSprings[0], "change", () =>
-    setPathD(buildRopePath()),
-  );
-  useMotionValueEvent(pointSprings[1], "change", () =>
-    setPathD(buildRopePath()),
-  );
-  useMotionValueEvent(pointSprings[2], "change", () =>
-    setPathD(buildRopePath()),
-  );
-  useMotionValueEvent(pointSprings[3], "change", () =>
-    setPathD(buildRopePath()),
-  );
-  useMotionValueEvent(pointSprings[4], "change", () =>
-    setPathD(buildRopePath()),
-  );
-  useMotionValueEvent(pointSprings[5], "change", () =>
-    setPathD(buildRopePath()),
-  );
-
   const releaseRope = (delay = 120) => {
     if (releaseTimeoutRef.current) {
       clearTimeout(releaseTimeoutRef.current);
@@ -454,10 +419,10 @@ function Garland({
   const widthClass =
     variant === "card" ? "w-[4.25rem] sm:w-20 md:w-24" : "w-24 sm:w-32 md:w-40";
 
-  const svgViewBox =
+  const stringHeight =
     variant === "card"
-      ? `0 0 160 ${CARD_VIEW_BOX_HEIGHT}`
-      : `0 0 160 ${stringEnd}`;
+      ? `${(stringEnd / CARD_VIEW_BOX_HEIGHT) * 100}%`
+      : stringEnd;
 
   return (
     <motion.div
@@ -468,35 +433,17 @@ function Garland({
         sidePositionClass,
       )}
     >
-      <motion.svg
-        className={cn(
-          "absolute left-1/2 w-full -translate-x-1/2 overflow-visible",
-          variant === "card" ? "top-0 h-full" : "top-0 overflow-visible",
-        )}
-        viewBox={svgViewBox}
-        preserveAspectRatio="none"
-        style={variant === "section" ? { height: stringEnd } : undefined}
-      >
-        <path
-          d={pathD}
-          fill="none"
-          stroke="#FF9DAE"
-          strokeLinecap="round"
-          strokeWidth="2"
-          vectorEffect="nonScalingStroke"
-        />
-      </motion.svg>
       {cranes.map((crane, index) => (
         <div
           key={`${side}-${crane.top}-${index}`}
-          className="absolute"
+          className="absolute z-20"
           style={{
             top:
               variant === "card"
                 ? `${(crane.top / CARD_VIEW_BOX_HEIGHT) * 100}%`
                 : crane.top,
             left: `calc(50% + ${crane.offset}px)`,
-            transform: "translateX(-50%)",
+            transform: "translate(-50%, -50%)",
           }}
         >
           <motion.div
@@ -524,6 +471,10 @@ function Garland({
           </motion.div>
         </div>
       ))}
+      <div
+        className="absolute top-0 left-1/2 z-10 w-0.5 -translate-x-1/2 rounded-full bg-[#FF9DAE]"
+        style={{ height: stringHeight }}
+      />
     </motion.div>
   );
 }
