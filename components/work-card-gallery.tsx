@@ -5,31 +5,40 @@ import RevealImage from "@/components/reveal-image";
 
 type GalleryProps = {
   images: readonly WorkProjectImage[];
+  mobileImageCorners?: "rounded" | "square";
   mobileThreeLayout?: "stacked" | "side-by-side";
 };
 
 /** Shared canvas — taller so tiles read at portfolio scale */
 const galleryViewport = "relative h-[320px] w-full sm:h-[440px] md:h-[540px]";
 
-const shell = "overflow-hidden rounded-xl";
-
 function TileFill({
   image,
+  mobileImageCorners = "rounded",
   sizes,
 }: {
   image: WorkProjectImage;
+  mobileImageCorners?: "rounded" | "square";
   sizes: string;
 }) {
+  const radiusClass =
+    mobileImageCorners === "square"
+      ? "rounded-none sm:rounded-xl"
+      : "rounded-xl";
+
   return (
-    <div className={`relative h-full min-h-0 w-full ${shell}`}>
+    <div
+      className={`relative h-full min-h-0 w-full overflow-hidden ${radiusClass}`}
+    >
       {image.mobileSrc && (
         <div className="absolute inset-0 block sm:hidden">
           <RevealImage
             src={image.mobileSrc}
             alt={image.alt}
             fill
+            loading="lazy"
             sizes={sizes}
-            className="rounded-xl object-contain"
+            className={`${radiusClass} object-contain`}
             wrapperClassName="absolute inset-0"
           />
         </div>
@@ -41,8 +50,9 @@ function TileFill({
           src={image.src}
           alt={image.alt}
           fill
+          loading="lazy"
           sizes={sizes}
-          className="rounded-xl object-contain"
+          className={`${radiusClass} object-contain`}
           wrapperClassName="absolute inset-0"
         />
       </div>
@@ -58,11 +68,21 @@ function TileFill({
  * 4 — 2×2 grid.
  */
 
-function GalleryOne({ image }: { image: WorkProjectImage }) {
+function GalleryOne({
+  image,
+  mobileImageCorners,
+}: {
+  image: WorkProjectImage;
+  mobileImageCorners?: "rounded" | "square";
+}) {
   return (
     <div className="flex h-full w-full items-center justify-center px-1 sm:px-2">
       <div className="relative aspect-16/10 h-[88%] w-auto max-w-[92%]">
-        <TileFill image={image} sizes="(max-width: 1152px) 85vw, 900px" />
+        <TileFill
+          image={image}
+          mobileImageCorners={mobileImageCorners}
+          sizes="(max-width: 1152px) 85vw, 900px"
+        />
       </div>
     </div>
   );
@@ -70,17 +90,27 @@ function GalleryOne({ image }: { image: WorkProjectImage }) {
 
 function GalleryTwo({
   images,
+  mobileImageCorners,
 }: {
   images: readonly [WorkProjectImage, WorkProjectImage];
+  mobileImageCorners?: "rounded" | "square";
 }) {
   return (
     <>
       <div className="flex h-full w-full flex-col gap-3 p-3 sm:flex-row sm:gap-4 sm:p-4 md:hidden">
         <div className="relative flex-1">
-          <TileFill image={images[0]} sizes="(max-width: 640px) 85vw, 42vw" />
+          <TileFill
+            image={images[0]}
+            mobileImageCorners={mobileImageCorners}
+            sizes="(max-width: 640px) 85vw, 42vw"
+          />
         </div>
         <div className="relative flex-1">
-          <TileFill image={images[1]} sizes="(max-width: 640px) 85vw, 42vw" />
+          <TileFill
+            image={images[1]}
+            mobileImageCorners={mobileImageCorners}
+            sizes="(max-width: 640px) 85vw, 42vw"
+          />
         </div>
       </div>
 
@@ -99,9 +129,11 @@ function GalleryTwo({
 
 function GalleryThree({
   images,
+  mobileImageCorners,
   mobileLayout = "stacked",
 }: {
   images: readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage];
+  mobileImageCorners?: "rounded" | "square";
   mobileLayout?: "stacked" | "side-by-side";
 }) {
   return (
@@ -109,20 +141,36 @@ function GalleryThree({
       {mobileLayout === "side-by-side" ? (
         <div className="grid h-full w-full grid-cols-[0.78fr_1.55fr_0.78fr] items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
           <div className="relative h-full min-h-0">
-            <TileFill image={images[0]} sizes="(max-width: 640px) 24vw, 24vw" />
+            <TileFill
+              image={images[0]}
+              mobileImageCorners={mobileImageCorners}
+              sizes="(max-width: 640px) 24vw, 24vw"
+            />
           </div>
           <div className="relative h-full min-h-0">
-            <TileFill image={images[1]} sizes="(max-width: 640px) 46vw, 42vw" />
+            <TileFill
+              image={images[1]}
+              mobileImageCorners={mobileImageCorners}
+              sizes="(max-width: 640px) 46vw, 42vw"
+            />
           </div>
           <div className="relative h-full min-h-0">
-            <TileFill image={images[2]} sizes="(max-width: 640px) 24vw, 24vw" />
+            <TileFill
+              image={images[2]}
+              mobileImageCorners={mobileImageCorners}
+              sizes="(max-width: 640px) 24vw, 24vw"
+            />
           </div>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col gap-3 p-3 sm:gap-4 sm:p-4 md:hidden">
           {images.map((image) => (
             <div key={image.src} className="relative min-h-0 flex-1">
-              <TileFill image={image} sizes="(max-width: 640px) 82vw, 42vw" />
+              <TileFill
+                image={image}
+                mobileImageCorners={mobileImageCorners}
+                sizes="(max-width: 640px) 82vw, 42vw"
+              />
             </div>
           ))}
         </div>
@@ -146,6 +194,7 @@ function GalleryThree({
 
 function GalleryFour({
   images,
+  mobileImageCorners,
 }: {
   images: readonly [
     WorkProjectImage,
@@ -153,6 +202,7 @@ function GalleryFour({
     WorkProjectImage,
     WorkProjectImage,
   ];
+  mobileImageCorners?: "rounded" | "square";
 }) {
   return (
     <div className="grid h-full min-h-0 w-full grid-cols-2 grid-rows-2 gap-2.5 sm:gap-3 md:gap-4">
@@ -160,6 +210,7 @@ function GalleryFour({
         <TileFill
           key={`${image.src}-${i}`}
           image={image}
+          mobileImageCorners={mobileImageCorners}
           sizes="(max-width: 1152px) 48vw, 640px"
         />
       ))}
@@ -169,13 +220,16 @@ function GalleryFour({
 
 export default function WorkCardGallery({
   images,
+  mobileImageCorners = "rounded",
   mobileThreeLayout = "stacked",
 }: GalleryProps) {
   let inner: ReactNode;
 
   switch (images.length) {
     case 1:
-      inner = <GalleryOne image={images[0]} />;
+      inner = (
+        <GalleryOne image={images[0]} mobileImageCorners={mobileImageCorners} />
+      );
       break;
     case 2:
       inner = (
@@ -186,6 +240,7 @@ export default function WorkCardGallery({
               WorkProjectImage,
             ]
           }
+          mobileImageCorners={mobileImageCorners}
         />
       );
       break;
@@ -200,6 +255,7 @@ export default function WorkCardGallery({
               WorkProjectImage,
             ]
           }
+          mobileImageCorners={mobileImageCorners}
         />
       );
       break;
@@ -214,6 +270,7 @@ export default function WorkCardGallery({
               WorkProjectImage,
             ]
           }
+          mobileImageCorners={mobileImageCorners}
         />
       );
       break;

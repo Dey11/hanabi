@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/reveal";
-import TeamMemberCard from "@/components/team-member-card";
+import TeamMembersList from "@/components/team-members-list";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
 
@@ -104,24 +104,7 @@ export default function StudiosQuoteSection() {
         delay={0.18}
         className="relative z-10 mx-auto mt-4 w-full max-w-4xl sm:mt-6"
       >
-        <div className="flex flex-col gap-7 min-[520px]:hidden">
-          <ul className="grid grid-cols-3 gap-x-2">
-            {teamMembers.slice(0, 3).map((member) => (
-              <TeamMemberCard key={member.name} member={member} />
-            ))}
-          </ul>
-          <ul className="mx-auto grid w-[56%] grid-cols-2 gap-x-2">
-            {teamMembers.slice(3).map((member) => (
-              <TeamMemberCard key={member.name} member={member} />
-            ))}
-          </ul>
-        </div>
-
-        <ul className="hidden grid-cols-5 gap-x-6 min-[520px]:grid">
-          {teamMembers.map((member) => (
-            <TeamMemberCard key={member.name} member={member} />
-          ))}
-        </ul>
+        <TeamMembersList members={teamMembers} />
       </Reveal>
     </section>
   );

@@ -33,6 +33,7 @@ export default function WorkCard({
             <div className="relative z-10 px-6 pt-4 pb-4 sm:px-9 sm:pt-5 sm:pb-5 md:px-12 md:pt-6 md:pb-6">
               <WorkCardGallery
                 images={images}
+                mobileImageCorners={title === "GOT NEXT" ? "square" : "rounded"}
                 mobileThreeLayout={
                   title === "DOWN THE COVE" ? "side-by-side" : "stacked"
                 }

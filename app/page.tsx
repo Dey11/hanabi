@@ -1,3 +1,4 @@
+import BookCallLink from "@/components/book-call-link";
 import { CalPopupButton } from "@/components/cal-popup-button";
 import FooterReveal from "@/components/footer-reveal";
 import Header from "@/components/header";
@@ -49,7 +50,24 @@ export default function Home() {
 
             <Reveal delay={0.16}>
               <div className="flex gap-8 pt-5">
-                <CalPopupButton className="text-background font-inter group relative cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95">
+                <BookCallLink className="text-background font-inter group relative inline-flex cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95 md:hidden">
+                  <span
+                    className="absolute inset-0 bg-linear-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
+                    aria-hidden
+                  />
+                  <span
+                    className="absolute inset-0 bg-linear-to-t from-[#FF9900] from-30% via-80% to-[#FF2500] to-120% opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                    aria-hidden
+                  />
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full inset-shadow-sm inset-shadow-[#FF2500]"
+                    aria-hidden
+                  />
+                  <span className="relative z-10 text-shadow-[#FF2500] text-shadow-xs">
+                    Book an Intro call
+                  </span>
+                </BookCallLink>
+                <CalPopupButton className="text-background font-inter group relative hidden cursor-pointer overflow-hidden rounded-full border border-[#FF2500] p-1 px-4 text-lg font-medium transition-transform duration-50 active:scale-95 md:inline-flex">
                   <span
                     className="absolute inset-0 bg-linear-to-b from-[#FF2500] from-30% via-50% to-[#FF9900] to-80% inset-shadow-2xs inset-shadow-[#FF9900]"
                     aria-hidden

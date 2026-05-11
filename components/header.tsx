@@ -1,5 +1,6 @@
 "use client";
 
+import BookCallLink from "@/components/book-call-link";
 import { CalPopupButton } from "@/components/cal-popup-button";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
@@ -84,9 +85,9 @@ export default function Header() {
               </div>
             </div>
 
-            <CalPopupButton className="text-background font-inter inline-flex items-center justify-center rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
+            <BookCallLink className="text-background font-inter inline-flex items-center justify-center rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
               Book a Call
-            </CalPopupButton>
+            </BookCallLink>
           </div>
         </div>
       </header>

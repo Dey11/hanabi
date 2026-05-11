@@ -1,10 +1,7 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import KrishBannerFireflies from "@/components/krish-banner-fireflies";
 
-type TeamMember = {
+export type TeamMember = {
   avatarSrc: string;
   bannerSrc?: string;
   fireflies?: boolean;
@@ -15,72 +12,25 @@ type TeamMember = {
 };
 
 export default function TeamMemberCard({ member }: { member: TeamMember }) {
-  const cardRef = useRef<HTMLLIElement | null>(null);
-  const [shouldLoadBanner, setShouldLoadBanner] = useState(false);
-
-  const loadBanner = () => {
-    if (!shouldLoadBanner) {
-      setShouldLoadBanner(true);
-    }
-  };
-
-  useEffect(() => {
-    if (shouldLoadBanner || !member.bannerSrc) return;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    if (typeof IntersectionObserver === "undefined") {
-      setShouldLoadBanner(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-
-        setShouldLoadBanner(true);
-        observer.disconnect();
-      },
-      {
-        rootMargin: "420px 0px 420px 0px",
-        threshold: 0,
-      },
-    );
-
-    observer.observe(card);
-
-    return () => observer.disconnect();
-  }, [member.bannerSrc, shouldLoadBanner]);
-
   return (
-    <li ref={cardRef} className="relative min-w-0 text-center">
-      <div
-        className="team-mask-hover group relative mx-auto aspect-[430/520] h-12 overflow-visible sm:h-14"
-        onFocus={loadBanner}
-        onPointerEnter={loadBanner}
-        onTouchStart={loadBanner}
-      >
+    <li className="relative min-w-0 text-center">
+      <div className="team-mask-hover group relative mx-auto aspect-[430/520] h-12 overflow-visible sm:h-14">
         {member.bannerSrc ? (
-          <div className="pointer-events-none absolute top-[calc(100%+0.7rem)] left-0 z-40 w-56 opacity-0 blur-[2px] transition-[opacity,filter] duration-500 ease-out group-hover:opacity-100 group-hover:blur-none min-[520px]:left-1/2 min-[520px]:-translate-x-1/2 sm:w-64">
+          <div className="team-banner-popover pointer-events-none absolute top-[calc(100%+0.7rem)] left-0 z-40 w-56 opacity-0 blur-[2px] transition-[opacity,filter] duration-500 ease-out min-[520px]:left-1/2 min-[520px]:-translate-x-1/2 sm:w-64">
             <div className="relative h-24 overflow-hidden rounded-md shadow-[0_18px_34px_rgba(0,0,0,0.14)] sm:h-28">
-              {shouldLoadBanner ? (
-                <Image
-                  src={member.bannerSrc}
-                  alt=""
-                  width={512}
-                  height={288}
-                  sizes="(min-width: 640px) 16rem, 14rem"
-                  loading="lazy"
-                  quality={75}
-                  unoptimized={member.unoptimizedBanner}
-                  className="h-full w-full object-cover"
-                  aria-hidden
-                />
-              ) : null}
-              {member.fireflies && shouldLoadBanner ? (
-                <KrishBannerFireflies />
-              ) : null}
+              <Image
+                src={member.bannerSrc}
+                alt=""
+                width={512}
+                height={288}
+                sizes="(min-width: 640px) 16rem, 14rem"
+                loading="lazy"
+                quality={75}
+                unoptimized={member.unoptimizedBanner}
+                className="h-full w-full object-cover"
+                aria-hidden
+              />
+              {member.fireflies ? <KrishBannerFireflies /> : null}
             </div>
             {member.quote ? (
               <p className="mt-2 flex items-center justify-center gap-1 text-center text-[11px] leading-none font-medium tracking-[0.02em] text-black italic sm:text-xs">

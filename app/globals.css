@@ -182,8 +182,25 @@
   filter: grayscale(1) saturate(0) contrast(1.34) brightness(0.62);
 }
 
-.team-mask-hover:hover .team-mono-wipe {
-  clip-path: inset(0 0 0 0);
+.team-banner-popover {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .team-banner-popover {
+    display: block;
+  }
+
+  .team-mask-hover:hover .team-banner-popover,
+  .team-mask-hover:focus-within .team-banner-popover {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .team-mask-hover:hover .team-mono-wipe,
+  .team-mask-hover:focus-within .team-mono-wipe {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 .krish-banner-firefly {
