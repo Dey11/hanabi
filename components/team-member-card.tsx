@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import KrishBannerFireflies from "@/components/krish-banner-fireflies";
 
@@ -15,6 +15,7 @@ type TeamMember = {
 };
 
 export default function TeamMemberCard({ member }: { member: TeamMember }) {
+  const cardRef = useRef<HTMLLIElement | null>(null);
   const [shouldLoadBanner, setShouldLoadBanner] = useState(false);
 
   const loadBanner = () => {
@@ -23,8 +24,37 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
     }
   };
 
+  useEffect(() => {
+    if (shouldLoadBanner || !member.bannerSrc) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldLoadBanner(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        setShouldLoadBanner(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "420px 0px 420px 0px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(card);
+
+    return () => observer.disconnect();
+  }, [member.bannerSrc, shouldLoadBanner]);
+
   return (
-    <li className="relative min-w-0 text-center">
+    <li ref={cardRef} className="relative min-w-0 text-center">
       <div
         className="team-mask-hover group relative mx-auto aspect-[430/520] h-12 overflow-visible sm:h-14"
         onFocus={loadBanner}

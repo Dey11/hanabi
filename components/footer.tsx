@@ -11,6 +11,7 @@ const sawarabiGothic = Sawarabi_Gothic({
 });
 
 const FOOTER_IMAGE = "/footer.png";
+const SHOW_FOOTER_TRANSITION_SECTION = false;
 
 const SOCIAL_LINKS = [
   { label: "Email", href: `mailto:${EMAIL}`, icon: "mail" },
@@ -91,32 +92,34 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
       id="footer"
       className="relative w-full overflow-hidden bg-black text-white"
     >
-      <section
-        className="relative h-[260px] overflow-hidden bg-black sm:h-[340px] lg:h-[410px]"
-        aria-label="Footer artwork"
-      >
-        <img
-          src="/footer-transition.png"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-96"
-          draggable={false}
-        />
-        <div className="absolute inset-0 z-10" aria-hidden="true">
-          <TransitionFireworksCanvas active={isActive} />
-        </div>
-        <div className="absolute inset-x-0 bottom-[10%] z-40 flex justify-center px-5">
-          <div className="flex max-w-[calc(100vw-2rem)] flex-col items-center justify-center gap-4 px-2 py-2 sm:gap-5">
-            <FooterLiquidGlassButton />
-            <p className="max-w-[39ch] text-center text-sm leading-snug font-medium text-white/84 sm:text-base">
-              The agency for building standout scalable digital experiences
-            </p>
+      {SHOW_FOOTER_TRANSITION_SECTION ? (
+        <section
+          className="relative h-[260px] overflow-hidden bg-black sm:h-[340px] lg:h-[410px]"
+          aria-label="Footer artwork"
+        >
+          <img
+            src="/footer-transition.png"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-96"
+            draggable={false}
+          />
+          <div className="absolute inset-0 z-10" aria-hidden="true">
+            <TransitionFireworksCanvas active={isActive} />
           </div>
-        </div>
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-32 bg-linear-to-b from-transparent via-black/66 to-black sm:h-44"
-          aria-hidden="true"
-        />
-      </section>
+          <div className="absolute inset-x-0 bottom-[10%] z-40 flex justify-center px-5">
+            <div className="flex max-w-[calc(100vw-2rem)] flex-col items-center justify-center gap-4 px-2 py-2 sm:gap-5">
+              <FooterLiquidGlassButton />
+              <p className="max-w-[39ch] text-center text-sm leading-snug font-medium text-white/84 sm:text-base">
+                The agency for building standout scalable digital experiences
+              </p>
+            </div>
+          </div>
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-32 bg-linear-to-b from-transparent via-black/66 to-black sm:h-44"
+            aria-hidden="true"
+          />
+        </section>
+      ) : null}
 
       <footer className="relative h-[460px] w-full overflow-hidden bg-black text-white sm:h-[520px]">
         <img

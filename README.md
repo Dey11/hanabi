@@ -41,7 +41,8 @@ bun run start
 - `components/work-card-gallery.tsx` handles project image layouts based on image count.
 - `components/reveal.tsx` provides the viewport reveal/fade behavior used across the page and by newly mounted work projects.
 - `components/why-us-cards.tsx` renders the Why Us cards, with separated mobile spacing for the Quality and Clean Code cards so they do not attach on narrow screens.
-- `components/studios-quote-section.tsx` renders the Studios/Who We Are quote and team list. Team avatar gradients now fill the full rounded circle while retaining the ring, inset highlight, and shadow depth matching the small circles in the Development service card.
+- `components/studios-quote-section.tsx` renders the Studios/Who We Are quote and team list. Team avatar gradients fill the full rounded circle while retaining their ring, inset highlight, and shadow depth, and team banners preload as their cards approach the viewport while still revealing on hover, focus, or touch.
+- The footer transition artwork section is currently disabled, so the footer renders only the base footer artwork.
 
 ## Updating Works
 
