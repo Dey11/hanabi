@@ -1,3 +1,89 @@
+import type { CSSProperties } from "react";
+import { Sawarabi_Gothic } from "next/font/google";
+
+const sawarabiGothic = Sawarabi_Gothic({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const FOOTER_IMAGE = "/footer.png";
+
+type FireflyStyle = CSSProperties & {
+  "--x": string;
+  "--y": string;
+  "--size": string;
+  "--delay": string;
+  "--duration": string;
+  "--drift": string;
+};
+
+const FIREFLIES = [
+  [7, 25, 3, -1.4, 7.8, 18],
+  [12, 52, 2, -4.2, 9.4, -12],
+  [16, 70, 2, -0.8, 8.6, 14],
+  [22, 34, 3, -3.1, 10.2, -18],
+  [27, 82, 2, -5.4, 8.2, 16],
+  [33, 20, 2, -2.6, 9.8, -10],
+  [36, 66, 3, -6.8, 11.2, 13],
+  [64, 23, 2, -3.7, 9.6, -14],
+  [68, 77, 2, -1.9, 8.8, 18],
+  [73, 42, 3, -5.2, 10.4, -16],
+  [79, 64, 2, -0.7, 7.9, 12],
+  [84, 30, 2, -4.9, 9.1, -15],
+  [89, 74, 3, -2.2, 10.8, 16],
+  [94, 49, 2, -6.1, 8.4, -12],
+] as const;
+
+export default function Footer() {
+  return (
+    <footer
+      id="footer"
+      className="relative h-[460px] w-full overflow-hidden bg-black text-white sm:h-[520px]"
+    >
+      <img
+        src={FOOTER_IMAGE}
+        alt=""
+        className="absolute top-1/2 left-1/2 h-[calc(100%+120px)] w-[calc(100%+150px)] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover opacity-95"
+        draggable={false}
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_20%,rgba(0,0,0,0.22)_43%,rgba(0,0,0,0.72)_78%,#000_100%)]" />
+      <div className="absolute inset-0 shadow-[inset_0_0_150px_52px_rgba(0,0,0,0.96)] sm:shadow-[inset_0_0_210px_76px_rgba(0,0,0,0.98)]" />
+
+      <div className="absolute inset-x-0 top-[17%] flex justify-center">
+        <p
+          className={`${sawarabiGothic.className} bg-linear-to-b from-[#ff2bc0] to-[#ff67d2] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-22 text-shadow-[0_4px_4px_#7b0057] sm:text-8xl md:text-[125px]`}
+        >
+          Hanabi
+        </p>
+      </div>
+
+      <div className="absolute inset-0" aria-hidden="true">
+        {FIREFLIES.map(([x, y, size, delay, duration, drift], index) => {
+          const style: FireflyStyle = {
+            "--x": `${x}%`,
+            "--y": `${y}%`,
+            "--size": `${size}px`,
+            "--delay": `${delay}s`,
+            "--duration": `${duration}s`,
+            "--drift": `${drift}px`,
+          };
+
+          return (
+            <span
+              key={index}
+              className="footer-firefly absolute top-[var(--y)] left-[var(--x)] size-[var(--size)] rounded-full"
+              style={style}
+            />
+          );
+        })}
+      </div>
+    </footer>
+  );
+}
+
+/*
+Old footer kept commented out while we iterate on the image/firefly footer again.
+
 import { CalPopupButton } from "@/components/cal-popup-button";
 import { EMAIL, INSTAGRAM, LINKEDIN, TELEGRAM } from "@/lib/constants";
 import type { CSSProperties } from "react";
@@ -66,70 +152,13 @@ function DotField({
   );
 }
 
-export default function Footer() {
+export function DotMatrixFooter() {
   return (
     <footer className="h-[400px] w-full bg-black text-white">
       <div className="mx-auto flex w-full flex-col px-5 pt-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-white/85">
-            <a
-              href={INSTAGRAM}
-              aria-label="Instagram"
-              className="transition-opacity hover:opacity-100"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/icons/insta.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 opacity-90"
-              />
-            </a>
-            <a
-              href={LINKEDIN}
-              aria-label="LinkedIn"
-              className="transition-opacity hover:opacity-100"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/icons/linkedin.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 opacity-90"
-              />
-            </a>
-            <a
-              href={`mailto:${EMAIL}`}
-              aria-label="Email"
-              className="transition-opacity hover:opacity-100"
-            >
-              <Image
-                src="/icons/mail.svg"
-                alt=""
-                width={24}
-                height={19}
-                className="h-5 w-5 opacity-90"
-              />
-            </a>
-            <a
-              href={TELEGRAM}
-              aria-label="Telegram"
-              className="transition-opacity hover:opacity-100"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/icons/telegram.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 opacity-90"
-              />
-            </a>
+            social links...
           </div>
 
           <div className="flex items-center gap-2 text-sm text-white/80">
@@ -191,84 +220,6 @@ export default function Footer() {
             Hanabi
           </div>
         </div>
-      </div>
-    </footer>
-  );
-}
-
-/*
-New footer kept commented out per request.
-
-const FOOTER_IMAGE = "/footer.png";
-
-type FireflyStyle = CSSProperties & {
-  "--x": string;
-  "--y": string;
-  "--size": string;
-  "--delay": string;
-  "--duration": string;
-  "--drift": string;
-};
-
-const FIREFLIES = [
-  [7, 25, 3, -1.4, 7.8, 18],
-  [12, 52, 2, -4.2, 9.4, -12],
-  [16, 70, 2, -0.8, 8.6, 14],
-  [22, 34, 3, -3.1, 10.2, -18],
-  [27, 82, 2, -5.4, 8.2, 16],
-  [33, 20, 2, -2.6, 9.8, -10],
-  [36, 66, 3, -6.8, 11.2, 13],
-  [64, 23, 2, -3.7, 9.6, -14],
-  [68, 77, 2, -1.9, 8.8, 18],
-  [73, 42, 3, -5.2, 10.4, -16],
-  [79, 64, 2, -0.7, 7.9, 12],
-  [84, 30, 2, -4.9, 9.1, -15],
-  [89, 74, 3, -2.2, 10.8, 16],
-  [94, 49, 2, -6.1, 8.4, -12],
-] as const;
-
-export function ImageFireflyFooter() {
-  return (
-    <footer
-      id="footer"
-      className="relative h-[460px] w-full overflow-hidden bg-black text-white sm:h-[520px]"
-    >
-      <img
-        src={FOOTER_IMAGE}
-        alt=""
-        className="absolute top-1/2 left-1/2 h-[calc(100%+120px)] w-[calc(100%+150px)] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover opacity-95"
-        draggable={false}
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_20%,rgba(0,0,0,0.22)_43%,rgba(0,0,0,0.72)_78%,#000_100%)]" />
-      <div className="absolute inset-0 shadow-[inset_0_0_150px_52px_rgba(0,0,0,0.96)] sm:shadow-[inset_0_0_210px_76px_rgba(0,0,0,0.98)]" />
-
-      <div className="absolute inset-x-0 top-[17%] flex justify-center">
-        <p
-          className={`${sawarabiGothic.className} bg-linear-to-b from-[#ff2bc0] to-[#ff67d2] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-22 text-shadow-[0_4px_4px_#7b0057] sm:text-8xl md:text-[125px]`}
-        >
-          Hanabi
-        </p>
-      </div>
-
-      <div className="absolute inset-0" aria-hidden="true">
-        {FIREFLIES.map(([x, y, size, delay, duration, drift], index) => {
-          const style: FireflyStyle = {
-            "--x": `${x}%`,
-            "--y": `${y}%`,
-            "--size": `${size}px`,
-            "--delay": `${delay}s`,
-            "--duration": `${duration}s`,
-            "--drift": `${drift}px`,
-          };
-
-          return (
-            <span
-              key={index}
-              className="footer-firefly absolute top-[var(--y)] left-[var(--x)] size-[var(--size)] rounded-full"
-              style={style}
-            />
-          );
-        })}
       </div>
     </footer>
   );
