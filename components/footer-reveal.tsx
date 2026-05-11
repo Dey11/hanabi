@@ -10,6 +10,7 @@ export default function FooterReveal({
 }) {
   const footerRef = useRef<HTMLDivElement | null>(null);
   const [footerHeight, setFooterHeight] = useState(0);
+  const [isFooterActive, setIsFooterActive] = useState(false);
 
   useEffect(() => {
     const el = footerRef.current;
@@ -28,6 +29,41 @@ export default function FooterReveal({
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  useEffect(() => {
+    if (footerHeight === 0) return;
+
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const remaining = scrollable - window.scrollY;
+      const activationDistance = Math.max(footerHeight * 0.55, 360);
+
+      setIsFooterActive(remaining <= activationDistance);
+    };
+
+    const requestUpdate = () => {
+      if (frame !== 0) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, [footerHeight]);
+
   return (
     <>
       <div
@@ -42,7 +78,7 @@ export default function FooterReveal({
         className="fixed inset-x-0 bottom-0 z-0"
         aria-hidden={footerHeight === 0}
       >
-        <Footer />
+        <Footer isActive={isFooterActive} />
       </div>
     </>
   );

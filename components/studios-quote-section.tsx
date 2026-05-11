@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/reveal";
+import TeamMemberCard from "@/components/team-member-card";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
 
@@ -12,49 +13,42 @@ const teamMembers = [
     name: "Krish",
     role: "Designer",
     avatarSrc: "/team/krish.png",
+    bannerSrc: "/team/krish-banner.png",
+    quote: "To be is to gamble",
+    fireflies: true,
   },
   {
     name: "Roy",
     role: "Developer",
     avatarSrc: "/team/roy.png",
+    bannerSrc: "/team/roy-banner.gif",
+    quote: "Here to be myself",
+    unoptimizedBanner: true,
   },
   {
     name: "Dey",
     role: "Developer",
     avatarSrc: "/team/dey.png",
+    bannerSrc: "/team/dey-banner.gif",
+    quote: "The wind remembers",
+    unoptimizedBanner: true,
   },
   {
     name: "Sagarika",
     role: "Designer",
     avatarSrc: "/team/sagarika.png",
+    bannerSrc: "/team/placeholder-banner.webp",
+    quote: "Soft details, sharp echoes",
   },
   {
     name: "Arsh",
     role: "Developer",
     avatarSrc: "/team/arsh.png",
+    bannerSrc: "/team/arsh-banner.gif",
+    quote: "Clean builds, quiet wonder",
+    unoptimizedBanner: true,
   },
 ];
-
-function TeamMemberCard({ member }: { member: (typeof teamMembers)[number] }) {
-  return (
-    <li className="min-w-0 text-center">
-      <Image
-        src={member.avatarSrc}
-        alt=""
-        width={430}
-        height={520}
-        className="mx-auto h-12 w-auto object-contain sm:h-14"
-        aria-hidden
-      />
-      <h4 className="mt-3 text-lg leading-tight font-medium text-black sm:text-xl">
-        {member.name}
-      </h4>
-      <p className="mt-1 font-mono text-sm leading-tight font-medium text-[#6C6C6C] uppercase">
-        {member.role}
-      </p>
-    </li>
-  );
-}
 
 export default function StudiosQuoteSection() {
   return (

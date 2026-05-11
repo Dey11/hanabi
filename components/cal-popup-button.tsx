@@ -21,11 +21,7 @@ type CalPopupButtonProps = Omit<
   children: ReactNode;
 };
 
-export function CalPopupButton({
-  children,
-  onClick,
-  ...buttonProps
-}: CalPopupButtonProps) {
+export function useCalPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const embedRef = useRef<HTMLDivElement | null>(null);
   const titleId = useId();
@@ -112,6 +108,19 @@ export function CalPopupButton({
     };
   }, [isOpen]);
 
+  return {
+    openPopup: () => setIsOpen(true),
+    popup: popup ? createPortal(popup, document.body) : null,
+  };
+}
+
+export function CalPopupButton({
+  children,
+  onClick,
+  ...buttonProps
+}: CalPopupButtonProps) {
+  const { openPopup, popup } = useCalPopup();
+
   return (
     <>
       <button
@@ -121,14 +130,14 @@ export function CalPopupButton({
           onClick?.(event);
 
           if (!event.defaultPrevented) {
-            setIsOpen(true);
+            openPopup();
           }
         }}
       >
         {children}
       </button>
 
-      {popup ? createPortal(popup, document.body) : null}
+      {popup}
     </>
   );
 }
