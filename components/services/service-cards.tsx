@@ -45,6 +45,7 @@ function TestimonialBrandLogo({ invert = false }: { invert?: boolean }) {
             alt=""
             width={168}
             height={135}
+            loading="lazy"
             className={[
               "h-6 w-7 object-contain transition-[filter,opacity] duration-200 ease-out",
               invert

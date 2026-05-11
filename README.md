@@ -38,11 +38,12 @@ bun run start
 - `components/seamless-marquee.tsx` provides the package-free, duplicated-track marquee used by the hero and inline service marquees.
 - `components/book-call-link.tsx` is the direct Cal.com link used by mobile booking CTAs.
 - `components/cal-popup-button.tsx` remains the desktop Cal.com popup embed.
+- `components/services/*-card.tsx` renders Services section cards and explicitly lazy loads their card images.
 - `components/work-projects-list.tsx` owns the works list client interaction. It shows the first three projects initially, renders a blurred, non-interactive peek of the next project behind the rounded-full "See more" button with a `#E3E3E3/80` fill, light vertical gradient stroke, subtle layered shadows, and active scale feedback, then mounts the remaining projects on click.
 - `components/work-card.tsx` renders each work project shell, description, and clipped media area for decorative paper-crane garlands.
 - `components/work-card-gallery.tsx` handles project image layouts based on image count and explicitly lazy loads project gallery images.
 - `components/reveal.tsx` provides the viewport reveal/fade behavior used across the page and by newly mounted work projects.
-- `components/why-us-cards.tsx` renders the Why Us cards, with separated mobile spacing for the Quality and Clean Code cards so they do not attach on narrow screens.
+- `components/why-us-cards.tsx` renders the Why Us / Hanabi Difference cards, explicitly lazy loads their card images, and keeps separated mobile spacing for the Quality and Clean Code cards so they do not attach on narrow screens.
 - `components/studios-quote-section.tsx` renders the Studios/Who We Are quote and mounts the team list.
 - `components/team-members-list.tsx` owns the responsive Studios/Who We Are team list layout.
 - `components/team-member-card.tsx` owns each avatar/banner card, including avatar gradients, ring, inset highlight, shadow depth, and banner media mounted with lazy loading so the browser can fetch it while approaching the Studios section. CSS keeps banner popovers desktop hover/focus-only.

@@ -122,6 +122,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
                   alt={project}
                   width={180}
                   height={130}
+                  loading="lazy"
                   className="h-full w-full object-cover"
                 />
               </div>

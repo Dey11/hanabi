@@ -178,6 +178,7 @@ export function DevelopmentCard() {
           alt="Hanabi Logo"
           width={100}
           height={100}
+          loading="lazy"
           className="absolute inset-x-0 top-1/4 m-auto"
         />
       </div>

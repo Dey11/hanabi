@@ -352,8 +352,8 @@ function WhyUsTopCard({ item }: { item: WhyUsItem }) {
           alt={item.image.alt}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
+          loading="lazy"
           className="object-cover"
-          priority
           wrapperClassName="absolute inset-0"
         />
         <div
@@ -407,6 +407,7 @@ function WhyUsBottomCard({ item }: { item: WhyUsItem }) {
             alt={item.image.alt}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
+            loading="lazy"
             className="object-cover"
             wrapperClassName="absolute inset-0"
           />
