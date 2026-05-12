@@ -30,7 +30,7 @@ const teamMembers = [
     role: "Developer",
     avatarSrc: "/team/dey.png",
     bannerSrc: "/team/dey-banner.gif",
-    quote: "The wind remembers",
+    quote: "Compassion and empathy",
     unoptimizedBanner: true,
   },
   {

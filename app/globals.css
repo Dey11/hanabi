@@ -194,6 +194,7 @@
   .team-mask-hover:hover .team-banner-popover,
   .team-mask-hover:focus-within .team-banner-popover {
     opacity: 1;
+    scale: 1;
     filter: blur(0);
   }
 

@@ -16,7 +16,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
     <li className="relative min-w-0 text-center">
       <div className="team-mask-hover group relative mx-auto aspect-[430/520] h-12 overflow-visible sm:h-14">
         {member.bannerSrc ? (
-          <div className="team-banner-popover pointer-events-none absolute top-[calc(100%+0.7rem)] left-0 z-40 w-56 opacity-0 blur-[2px] transition-[opacity,filter] duration-500 ease-out min-[520px]:left-1/2 min-[520px]:-translate-x-1/2 sm:w-64">
+          <div className="team-banner-popover pointer-events-none absolute top-[calc(100%+0.7rem)] left-0 z-40 w-56 scale-95 opacity-0 blur-[2px] transition-[opacity,filter,scale] duration-500 ease-out min-[520px]:left-1/2 min-[520px]:-translate-x-1/2 sm:w-64">
             <div className="relative h-24 overflow-hidden rounded-md shadow-[0_18px_34px_rgba(0,0,0,0.14)] sm:h-28">
               <Image
                 src={member.bannerSrc}
