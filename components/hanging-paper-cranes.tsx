@@ -215,6 +215,7 @@ function buildCardCraneColumn({
   const firstTop = randomBetween(random, 48, 60);
   const craneGap = 114;
   const palettes = shuffledPalettes(random);
+  const firstFlip = random() > 0.5;
   let runningTop = firstTop;
 
   return Array.from({ length: count }, (_, index) => {
@@ -227,7 +228,7 @@ function buildCardCraneColumn({
       offset: 0,
       rotate: Math.round(randomBetween(random, -4, 4)),
       scale: Number(randomBetween(random, 0.79, 0.83).toFixed(2)),
-      flip: random() > 0.5,
+      flip: index % 2 === 0 ? firstFlip : !firstFlip,
       palette: palettes[index % palettes.length],
     };
   });

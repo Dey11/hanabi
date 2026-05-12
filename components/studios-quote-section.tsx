@@ -14,7 +14,7 @@ const teamMembers = [
     role: "Designer",
     avatarSrc: "/team/krish.png",
     bannerSrc: "/team/krish-banner.png",
-    quote: "To be is to gamble",
+    quote: "Focus only on your art",
     fireflies: true,
   },
   {
