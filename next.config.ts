@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     "*.ngrok-free.app",
   ],
   images: {
-    qualities: [75, 80, 90, 92],
+    qualities: [75, 80, 90, 92, 100],
   },
 };
 

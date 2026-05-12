@@ -142,8 +142,8 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
           src={FOOTER_IMAGE}
           alt=""
           fill
-          quality={92}
-          sizes="100vw"
+          quality={100}
+          sizes="(max-width: 640px) 120vw, (max-width: 1024px) 115vw, (max-width: 1536px) 110vw, 105vw"
           className="object-cover object-center opacity-95"
           draggable={false}
         />
@@ -152,7 +152,7 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
 
         <div className="absolute inset-x-0 top-[14%] z-20 flex justify-center">
           <p
-            className={`${sawarabiGothic.className} bg-linear-to-b from-[#ffd37a] via-[#ff8429] to-[#d3480c] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-70 text-shadow-[0_4px_18px_rgba(118,38,0,0.76)] sm:text-8xl md:text-[125px]`}
+            className={`${sawarabiGothic.className} bg-linear-to-b from-[#ffd37a] via-[#ff8429] to-[#d3480c] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-70 text-shadow-[0_3px_10px_rgba(118,38,0,0.82),0_0_18px_rgba(255,104,24,0.24)] sm:text-8xl md:text-[125px]`}
           >
             Hanabi
           </p>
