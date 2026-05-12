@@ -37,8 +37,9 @@ const teamMembers = [
     name: "Sagarika",
     role: "Designer",
     avatarSrc: "/team/sagarika.png",
-    bannerSrc: "/team/placeholder-banner.webp",
-    quote: "Soft details, sharp echoes",
+    bannerSrc: "/team/sagarika-banner.webp",
+    quote: "It's all about the mindset",
+    unoptimizedBanner: true,
   },
   {
     name: "Arsh",
