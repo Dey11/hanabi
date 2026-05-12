@@ -1,12 +1,17 @@
 import HangingPaperCranes from "@/components/hanging-paper-cranes";
+import ProjectContributorMasks from "@/components/project-contributor-masks";
 import WorkCardGallery from "@/components/work-card-gallery";
-import type { WorkProjectImages } from "@/data/work-projects";
+import type {
+  WorkProjectContributor,
+  WorkProjectImages,
+} from "@/data/work-projects";
 
 export type WorkCardProps = {
   title: string;
   category: string;
   description: string;
   images: WorkProjectImages;
+  contributors: readonly WorkProjectContributor[];
 };
 
 export default function WorkCard({
@@ -14,6 +19,7 @@ export default function WorkCard({
   category,
   description,
   images,
+  contributors,
 }: WorkCardProps) {
   return (
     <article className="flex w-full flex-col">
@@ -37,8 +43,12 @@ export default function WorkCard({
                 mobileThreeLayout={
                   title === "DOWN THE COVE" ? "side-by-side" : "stacked"
                 }
+                desktopThreeLayout={
+                  title === "DOWN THE COVE" ? "side-by-side" : "overlap"
+                }
               />
             </div>
+            <ProjectContributorMasks contributors={contributors} />
           </div>
 
           <div

@@ -152,7 +152,7 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
 
         <div className="absolute inset-x-0 top-[14%] z-20 flex justify-center">
           <p
-            className={`${sawarabiGothic.className} bg-linear-to-b from-[#ffc15a] via-[#ff7a1f] to-[#c83c08] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-52 text-shadow-[0_4px_12px_rgba(118,38,0,0.62)] sm:text-8xl md:text-[125px]`}
+            className={`${sawarabiGothic.className} bg-linear-to-b from-[#ffd37a] via-[#ff8429] to-[#d3480c] bg-clip-text text-6xl leading-none tracking-normal text-transparent opacity-70 text-shadow-[0_4px_18px_rgba(118,38,0,0.76)] sm:text-8xl md:text-[125px]`}
           >
             Hanabi
           </p>

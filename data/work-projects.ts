@@ -4,6 +4,13 @@ export type WorkProjectImage = {
   mobileSrc?: string;
 };
 
+export type WorkProjectContributor =
+  | "krish"
+  | "roy"
+  | "dey"
+  | "sagarika"
+  | "arsh";
+
 /**
  * Layout follows image count (see `work-card-gallery.tsx`):
  * 1 — centered inset tile
@@ -27,14 +34,33 @@ export type WorkProject = {
   category: string;
   description: string;
   images: WorkProjectImages;
+  contributors: readonly WorkProjectContributor[];
 };
 
 export const workProjects: readonly WorkProject[] = [
+  {
+    title: "TRADE MOAI",
+    category: "WEB APP | PRODUCT UI",
+    description:
+      "A focused trading interface concept designed around fast scanning, clear positions, and confident decision-making.",
+    contributors: ["krish", "dey"],
+    images: [
+      {
+        src: "/projects/tradeMoai1.png",
+        alt: "Trade Moai interface overview",
+      },
+      {
+        src: "/projects/tradeMoai2.png",
+        alt: "Trade Moai trading dashboard",
+      },
+    ],
+  },
   {
     title: "DOWN THE COVE",
     category: "WEBSITE | LANDING",
     description:
       "A fresh landing experience designed to capture the brand's coastal calm and community-driven story.",
+    contributors: ["krish", "dey"],
     images: [
       {
         src: "/projects/dtc1.png",
@@ -55,6 +81,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | LANDING",
     description:
       "A bold and energetic digital presence built for a community-driven sports brand that lives and breathes competition.",
+    contributors: ["krish", "dey"],
     images: [
       {
         src: "/projects/ballaratboxsports1.png",
@@ -75,6 +102,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | BRANDING",
     description:
       "A calm, tactile web experience shaped around imperfect beauty, considered details, and a quietly memorable brand presence.",
+    contributors: ["dey", "sagarika"],
     images: [
       {
         src: "/projects/wabisabi1.png",
@@ -95,6 +123,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEB APP | PRODUCT UI",
     description:
       "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
+    contributors: ["krish"],
     images: [
       {
         src: "/projects/gotnextHero.png",
@@ -111,6 +140,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | BRANDING",
     description:
       "A refined editorial web presence honouring the legacy of a master engraver - balancing heritage craft with modern digital storytelling.",
+    contributors: ["dey", "sagarika"],
     images: [
       {
         src: "/projects/thomasbewick1.png",
@@ -127,6 +157,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEB APP | PRODUCT UI",
     description:
       "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
+    contributors: ["arsh", "roy"],
     images: [
       {
         src: "/projects/leadly1.png",

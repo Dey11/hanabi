@@ -7,10 +7,12 @@ type GalleryProps = {
   images: readonly WorkProjectImage[];
   mobileImageCorners?: "rounded" | "square";
   mobileThreeLayout?: "stacked" | "side-by-side";
+  desktopThreeLayout?: "overlap" | "side-by-side";
 };
 
 /** Shared canvas — taller so tiles read at portfolio scale */
-const galleryViewport = "relative h-[320px] w-full sm:h-[440px] md:h-[540px]";
+const galleryViewport =
+  "relative h-[320px] w-full sm:h-[440px] md:h-[420px] lg:h-[500px] xl:h-[540px]";
 
 function TileFill({
   image,
@@ -21,10 +23,7 @@ function TileFill({
   mobileImageCorners?: "rounded" | "square";
   sizes: string;
 }) {
-  const radiusClass =
-    mobileImageCorners === "square"
-      ? "rounded-none sm:rounded-xl"
-      : "rounded-xl";
+  const radiusClass = "rounded-none";
 
   return (
     <div
@@ -131,11 +130,16 @@ function GalleryThree({
   images,
   mobileImageCorners,
   mobileLayout = "stacked",
+  desktopLayout = "overlap",
 }: {
   images: readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage];
   mobileImageCorners?: "rounded" | "square";
   mobileLayout?: "stacked" | "side-by-side";
+  desktopLayout?: "overlap" | "side-by-side";
 }) {
+  const collageTileClass =
+    "aspect-[1440/1024] shadow-[0_18px_44px_-30px_rgba(0,0,0,0.55)]";
+
   return (
     <>
       {mobileLayout === "side-by-side" ? (
@@ -164,7 +168,7 @@ function GalleryThree({
         </div>
       ) : (
         <div className="flex h-full w-full flex-col gap-3 p-3 sm:gap-4 sm:p-4 md:hidden">
-          {images.map((image) => (
+          {[images[0], images[2]].map((image) => (
             <div key={image.src} className="relative min-h-0 flex-1">
               <TileFill
                 image={image}
@@ -176,18 +180,48 @@ function GalleryThree({
         </div>
       )}
 
-      {/* Desktop: 3 side by side */}
-      <div className="hidden h-full w-full gap-4 p-5 md:flex">
-        <div className="relative flex-1">
-          <TileFill image={images[0]} sizes="33vw" />
+      {desktopLayout === "side-by-side" ? (
+        <div className="hidden h-full w-full gap-4 p-5 md:flex">
+          <div className="relative flex-1">
+            <TileFill image={images[0]} sizes="33vw" />
+          </div>
+          <div className="relative flex-1">
+            <TileFill image={images[1]} sizes="33vw" />
+          </div>
+          <div className="relative flex-1">
+            <TileFill image={images[2]} sizes="33vw" />
+          </div>
         </div>
-        <div className="relative flex-1">
-          <TileFill image={images[1]} sizes="33vw" />
+      ) : (
+        <div className="relative hidden h-full w-full items-center justify-center md:flex">
+          <div className="relative h-[88%] w-[94%] max-w-[1320px] lg:h-[90%] lg:w-[90%] xl:h-[92%] xl:w-[88%]">
+            <div
+              className={`absolute top-[7%] left-[5%] z-20 w-[44%] lg:top-[5%] lg:left-[7%] lg:w-[41%] xl:top-[3%] xl:left-[8%] xl:w-[39%] ${collageTileClass}`}
+            >
+              <TileFill
+                image={images[0]}
+                sizes="(max-width: 1024px) 42vw, (max-width: 1280px) 37vw, 560px"
+              />
+            </div>
+            <div
+              className={`absolute top-[24%] right-[5%] z-30 w-[44%] lg:top-[22%] lg:right-[7%] lg:w-[41%] xl:top-[21%] xl:right-[8%] xl:w-[39%] ${collageTileClass}`}
+            >
+              <TileFill
+                image={images[1]}
+                sizes="(max-width: 1024px) 42vw, (max-width: 1280px) 37vw, 560px"
+              />
+            </div>
+            <div
+              className={`absolute bottom-[7%] left-1/2 z-40 w-[40%] -translate-x-1/2 lg:bottom-[5%] lg:w-[38%] xl:bottom-[3%] xl:w-[36%] ${collageTileClass}`}
+            >
+              <TileFill
+                image={images[2]}
+                sizes="(max-width: 1024px) 38vw, (max-width: 1280px) 34vw, 520px"
+              />
+            </div>
+          </div>
         </div>
-        <div className="relative flex-1">
-          <TileFill image={images[2]} sizes="33vw" />
-        </div>
-      </div>
+      )}
     </>
   );
 }
@@ -222,6 +256,7 @@ export default function WorkCardGallery({
   images,
   mobileImageCorners = "rounded",
   mobileThreeLayout = "stacked",
+  desktopThreeLayout = "overlap",
 }: GalleryProps) {
   let inner: ReactNode;
 
@@ -248,6 +283,7 @@ export default function WorkCardGallery({
       inner = (
         <GalleryThree
           mobileLayout={mobileThreeLayout}
+          desktopLayout={desktopThreeLayout}
           images={
             [images[0], images[1], images[2]] as readonly [
               WorkProjectImage,
