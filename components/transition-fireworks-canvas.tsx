@@ -49,18 +49,19 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function createFirework(width: number, height: number): Firework {
-  const startX = randomBetween(width * 0.14, width * 0.86);
+  const horizontalPadding = width * 0.16;
+  const startX = randomBetween(horizontalPadding, width - horizontalPadding);
   const startY = height * 0.96;
   const targetX = clamp(
-    startX + randomBetween(-width * 0.1, width * 0.1),
-    0,
-    width,
+    startX + randomBetween(-width * 0.08, width * 0.08),
+    horizontalPadding,
+    width - horizontalPadding,
   );
-  const targetY = randomBetween(height * 0.16, height * 0.58);
+  const targetY = randomBetween(height * 0.14, height * 0.52);
   const dx = targetX - startX;
   const dy = targetY - startY;
   const distance = Math.hypot(dx, dy) || 1;
-  const speed = randomBetween(250, 360);
+  const speed = randomBetween(height * 0.82, height * 1.05);
   const colorway =
     FIREWORK_COLORWAYS[Math.floor(Math.random() * FIREWORK_COLORWAYS.length)];
   const color = colorway[Math.floor(Math.random() * colorway.length)];
@@ -70,7 +71,7 @@ function createFirework(width: number, height: number): Firework {
     createdAt: performance.now(),
     explodedAt: null,
     particles: [],
-    radius: randomBetween(1, 1.55),
+    radius: randomBetween(1.35, 2),
     targetY,
     vx: (dx / distance) * speed,
     vy: (dy / distance) * speed,
@@ -90,7 +91,7 @@ function explodeFirework(firework: Firework) {
   firework.explodedAt = now;
   firework.particles = Array.from({ length: count }, (_, index): Particle => {
     const angle = (Math.PI * 2 * index) / count + randomBetween(-0.16, 0.16);
-    const speed = randomBetween(52, 138);
+    const speed = randomBetween(44, 112);
     const color = colorway[Math.floor(Math.random() * colorway.length)];
 
     return {
@@ -98,7 +99,7 @@ function explodeFirework(firework: Firework) {
       color,
       createdAt: now,
       lifespan: randomBetween(0.75, 1.45),
-      radius: randomBetween(1.1, 2.2),
+      radius: randomBetween(1.55, 3.05),
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       x: firework.x,
@@ -176,7 +177,7 @@ export default function TransitionFireworksCanvas({
       context.lineCap = "round";
       context.lineWidth = radius * 2;
       context.strokeStyle = color;
-      context.shadowBlur = 12;
+      context.shadowBlur = 16;
       context.shadowColor = color;
       context.beginPath();
       context.moveTo(xPrevious, yPrevious);
@@ -235,7 +236,7 @@ export default function TransitionFireworksCanvas({
           const shouldExplode =
             firework.y <= firework.targetY ||
             firework.vy >= -18 ||
-            age >= randomBetween(850, 1250);
+            age >= randomBetween(1050, 1550);
 
           firework.xPrevious = firework.x;
           firework.yPrevious = firework.y;
