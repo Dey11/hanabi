@@ -2,11 +2,12 @@ import { Analytics } from "@vercel/analytics/next";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Geist } from "next/font/google";
+import Script from "next/script";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,10 +40,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", geist.variable)}
+    >
       <body
         className={`${inter.variable} ${geistMono.variable} font-inter overflow-x-clip tracking-[-0.04em] antialiased`}
       >
+        <Script
+          defer
+          src="https://umami.cooldash.xyz/script.js"
+          data-website-id="3d9dc9b1-5b75-4eaf-97e6-c714b1058b70"
+          strategy="afterInteractive"
+        />
         <Analytics />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>

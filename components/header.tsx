@@ -106,8 +106,12 @@ export default function Header() {
           ))}
         </nav>
 
-        <CalPopupButton className="text-background font-inter inline-flex cursor-pointer items-center rounded-full border border-neutral-900 bg-linear-to-b from-neutral-900 to-black p-1 px-4 font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
-          Book a Call
+        <CalPopupButton className="text-background font-inter group relative inline-flex cursor-pointer items-center overflow-hidden rounded-full border border-neutral-900 bg-linear-to-b from-neutral-900 to-black p-1 px-4 font-medium inset-shadow-sm inset-shadow-neutral-500 transition-shadow duration-300 text-shadow-neutral-500 text-shadow-xs hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_7px_18px_-18px_rgba(0,0,0,0.85)] active:scale-95">
+          <span
+            className="absolute inset-0 bg-linear-to-t from-white/0 via-white/6 to-white/14 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+            aria-hidden
+          />
+          <span className="relative z-10">Book a Call</span>
         </CalPopupButton>
       </header>
 
@@ -122,8 +126,12 @@ export default function Header() {
               </div>
             </div>
 
-            <BookCallLink className="text-background font-inter inline-flex items-center justify-center rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 text-shadow-neutral-500 text-shadow-xs active:scale-95">
-              Book a Call
+            <BookCallLink className="text-background font-inter group relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 transition-shadow duration-300 text-shadow-neutral-500 text-shadow-xs hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_7px_18px_-18px_rgba(0,0,0,0.85)] active:scale-95">
+              <span
+                className="absolute inset-0 bg-linear-to-t from-white/0 via-white/6 to-white/14 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+                aria-hidden
+              />
+              <span className="relative z-10">Book a Call</span>
             </BookCallLink>
           </div>
         </div>
@@ -151,6 +159,6 @@ const NAV_ITEMS = [
   {
     key: "about-us",
     label: "About us",
-    href: "/#about-us",
+    href: "/#studios",
   },
 ] as const;
