@@ -28,7 +28,7 @@ const EXTRA_SERVICES: ExtraService[] = [
   { label: "Discord Bots" },
   { label: "Frontend Revamp" },
   { label: "Design Systems" },
-  { label: "And more...", muted: true },
+  { label: "E-Commerce" },
 ];
 
 function TestimonialBrandLogo({ invert = false }: { invert?: boolean }) {

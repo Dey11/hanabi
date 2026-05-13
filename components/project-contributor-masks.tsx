@@ -54,7 +54,7 @@ export default function ProjectContributorMasks({
               <TooltipContent
                 side="top"
                 sideOffset={6}
-                className="rounded-full border-black/5 bg-white/95 px-2.5 py-1 text-xs font-medium text-black shadow-[0_8px_24px_-16px_rgba(0,0,0,0.42)]"
+                className="w-[4.65rem] rounded-full border-black/5 bg-white/95 px-0 py-1 text-center text-xs font-medium text-black shadow-[0_8px_24px_-16px_rgba(0,0,0,0.42)]"
               >
                 {meta.name}
               </TooltipContent>
