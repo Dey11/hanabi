@@ -31,7 +31,7 @@ export default function Home() {
 
           <HeroKites />
 
-          <div className="relative z-20 flex flex-col items-center bg-white/40 md:bg-transparent">
+          <div className="relative z-20 flex -translate-y-7 flex-col items-center bg-white/40 md:-translate-y-9 md:bg-transparent xl:-translate-y-14 2xl:-translate-y-18">
             <div className="mx-4 mt-32 w-full max-w-2xl rounded-3xl px-4 py-4 md:mx-0 md:mt-48 md:px-0 md:py-0">
               <Reveal delay={0}>
                 <h1 className="font-inter mx-auto max-w-xl text-4xl leading-tight font-medium text-balance md:text-5xl">
@@ -103,7 +103,7 @@ export default function Home() {
 
         <section
           id="services"
-          className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-24 pb-10"
+          className="flex flex-col items-center justify-center bg-linear-to-b from-white via-[#F6F6F6] via-18% to-[#F6F6F6] px-5 pt-24 pb-10"
         >
           <Reveal>
             <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">

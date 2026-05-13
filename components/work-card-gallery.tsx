@@ -143,26 +143,19 @@ function GalleryThree({
   return (
     <>
       {mobileLayout === "side-by-side" ? (
-        <div className="grid h-full w-full grid-cols-[0.78fr_1.55fr_0.78fr] items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
+        <div className="grid h-full w-full grid-cols-2 items-center gap-2 p-2 sm:gap-3 sm:p-4 md:hidden">
           <div className="relative h-full min-h-0">
             <TileFill
               image={images[0]}
               mobileImageCorners={mobileImageCorners}
-              sizes="(max-width: 640px) 24vw, 24vw"
-            />
-          </div>
-          <div className="relative h-full min-h-0">
-            <TileFill
-              image={images[1]}
-              mobileImageCorners={mobileImageCorners}
-              sizes="(max-width: 640px) 46vw, 42vw"
+              sizes="(max-width: 640px) 45vw, 42vw"
             />
           </div>
           <div className="relative h-full min-h-0">
             <TileFill
               image={images[2]}
               mobileImageCorners={mobileImageCorners}
-              sizes="(max-width: 640px) 24vw, 24vw"
+              sizes="(max-width: 640px) 45vw, 42vw"
             />
           </div>
         </div>
@@ -194,29 +187,29 @@ function GalleryThree({
         </div>
       ) : (
         <div className="relative hidden h-full w-full items-center justify-center md:flex">
-          <div className="relative h-[88%] w-[94%] max-w-[1320px] lg:h-[90%] lg:w-[90%] xl:h-[92%] xl:w-[88%]">
+          <div className="relative h-full w-full max-w-[1680px] lg:w-[98%] xl:w-[97%]">
             <div
-              className={`absolute top-[7%] left-[5%] z-20 w-[44%] lg:top-[5%] lg:left-[7%] lg:w-[41%] xl:top-[3%] xl:left-[8%] xl:w-[39%] ${collageTileClass}`}
+              className={`absolute top-[1%] left-[0%] z-30 w-[49%] lg:top-[0%] lg:left-[1%] lg:w-[46%] xl:left-[2%] xl:w-[44%] ${collageTileClass}`}
             >
               <TileFill
                 image={images[0]}
-                sizes="(max-width: 1024px) 42vw, (max-width: 1280px) 37vw, 560px"
+                sizes="(max-width: 1024px) 47vw, (max-width: 1280px) 43vw, 710px"
               />
             </div>
             <div
-              className={`absolute top-[24%] right-[5%] z-30 w-[44%] lg:top-[22%] lg:right-[7%] lg:w-[41%] xl:top-[21%] xl:right-[8%] xl:w-[39%] ${collageTileClass}`}
+              className={`absolute top-[12%] right-[-2%] z-40 w-[49%] lg:top-[11%] lg:right-[-1%] lg:w-[46%] xl:top-[10%] xl:right-[0%] xl:w-[44%] ${collageTileClass}`}
             >
               <TileFill
                 image={images[1]}
-                sizes="(max-width: 1024px) 42vw, (max-width: 1280px) 37vw, 560px"
+                sizes="(max-width: 1024px) 47vw, (max-width: 1280px) 43vw, 710px"
               />
             </div>
             <div
-              className={`absolute bottom-[7%] left-1/2 z-40 w-[40%] -translate-x-1/2 lg:bottom-[5%] lg:w-[38%] xl:bottom-[3%] xl:w-[36%] ${collageTileClass}`}
+              className={`absolute bottom-[0%] left-[46%] z-20 w-[45%] -translate-x-1/2 lg:left-[47%] lg:w-[43%] xl:left-[48%] xl:w-[41%] ${collageTileClass}`}
             >
               <TileFill
                 image={images[2]}
-                sizes="(max-width: 1024px) 38vw, (max-width: 1280px) 34vw, 520px"
+                sizes="(max-width: 1024px) 43vw, (max-width: 1280px) 40vw, 660px"
               />
             </div>
           </div>
