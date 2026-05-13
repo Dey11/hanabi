@@ -5,7 +5,7 @@ import { CalPopupButton } from "@/components/cal-popup-button";
 import { Sawarabi_Gothic } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sawarabiGothic = Sawarabi_Gothic({
   weight: "400",
@@ -16,11 +16,48 @@ type ItemHovered = (typeof NAV_ITEMS)[number]["key"];
 
 export default function Header() {
   const [itemHovered, setItemHovered] = useState<ItemHovered | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const distance = currentScrollY - lastScrollY.current;
+
+        if (currentScrollY < 48) {
+          setIsVisible(true);
+        } else if (Math.abs(distance) > 6) {
+          setIsVisible(distance < 0);
+        }
+
+        lastScrollY.current = currentScrollY;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <>
+    <div
+      className={[
+        "fixed inset-x-0 top-0 z-[90] transition-transform duration-300 ease-out will-change-transform",
+        isVisible ? "translate-y-0" : "-translate-y-[125%]",
+      ].join(" ")}
+    >
       {/* Desktop / tablet header */}
-      <header className="m-5 mx-auto hidden max-w-2xl items-center justify-between rounded-full p-1.5 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.2)] md:flex">
+      <header className="m-5 mx-auto hidden max-w-2xl items-center justify-between rounded-full bg-white p-1.5 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.2)] md:flex">
         <Image src="/logo.svg" alt="logo" width={37} height={36} />
 
         <nav className="flex gap-7" onMouseLeave={() => setItemHovered(null)}>
@@ -76,7 +113,7 @@ export default function Header() {
 
       {/* Mobile header */}
       <header className="mx-auto w-full md:hidden">
-        <div className="mx-4 mt-4 rounded-2xl border border-black/10 bg-white/90 px-3 py-2 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.16)] backdrop-blur">
+        <div className="mx-4 mt-4 rounded-2xl border border-black/10 bg-white px-3 py-2 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.16)] backdrop-blur">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Image src="/logo.svg" alt="logo" width={30} height={30} />
@@ -91,7 +128,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 }
 
