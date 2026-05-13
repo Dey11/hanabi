@@ -11,6 +11,7 @@ export default function FooterReveal({
   const footerRef = useRef<HTMLDivElement | null>(null);
   const [footerHeight, setFooterHeight] = useState(0);
   const [isFooterActive, setIsFooterActive] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     const el = footerRef.current;
@@ -41,7 +42,12 @@ export default function FooterReveal({
         document.documentElement.scrollHeight - window.innerHeight;
       const remaining = scrollable - window.scrollY;
       const activationDistance = Math.max(footerHeight * 0.55, 360);
+      const visibilityDistance = Math.max(
+        footerHeight + window.innerHeight * 0.75,
+        900,
+      );
 
+      setIsFooterVisible(remaining <= visibilityDistance);
       setIsFooterActive(remaining <= activationDistance);
     };
 
@@ -75,7 +81,10 @@ export default function FooterReveal({
 
       <div
         ref={footerRef}
-        className="fixed inset-x-0 bottom-0 z-0"
+        className={[
+          "fixed inset-x-0 bottom-0 z-0",
+          isFooterVisible ? "visible" : "invisible",
+        ].join(" ")}
         aria-hidden={footerHeight === 0}
       >
         <Footer isActive={isFooterActive} />
