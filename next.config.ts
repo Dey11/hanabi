@@ -6,7 +6,11 @@ const nextConfig: NextConfig = {
     "*.ngrok-free.app",
   ],
   images: {
-    qualities: [75, 80, 90, 92, 100],
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 414, 640, 768, 1024, 1280, 1536, 1920],
+    imageSizes: [32, 48, 64, 96, 128, 180, 256, 320, 384, 512, 640],
+    minimumCacheTTL: 31536000,
+    qualities: [70, 75, 80, 82, 85, 90, 92],
   },
 };
 

@@ -164,7 +164,7 @@ export function DevelopmentCard() {
   return (
     <div
       style={{
-        backgroundImage: "url('/gradients/mesh1.png')",
+        backgroundImage: "url('/gradients/mesh1.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -178,6 +178,8 @@ export function DevelopmentCard() {
           alt="Hanabi Logo"
           width={100}
           height={100}
+          sizes="100px"
+          quality={82}
           loading="lazy"
           className="absolute inset-x-0 top-1/4 m-auto"
         />

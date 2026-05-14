@@ -11,6 +11,8 @@ type RevealImageProps = ImageProps & {
 export default function RevealImage({
   wrapperClassName,
   onLoad,
+  quality,
+  decoding,
   ...props
 }: RevealImageProps) {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +32,8 @@ export default function RevealImage({
     >
       <Image
         {...props}
+        quality={quality ?? 82}
+        decoding={decoding ?? "async"}
         onLoad={(event) => {
           setLoaded(true);
           onLoad?.(event);
