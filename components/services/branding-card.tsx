@@ -28,7 +28,7 @@ export function BrandingCard() {
   return (
     <div
       style={{
-        backgroundImage: "url('/gradients/mesh3.png')",
+        backgroundImage: "url('/gradients/mesh3.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -81,6 +81,8 @@ export function BrandingCard() {
                 alt="Ballarat Box Sports"
                 width={1024}
                 height={768}
+                sizes="200px"
+                quality={82}
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
@@ -128,6 +130,8 @@ export function BrandingCard() {
                 alt="Nectar"
                 width={1024}
                 height={768}
+                sizes="200px"
+                quality={82}
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
@@ -171,6 +175,8 @@ export function BrandingCard() {
                 alt="Hibari"
                 width={1024}
                 height={768}
+                sizes="200px"
+                quality={82}
                 className="h-full w-full object-cover"
                 loading="lazy"
               />

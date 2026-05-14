@@ -142,7 +142,7 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
           src={FOOTER_IMAGE}
           alt=""
           fill
-          quality={100}
+          quality={90}
           sizes="(max-width: 640px) 120vw, (max-width: 1024px) 115vw, (max-width: 1536px) 110vw, 105vw"
           className="object-cover object-center opacity-95"
           draggable={false}

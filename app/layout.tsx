@@ -8,6 +8,22 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
+const siteDescription =
+  "Hanabi is a product design and web development studio that creates fast, elegant, and intuitive digital experiences for ambitious founders and forward-thinking enterprises.";
+const ogImage = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "Hanabi product design and web development studio",
+  type: "image/png",
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,9 +37,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hanabi",
-  description:
-    "Ignite your brand with stunning design and seamless web experiences — Hanabi, your creative digital partner.",
+  metadataBase: new URL(siteUrl),
+  applicationName: "Hanabi",
+  title: {
+    default: "Hanabi",
+    template: "%s | Hanabi",
+  },
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -32,6 +55,21 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Hanabi",
+    title: "Hanabi",
+    description: siteDescription,
+    images: [ogImage],
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hanabi",
+    description: siteDescription,
+    images: [ogImage],
+  },
 };
 
 export default function RootLayout({

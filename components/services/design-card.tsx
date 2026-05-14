@@ -86,7 +86,7 @@ export function DesignCard({ projects }: { projects: string[] }) {
   return (
     <div
       style={{
-        backgroundImage: "url('/gradients/mesh2.png')",
+        backgroundImage: "url('/gradients/mesh2.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -122,6 +122,8 @@ export function DesignCard({ projects }: { projects: string[] }) {
                   alt={project}
                   width={180}
                   height={130}
+                  sizes="180px"
+                  quality={82}
                   loading="lazy"
                   className="h-full w-full object-cover"
                 />

@@ -52,7 +52,7 @@ export default function Header() {
   return (
     <div
       className={[
-        "fixed inset-x-0 top-0 z-[90] transition-transform duration-300 ease-out will-change-transform",
+        "fixed inset-x-0 top-0 z-[90] transition-transform duration-500 ease-out will-change-transform",
         isVisible ? "translate-y-0" : "-translate-y-[125%]",
       ].join(" ")}
     >
