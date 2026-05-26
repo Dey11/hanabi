@@ -7,7 +7,7 @@ export type WorkProjectImage = {
 export type WorkProjectContributor =
   | "krish"
   | "roy"
-  | "dey"
+  // | "dey"
   | "sagarika"
   | "arsh";
 
@@ -23,11 +23,11 @@ export type WorkProjectImages =
   | readonly [WorkProjectImage, WorkProjectImage]
   | readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage]
   | readonly [
-      WorkProjectImage,
-      WorkProjectImage,
-      WorkProjectImage,
-      WorkProjectImage,
-    ];
+    WorkProjectImage,
+    WorkProjectImage,
+    WorkProjectImage,
+    WorkProjectImage,
+  ];
 
 export type WorkProject = {
   title: string;
@@ -43,7 +43,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEB APP | PRODUCT UI",
     description:
       "A focused trading interface concept designed around fast scanning, clear positions, and confident decision-making.",
-    contributors: ["krish", "dey"],
+    contributors: ["krish"],
     images: [
       {
         src: "/projects/tradeMoai1.png",
@@ -60,7 +60,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | LANDING",
     description:
       "A fresh landing experience designed to capture the brand's coastal calm and community-driven story.",
-    contributors: ["krish", "dey"],
+    contributors: ["krish"],
     images: [
       {
         src: "/projects/dtc1.png",
@@ -81,7 +81,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | LANDING",
     description:
       "A bold and energetic digital presence built for a community-driven sports brand that lives and breathes competition.",
-    contributors: ["krish", "dey"],
+    contributors: ["krish"],
     images: [
       {
         src: "/projects/ballaratboxsports1.png",
@@ -102,7 +102,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | BRANDING",
     description:
       "A calm, tactile web experience shaped around imperfect beauty, considered details, and a quietly memorable brand presence.",
-    contributors: ["dey", "sagarika"],
+    contributors: ["sagarika"],
     images: [
       {
         src: "/projects/wabisabi1.png",
@@ -140,7 +140,7 @@ export const workProjects: readonly WorkProject[] = [
     category: "WEBSITE | BRANDING",
     description:
       "A refined editorial web presence honouring the legacy of a master engraver - balancing heritage craft with modern digital storytelling.",
-    contributors: ["dey", "sagarika"],
+    contributors: ["sagarika"],
     images: [
       {
         src: "/projects/thomasbewick1.png",

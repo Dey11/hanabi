@@ -25,14 +25,14 @@ const teamMembers = [
     quote: "Here to be myself",
     unoptimizedBanner: true,
   },
-  {
-    name: "Dey",
-    role: "Developer",
-    avatarSrc: "/team/dey.png",
-    bannerSrc: "/team/dey-banner.webp",
-    quote: "Compassion and empathy",
-    unoptimizedBanner: true,
-  },
+  // {
+  //   name: "Dey",
+  //   role: "Developer",
+  //   avatarSrc: "/team/dey.png",
+  //   bannerSrc: "/team/dey-banner.webp",
+  //   quote: "Compassion and empathy",
+  //   unoptimizedBanner: true,
+  // },
   {
     name: "Sagarika",
     role: "Designer",

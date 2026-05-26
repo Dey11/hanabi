@@ -16,7 +16,7 @@ const CONTRIBUTOR_META: Record<
 > = {
   krish: { name: "Krish", mask: "/team/krish.png" },
   roy: { name: "Roy", mask: "/team/roy.png" },
-  dey: { name: "Dey", mask: "/team/dey.png" },
+  // dey: { name: "Dey", mask: "/team/dey.png" },
   sagarika: { name: "Sagarika", mask: "/team/sagarika.png" },
   arsh: { name: "Arsh", mask: "/team/arsh.png" },
 };
