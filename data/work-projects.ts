@@ -7,7 +7,7 @@ export type WorkProjectImage = {
 export type WorkProjectContributor =
   | "krish"
   | "roy"
-  // | "dey"
+  | "dey"
   | "sagarika"
   | "arsh";
 
@@ -23,11 +23,11 @@ export type WorkProjectImages =
   | readonly [WorkProjectImage, WorkProjectImage]
   | readonly [WorkProjectImage, WorkProjectImage, WorkProjectImage]
   | readonly [
-    WorkProjectImage,
-    WorkProjectImage,
-    WorkProjectImage,
-    WorkProjectImage,
-  ];
+      WorkProjectImage,
+      WorkProjectImage,
+      WorkProjectImage,
+      WorkProjectImage,
+    ];
 
 export type WorkProject = {
   title: string;
