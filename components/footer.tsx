@@ -143,6 +143,8 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
           alt=""
           fill
           quality={90}
+          loading="lazy"
+          fetchPriority="low"
           sizes="(max-width: 640px) 120vw, (max-width: 1024px) 115vw, (max-width: 1536px) 110vw, 105vw"
           className="object-cover object-center opacity-95"
           draggable={false}

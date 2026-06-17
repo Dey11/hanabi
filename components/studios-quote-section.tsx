@@ -10,20 +10,20 @@ const sawarabiGothic = Sawarabi_Gothic({
 
 const teamMembers = [
   {
-    name: "Krish",
-    role: "Designer",
-    avatarSrc: "/team/krish.png",
-    bannerSrc: "/team/krish-banner.png",
-    quote: "Focus only on your art",
-    fireflies: true,
-  },
-  {
     name: "Roy",
     role: "Developer",
     avatarSrc: "/team/roy.png",
     bannerSrc: "/team/roy-banner.webp",
     quote: "Here to be myself",
     unoptimizedBanner: true,
+  },
+  {
+    name: "Krish",
+    role: "Designer",
+    avatarSrc: "/team/krish.png",
+    bannerSrc: "/team/krish-banner.png",
+    quote: "Focus only on your art",
+    fireflies: true,
   },
   {
     name: "Dey",
