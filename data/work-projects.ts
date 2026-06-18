@@ -35,6 +35,7 @@ export type WorkProject = {
   description: string;
   images: WorkProjectImages;
   contributors: readonly WorkProjectContributor[];
+  liveUrl?: string;
 };
 
 export const workProjects: readonly WorkProject[] = [
@@ -58,6 +59,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "DOWN THE COVE",
     category: "WEBSITE | LANDING",
+    liveUrl: "https://dtc.cooldash.xyz",
     description:
       "A fresh landing experience designed to capture the brand's coastal calm and community-driven story.",
     contributors: ["krish", "dey"],
@@ -79,6 +81,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "BALLARAT BOX SPORTS",
     category: "WEBSITE | LANDING",
+    liveUrl: "https://ballaratsports.vercel.app",
     description:
       "A bold and energetic digital presence built for a community-driven sports brand that lives and breathes competition.",
     contributors: ["krish", "dey"],
@@ -100,6 +103,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "WABISABI",
     category: "WEBSITE | BRANDING",
+    liveUrl: "https://wabisabi.pics",
     description:
       "A calm, tactile web experience shaped around imperfect beauty, considered details, and a quietly memorable brand presence.",
     contributors: ["dey", "sagarika"],
@@ -121,6 +125,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "GOT NEXT",
     category: "WEB APP | PRODUCT UI",
+    liveUrl: "https://gotnext.gg",
     description:
       "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
     contributors: ["krish"],
@@ -138,6 +143,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "THOMAS BEWICK",
     category: "WEBSITE | BRANDING",
+    liveUrl: "https://thomasbewick.co.uk",
     description:
       "A refined editorial web presence honouring the legacy of a master engraver - balancing heritage craft with modern digital storytelling.",
     contributors: ["dey", "sagarika"],
@@ -155,6 +161,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "LEADLY",
     category: "WEB APP | PRODUCT UI",
+    liveUrl: "https://leadly.live",
     description:
       "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
     contributors: ["arsh", "roy"],
