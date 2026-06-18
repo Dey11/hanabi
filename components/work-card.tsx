@@ -1,5 +1,6 @@
 import HangingPaperCranes from "@/components/hanging-paper-cranes";
 import ProjectContributorMasks from "@/components/project-contributor-masks";
+import { LinkIcon } from "@/components/ui/link";
 import WorkCardGallery from "@/components/work-card-gallery";
 import type {
   WorkProjectContributor,
@@ -12,6 +13,7 @@ export type WorkCardProps = {
   description: string;
   images: WorkProjectImages;
   contributors: readonly WorkProjectContributor[];
+  liveUrl?: string;
 };
 
 export default function WorkCard({
@@ -20,12 +22,26 @@ export default function WorkCard({
   description,
   images,
   contributors,
+  liveUrl,
 }: WorkCardProps) {
   return (
     <article className="flex w-full flex-col">
       <div className="flex flex-col gap-1">
         <div className="flex items-start justify-between gap-4 font-mono text-sm font-medium tracking-[0.06em] text-[#6C6C6C] uppercase sm:text-sm">
-          <span className="min-w-0 text-pretty text-black">{title}</span>
+          <span className="flex min-w-0 items-center gap-1.5 text-pretty text-black">
+            <span className="min-w-0">{title}</span>
+            {liveUrl ? (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${title} live site`}
+                className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-black/70 transition-colors duration-200 hover:text-black focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F6F6F6] focus-visible:outline-none"
+              >
+                <LinkIcon size={15} aria-hidden="true" />
+              </a>
+            ) : null}
+          </span>
           <span className="shrink-0 text-right">{category}</span>
         </div>
 
