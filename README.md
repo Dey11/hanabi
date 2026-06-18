@@ -44,15 +44,15 @@ bun run start
 - `components/work-card-gallery.tsx` handles project image layouts based on image count and explicitly lazy loads project gallery images.
 - `components/reveal.tsx` provides the viewport reveal/fade behavior used across the page and by newly mounted work projects.
 - `components/why-us-cards.tsx` renders the Why Us / Hanabi Difference cards, explicitly lazy loads their card images, and keeps separated mobile spacing for the Quality and Clean Code cards so they do not attach on narrow screens.
-- `components/studios-quote-section.tsx` renders the Studios/Who We Are quote and mounts the team list.
+- `components/studios-quote-section.tsx` renders the Studios/Who We Are quote, owns the team member data/order, and mounts the team list.
 - `components/team-members-list.tsx` owns the responsive Studios/Who We Are team list layout.
 - `components/team-member-card.tsx` owns each avatar/banner card, including avatar gradients, ring, inset highlight, shadow depth, and banner media mounted with lazy loading so the browser can fetch it while approaching the Studios section. CSS keeps banner popovers desktop hover/focus-only.
-- The footer transition artwork section is currently disabled, so the footer renders only the base footer artwork.
+- The footer transition artwork section is currently disabled, so the footer renders only the base footer artwork, with the footer image explicitly lazy loaded at low fetch priority.
 - Header and hero mobile "Book a Call" CTAs redirect to Cal.com directly; desktop keeps the popup booking flow.
 
 ## Updating Works
 
-Add or edit projects in `data/work-projects.ts`. Project images should live under `public/projects` and be referenced with root-relative paths such as `/projects/example.png`.
+Add or edit projects in `data/work-projects.ts`. Project images should live under `public/projects` and be referenced with root-relative paths such as `/projects/example.png`. Project `contributors` control the bottom-right avatar masks on each work card; each contributor maps to a team avatar in `components/project-contributor-masks.tsx` and shows the contributor name on hover/focus.
 
 The first three projects in `workProjects` are visible immediately. In the collapsed state, the next project appears only as a blurred, non-interactive peek behind "See more"; full additional projects stay unmounted until visitors click the button, so their existing `Reveal` viewport animation runs when they appear. Paper-crane garlands are anchored inside each project media box, clipped by that project box, with the left and right strings inset from the box sides and spanning top-to-bottom. Got Next project images render square on mobile and keep rounded corners from the small breakpoint up.
 
