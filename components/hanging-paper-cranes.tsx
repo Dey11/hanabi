@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "motion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -119,12 +113,6 @@ const rightCranes: CraneSpec[] = [
     },
   },
 ];
-
-const ropeSpring = {
-  stiffness: 42,
-  damping: 4.8,
-  mass: 1.05,
-};
 
 /** Shared vertical layout for `card` garlands. */
 const CARD_VIEW_BOX_HEIGHT = 600;
@@ -253,12 +241,6 @@ function buildCardCraneSets(seed: string) {
   };
 }
 
-function craneAmplitude(crane: CraneSpec, stringEnd: number) {
-  const falloff = Math.max(0.12, crane.top / stringEnd);
-
-  return 7 + Math.pow(falloff, 1.5) * 48;
-}
-
 export default function HangingPaperCranes({
   className,
   seed = "paper-cranes",
@@ -304,109 +286,7 @@ function Garland({
   cranes: CraneSpec[];
   variant?: "section" | "card";
 }) {
-  const reduceMotion = useReducedMotion();
-  const releaseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stringEnd = Math.max(...cranes.map((crane) => crane.top));
-  const pointTarget0 = useMotionValue(0);
-  const pointTarget1 = useMotionValue(0);
-  const pointTarget2 = useMotionValue(0);
-  const pointTarget3 = useMotionValue(0);
-  const pointTarget4 = useMotionValue(0);
-  const pointTarget5 = useMotionValue(0);
-  const pointSpring0 = useSpring(pointTarget0, ropeSpring);
-  const pointSpring1 = useSpring(pointTarget1, ropeSpring);
-  const pointSpring2 = useSpring(pointTarget2, ropeSpring);
-  const pointSpring3 = useSpring(pointTarget3, ropeSpring);
-  const pointSpring4 = useSpring(pointTarget4, ropeSpring);
-  const pointSpring5 = useSpring(pointTarget5, ropeSpring);
-  const rotateTarget0 = useMotionValue(0);
-  const rotateTarget1 = useMotionValue(0);
-  const rotateTarget2 = useMotionValue(0);
-  const rotateTarget3 = useMotionValue(0);
-  const rotateTarget4 = useMotionValue(0);
-  const rotateTarget5 = useMotionValue(0);
-  const rotateSpring0 = useSpring(rotateTarget0, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const rotateSpring1 = useSpring(rotateTarget1, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const rotateSpring2 = useSpring(rotateTarget2, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const rotateSpring3 = useSpring(rotateTarget3, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const rotateSpring4 = useSpring(rotateTarget4, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const rotateSpring5 = useSpring(rotateTarget5, {
-    stiffness: 38,
-    damping: 5.6,
-    mass: 0.9,
-  });
-  const pointTargets = [
-    pointTarget0,
-    pointTarget1,
-    pointTarget2,
-    pointTarget3,
-    pointTarget4,
-    pointTarget5,
-  ];
-  const pointSprings = [
-    pointSpring0,
-    pointSpring1,
-    pointSpring2,
-    pointSpring3,
-    pointSpring4,
-    pointSpring5,
-  ];
-  const rotateTargets = [
-    rotateTarget0,
-    rotateTarget1,
-    rotateTarget2,
-    rotateTarget3,
-    rotateTarget4,
-    rotateTarget5,
-  ];
-  const rotateSprings = [
-    rotateSpring0,
-    rotateSpring1,
-    rotateSpring2,
-    rotateSpring3,
-    rotateSpring4,
-    rotateSpring5,
-  ];
-
-  useEffect(() => {
-    return () => {
-      if (releaseTimeoutRef.current) {
-        clearTimeout(releaseTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const releaseRope = (delay = 120) => {
-    if (releaseTimeoutRef.current) {
-      clearTimeout(releaseTimeoutRef.current);
-    }
-
-    releaseTimeoutRef.current = setTimeout(() => {
-      pointTargets.forEach((target) => target.set(0));
-      rotateTargets.forEach((target) => target.set(0));
-      releaseTimeoutRef.current = null;
-    }, delay);
-  };
 
   const sidePositionClass =
     variant === "card"
@@ -426,7 +306,7 @@ function Garland({
       : stringEnd;
 
   return (
-    <motion.div
+    <div
       className={cn(
         "pointer-events-none absolute origin-top",
         variant === "card" ? "top-0 h-full" : "top-0 h-full",
@@ -447,36 +327,28 @@ function Garland({
             transform: "translate(-50%, -50%)",
           }}
         >
-          <motion.div
+          <div
             style={{
-              x: pointSprings[index],
-              rotate: rotateSprings[index],
-              transformOrigin: "50% 4px",
+              transform: `rotate(${crane.rotate}deg) scale(${
+                crane.flip ? -crane.scale : crane.scale
+              }, ${crane.scale})`,
             }}
+            className={cn(
+              "origin-top [filter:drop-shadow(0_8px_10px_rgba(38,22,18,0.14))_drop-shadow(0_1px_0_rgba(255,255,255,0.5))]",
+              variant === "card"
+                ? "w-[54px] sm:w-[62px] md:w-[72px]"
+                : "w-[66px] sm:w-[78px] md:w-[90px]",
+            )}
           >
-            <div
-              style={{
-                transform: `rotate(${crane.rotate}deg) scale(${
-                  crane.flip ? -crane.scale : crane.scale
-                }, ${crane.scale})`,
-              }}
-              className={cn(
-                "origin-top [filter:drop-shadow(0_8px_10px_rgba(38,22,18,0.14))_drop-shadow(0_1px_0_rgba(255,255,255,0.5))]",
-                variant === "card"
-                  ? "w-[54px] sm:w-[62px] md:w-[72px]"
-                  : "w-[66px] sm:w-[78px] md:w-[90px]",
-              )}
-            >
-              <PaperCrane palette={crane.palette} />
-            </div>
-          </motion.div>
+            <PaperCrane palette={crane.palette} />
+          </div>
         </div>
       ))}
       <div
         className="absolute top-0 left-1/2 z-10 w-0.5 -translate-x-1/2 rounded-full bg-[#FF9DAE]"
         style={{ height: stringHeight }}
       />
-    </motion.div>
+    </div>
   );
 }
 
