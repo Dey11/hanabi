@@ -32,7 +32,7 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
         {initialProjects.map((project, idx) => (
           <Reveal
             key={project.title}
-            className="w-full"
+            className="w-full [contain-intrinsic-size:auto_720px] [content-visibility:auto]"
             delay={Math.min(0.04 * idx, 0.16)}
           >
             <WorkCard {...project} />
@@ -55,7 +55,7 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-full bg-linear-to-b from-[#F6F6F6] from-0% via-[#F6F6F6]/65 via-45% to-[#F6F6F6] to-100% backdrop-blur-[1px]"
+            className="pointer-events-none absolute inset-x-0 top-0 h-full bg-linear-to-b from-[#F6F6F6] from-0% via-[#F6F6F6]/65 via-45% to-[#F6F6F6] to-100%"
           />
           <button
             type="button"
@@ -76,7 +76,7 @@ export default function WorkProjectsList({ projects }: WorkProjectsListProps) {
           {additionalProjects.map((project, idx) => (
             <Reveal
               key={project.title}
-              className="w-full"
+              className="w-full [contain-intrinsic-size:auto_720px] [content-visibility:auto]"
               delay={Math.min(0.04 * (idx + INITIAL_VISIBLE_PROJECTS), 0.16)}
             >
               <WorkCard {...project} />
