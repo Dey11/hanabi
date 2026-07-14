@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 const revealItem = {
@@ -10,6 +10,15 @@ const revealItem = {
     y: 0,
     filter: "blur(0px)",
     transition: { delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  }),
+} satisfies Variants;
+
+// Reduced-motion users get an opacity-only fade — no blur, no travel.
+const revealItemReduced = {
+  hidden: { opacity: 0 },
+  show: (delay: number) => ({
+    opacity: 1,
+    transition: { delay, duration: 0.4, ease: "easeOut" },
   }),
 } satisfies Variants;
 
@@ -34,10 +43,12 @@ export function Reveal({
   delay?: number;
   viewportAmount?: number;
 }) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.div
       className={className}
-      variants={revealItem}
+      variants={prefersReducedMotion ? revealItemReduced : revealItem}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: viewportAmount }}
@@ -47,4 +58,3 @@ export function Reveal({
     </motion.div>
   );
 }
-

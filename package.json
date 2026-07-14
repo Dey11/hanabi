@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "gen:blur": "bun run scripts/generate-blur.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -32,6 +33,7 @@
     "@types/react-dom": "19.2.3",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.6.14",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"
   },

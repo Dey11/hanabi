@@ -2,26 +2,36 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 export default function HeroKites() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
+  // Lenis already smooths the scroll signal, so we drive the parallax directly
+  // from scrollYProgress — an extra useSpring here just double-smooths and adds
+  // a second rAF loop fighting Lenis, which is what made the hero stutter.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    mass: 0.4,
-  });
+  const leftY = useTransform(scrollYProgress, [0, 1], ["0%", "185%"]);
+  const rightY = useTransform(scrollYProgress, [0, 1], ["0%", "88%"]);
+  const leftRotate = useTransform(scrollYProgress, [0, 1], [0, -22]);
+  const rightRotate = useTransform(scrollYProgress, [0, 1], [0, 18]);
 
-  const leftY = useTransform(smoothProgress, [0, 1], ["0%", "185%"]);
-  const rightY = useTransform(smoothProgress, [0, 1], ["0%", "88%"]);
-  const leftRotate = useTransform(smoothProgress, [0, 1], [0, -22]);
-  const rightRotate = useTransform(smoothProgress, [0, 1], [0, 18]);
+  const leftStyle = prefersReducedMotion
+    ? undefined
+    : { y: leftY, rotate: leftRotate };
+  const rightStyle = prefersReducedMotion
+    ? undefined
+    : { y: rightY, rotate: rightRotate };
 
   return (
     <div
@@ -30,11 +40,13 @@ export default function HeroKites() {
       className="pointer-events-none absolute inset-0 z-10 overflow-hidden"
     >
       <motion.div
-        style={{ y: leftY, rotate: leftRotate }}
+        style={leftStyle}
         className="absolute top-[22%] left-[2%] w-[110px] sm:left-[4%] sm:w-[140px] md:w-[170px] lg:left-[6%] lg:w-[190px]"
       >
         <motion.div
-          initial={{ opacity: 0, y: -60 }}
+          initial={
+            prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -60 }
+          }
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1.1,
@@ -55,11 +67,13 @@ export default function HeroKites() {
       </motion.div>
 
       <motion.div
-        style={{ y: rightY, rotate: rightRotate }}
+        style={rightStyle}
         className="absolute top-[18%] right-[2%] w-[120px] sm:right-[4%] sm:w-[150px] md:w-[180px] lg:right-[6%] lg:w-[210px]"
       >
         <motion.div
-          initial={{ opacity: 0, y: -80 }}
+          initial={
+            prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -80 }
+          }
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1.2,
