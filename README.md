@@ -2,6 +2,8 @@
 
 Hanabi is a Next.js portfolio site built with Tailwind CSS and Bun. The homepage presents the studio story, seamless hero marquee, services, why-us section, recent works, and contact flow.
 
+It also hosts a password-protected **client & admin portal** (`/portal`, `/admin`) for delivering brand systems, assets, handoff docs, and progress updates to clients. See [`docs/PORTAL.md`](docs/PORTAL.md) for setup, environment, and the updates ingest API.
+
 ## Development
 
 Install dependencies:

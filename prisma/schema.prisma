@@ -1,0 +1,142 @@
+// Hanabi client portal — data model
+// Postgres (Neon) via the Prisma driver adapter.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// A single agency client. One client == one password-protected portal.
+model Client {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  /// bcrypt hash of the portal password
+  passwordHash String
+  /// short one-liner shown on the overview page
+  tagline      String?
+  /// oklch/hex accent used to tint this client's portal chrome
+  accentColor  String   @default("oklch(0.205 0 0)")
+  logoUrl      String?
+  status       ClientStatus @default(ACTIVE)
+
+  colors  BrandColor[]
+  fonts   BrandFont[]
+  assets  Asset[]
+  docs    Doc[]
+  updates Update[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+}
+
+enum ClientStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+/// A brand color the client can copy from the Brand page.
+model BrandColor {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  name  String // e.g. "Primary", "Ink", "Paper"
+  value String // hex or oklch string, copied verbatim
+  role  String? // optional note, e.g. "Backgrounds"
+  order Int    @default(0)
+
+  @@index([clientId])
+}
+
+/// A typeface in the client's brand system.
+model BrandFont {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  name     String // e.g. "Geist"
+  category String? // e.g. "Sans / Body"
+  weights  String? // e.g. "400, 500, 700"
+  url      String? // link to the font source / download
+  specimen String? // sample string to render
+  order    Int     @default(0)
+
+  @@index([clientId])
+}
+
+/// A downloadable brand asset (logo variant, icon, banner, or generic file).
+model Asset {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  name     String
+  kind     AssetKind @default(FILE)
+  url      String // public R2 URL
+  mime     String?
+  sizeBytes Int?
+  order    Int    @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@index([clientId, kind])
+}
+
+enum AssetKind {
+  LOGO
+  ICON
+  BANNER
+  FILE
+}
+
+/// A handoff document authored in the admin, stored as markdown.
+model Doc {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  title     String
+  slug      String
+  category  String? // groups docs in the sidebar, e.g. "Getting started"
+  contentMd String  @db.Text
+  order     Int     @default(0)
+  published Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([clientId, slug])
+  @@index([clientId])
+}
+
+/// A progress / changelog entry. May be auto-created from a GitHub commit.
+model Update {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  title     String
+  bodyMd    String  @db.Text
+  tag       String? // e.g. "Design", "Build", "Milestone"
+  date      DateTime @default(now())
+  commitSha String? // set when generated from a commit
+  commitUrl String?
+  source    UpdateSource @default(MANUAL)
+
+  createdAt DateTime @default(now())
+
+  @@index([clientId, date])
+  @@index([clientId, commitSha])
+}
+
+enum UpdateSource {
+  MANUAL
+  GITHUB
+}
