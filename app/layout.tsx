@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { Agentation } from "agentation";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Geist } from "next/font/google";
@@ -94,6 +95,7 @@ export default function RootLayout({
         />
         <Analytics />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        {process.env.NODE_ENV === "development" ? <Agentation /> : null}
       </body>
     </html>
   );
