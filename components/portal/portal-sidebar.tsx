@@ -125,7 +125,7 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
                             docsOpen ? "Collapse docs" : "Expand docs"
                           }
                           aria-expanded={docsOpen}
-                          className="peer-data-[active=true]/menu-button:text-sidebar-accent-foreground"
+                          className="cursor-pointer peer-data-[active=true]/menu-button:text-sidebar-accent-foreground"
                         >
                           <ChevronRight
                             className={cn(
