@@ -3,8 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Activity,
+  ChevronRight,
   FileDown,
   FileText,
   FolderDown,
@@ -13,6 +16,7 @@ import {
   Package,
   Palette,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { logoutClient } from "@/app/portal/actions";
 import {
   Sidebar,
@@ -22,6 +26,7 @@ import {
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -57,6 +62,11 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
     exact
       ? pathname === href
       : pathname === href || pathname.startsWith(href + "/");
+
+  // Docs sub-links start expanded when the user is within the Docs section.
+  const [docsOpen, setDocsOpen] = useState(() =>
+    pathname.startsWith("/portal/docs"),
+  );
 
   return (
     <Sidebar className="border-sidebar-border">
@@ -108,20 +118,56 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
                     </SidebarMenuButton>
 
                     {item.title === "Docs" && docs.length > 0 ? (
-                      <SidebarMenuSub>
-                        {docs.map((doc) => (
-                          <SidebarMenuSubItem key={doc.id}>
-                            <SidebarMenuSubButton
-                              isActive={pathname === `/portal/docs/${doc.slug}`}
-                              render={
-                                <Link href={`/portal/docs/${doc.slug}`} />
-                              }
+                      <>
+                        <SidebarMenuAction
+                          onClick={() => setDocsOpen((v) => !v)}
+                          aria-label={
+                            docsOpen ? "Collapse docs" : "Expand docs"
+                          }
+                          aria-expanded={docsOpen}
+                          className="peer-data-[active=true]/menu-button:text-sidebar-accent-foreground"
+                        >
+                          <ChevronRight
+                            className={cn(
+                              "transition-transform duration-200",
+                              docsOpen && "rotate-90",
+                            )}
+                          />
+                        </SidebarMenuAction>
+                        <AnimatePresence initial={false}>
+                          {docsOpen ? (
+                            <motion.div
+                              key="docs-sub"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2, ease: "easeOut" }}
+                              className="overflow-hidden"
                             >
-                              <span className="truncate">{doc.title}</span>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
+                              <SidebarMenuSub>
+                                {docs.map((doc) => (
+                                  <SidebarMenuSubItem key={doc.id}>
+                                    <SidebarMenuSubButton
+                                      isActive={
+                                        pathname === `/portal/docs/${doc.slug}`
+                                      }
+                                      render={
+                                        <Link
+                                          href={`/portal/docs/${doc.slug}`}
+                                        />
+                                      }
+                                    >
+                                      <span className="truncate">
+                                        {doc.title}
+                                      </span>
+                                    </SidebarMenuSubButton>
+                                  </SidebarMenuSubItem>
+                                ))}
+                              </SidebarMenuSub>
+                            </motion.div>
+                          ) : null}
+                        </AnimatePresence>
+                      </>
                     ) : null}
                   </SidebarMenuItem>
                 );
