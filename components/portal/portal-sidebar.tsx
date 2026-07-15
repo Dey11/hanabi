@@ -14,7 +14,6 @@ import {
   Palette,
 } from "lucide-react";
 import { logoutClient } from "@/app/portal/actions";
-import { PortalThemeToggle } from "@/components/theme-toggle";
 import {
   Sidebar,
   SidebarContent,
@@ -94,7 +93,7 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-1">
               {nav.map((item) => {
                 const active = isActive(item.href, item.exact);
                 const Icon = item.icon;
@@ -151,9 +150,6 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
               <Package />
               <span>Export all assets</span>
             </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <PortalThemeToggle />
           </SidebarMenuItem>
           <SidebarMenuItem>
             <form action={logoutClient}>
