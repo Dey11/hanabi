@@ -38,14 +38,14 @@ export default async function UpdatesPage() {
         <div className="flex flex-col gap-10">
           {groups.map((group) => (
             <section key={group.label}>
-              <h2 className="text-muted-foreground mb-5 text-[0.7rem] font-medium tracking-[0.14em] uppercase">
+              <h2 className="text-muted-foreground mb-5 text-[0.82rem] font-medium">
                 {group.label}
               </h2>
               <ol className="relative ml-1 border-l pl-6">
                 {group.items.map((u) => (
                   <li key={u.id} className="relative pb-8 last:pb-0">
                     <span
-                      className="ring-background absolute top-1 -left-[1.65rem] size-2.5 rounded-full ring-4"
+                      className="ring-background absolute top-1.5 -left-6 size-2.5 -translate-x-1/2 rounded-full ring-4"
                       style={{ background: "var(--brand)" }}
                     />
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">

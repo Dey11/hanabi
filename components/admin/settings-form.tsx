@@ -10,6 +10,13 @@ import {
 } from "@/app/admin/clients/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Field, SectionCard } from "@/components/admin/field";
 
 type Client = {
@@ -27,6 +34,7 @@ export function SettingsForm({ client }: { client: Client }) {
     {},
   );
   const [accent, setAccent] = useState(client.accentColor);
+  const [status, setStatus] = useState(client.status);
 
   useEffect(() => {
     if (state.ok) toast.success("Settings saved");
@@ -73,14 +81,21 @@ export function SettingsForm({ client }: { client: Client }) {
               </div>
             </Field>
             <Field label="Status">
-              <select
-                name="status"
-                defaultValue={client.status}
-                className="border-input h-9 rounded-lg border bg-transparent px-3 text-sm shadow-xs"
+              <input type="hidden" name="status" value={status} />
+              <Select
+                value={status}
+                onValueChange={(v) =>
+                  setStatus((v as Client["status"]) ?? "ACTIVE")
+                }
               >
-                <option value="ACTIVE">Active</option>
-                <option value="ARCHIVED">Archived</option>
-              </select>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ACTIVE">Active</SelectItem>
+                  <SelectItem value="ARCHIVED">Archived</SelectItem>
+                </SelectContent>
+              </Select>
             </Field>
           </div>
           <Field

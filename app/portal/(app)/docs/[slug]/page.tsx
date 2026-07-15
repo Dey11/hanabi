@@ -42,11 +42,11 @@ export default async function DocPage({
 
       <div className="mb-8 border-b pb-6">
         {doc.category ? (
-          <p className="text-muted-foreground text-[0.7rem] font-medium tracking-[0.14em] uppercase">
+          <span className="bg-muted text-muted-foreground inline-block rounded-full px-2.5 py-0.5 text-[0.72rem] font-medium">
             {doc.category}
-          </p>
+          </span>
         ) : null}
-        <h1 className="mt-1.5 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           {doc.title}
         </h1>
         <p className="text-muted-foreground mt-2 text-[0.75rem]">

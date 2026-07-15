@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold">{c.name}</span>
                       {c.status === "ARCHIVED" ? (
-                        <span className="text-muted-foreground bg-muted rounded-full px-1.5 py-0.5 text-[0.6rem] font-medium uppercase">
+                        <span className="text-muted-foreground bg-muted rounded-full px-2 py-0.5 text-[0.66rem] font-medium">
                           Archived
                         </span>
                       ) : null}

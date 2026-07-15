@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { requireAdmin } from "@/lib/auth";
+import { getTheme } from "@/lib/theme";
 import { logoutAdmin } from "@/app/admin/actions";
+import { BrandLogo } from "@/components/brand-logo";
+import { ThemeToggleButton } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -18,22 +22,30 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   await requireAdmin();
+  const theme = await getTheme();
 
   return (
-    <div className="bg-muted/30 min-h-svh">
+    <div
+      data-theme-root
+      className={cn("bg-muted/30 min-h-svh", theme === "dark" && "dark")}
+    >
       <header className="bg-background/90 sticky top-0 z-20 border-b backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
           <Link href="/admin" className="flex items-center gap-2">
+            <BrandLogo size={24} />
             <span className="text-sm font-semibold tracking-tight">Hanabi</span>
-            <span className="text-muted-foreground bg-muted rounded-md px-1.5 py-0.5 text-[0.62rem] font-medium tracking-[0.12em] uppercase">
+            <span className="text-muted-foreground bg-muted rounded-md px-1.5 py-0.5 text-[0.68rem] font-medium">
               Admin
             </span>
           </Link>
-          <form action={logoutAdmin}>
-            <Button variant="ghost" size="sm" type="submit">
-              Sign out
-            </Button>
-          </form>
+          <div className="flex items-center gap-1">
+            <ThemeToggleButton />
+            <form action={logoutAdmin}>
+              <Button variant="ghost" size="sm" type="submit">
+                Sign out
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-5 py-8">{children}</main>

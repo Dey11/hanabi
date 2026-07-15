@@ -34,6 +34,7 @@ export async function getClientForAdmin(id: string) {
       assets: { orderBy: [{ kind: "asc" }, { order: "asc" }] },
       docs: { orderBy: [{ category: "asc" }, { order: "asc" }] },
       updates: { orderBy: { date: "desc" } },
+      testimonials: { orderBy: { createdAt: "desc" } },
     },
   });
 }

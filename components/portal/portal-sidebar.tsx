@@ -5,20 +5,22 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Activity,
+  FileDown,
   FileText,
   FolderDown,
   Home,
   LogOut,
+  Package,
   Palette,
 } from "lucide-react";
 import { logoutClient } from "@/app/portal/actions";
+import { PortalThemeToggle } from "@/components/theme-toggle";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -130,19 +132,41 @@ export function PortalSidebar({ name, tagline, logoUrl, docs }: Props) {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-2">
-        <SidebarGroupLabel className="px-2 text-[0.62rem] tracking-[0.14em] uppercase">
-          Powered by Hanabi
-        </SidebarGroupLabel>
-        <form action={logoutClient}>
-          <SidebarMenuButton
-            type="submit"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <LogOut />
-            <span>Sign out</span>
-          </SidebarMenuButton>
-        </form>
+      <SidebarFooter className="gap-1 p-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              render={<a href="/api/portal/export/tokens" download />}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <FileDown />
+              <span>Export design tokens</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              render={<a href="/api/portal/export/assets" download />}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <Package />
+              <span>Export all assets</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <PortalThemeToggle />
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <form action={logoutClient}>
+              <SidebarMenuButton
+                type="submit"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <LogOut />
+                <span>Sign out</span>
+              </SidebarMenuButton>
+            </form>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
   );

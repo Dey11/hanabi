@@ -54,10 +54,10 @@ export default async function OverviewPage() {
   return (
     <div>
       <div className="mb-10">
-        <p className="text-muted-foreground text-[0.7rem] font-medium tracking-[0.16em] uppercase">
-          Client Portal
-        </p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <span className="bg-muted text-muted-foreground inline-block rounded-full px-2.5 py-0.5 text-[0.72rem] font-medium">
+          Client portal
+        </span>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           {client.name}
         </h1>
         {client.tagline ? (
@@ -108,7 +108,7 @@ export default async function OverviewPage() {
             {latest.map((u) => (
               <li key={u.id} className="relative pb-6 last:pb-0">
                 <span
-                  className="ring-background absolute top-1.5 -left-[1.4rem] size-2 rounded-full ring-4"
+                  className="ring-background absolute top-1.5 -left-5 size-2 -translate-x-1/2 rounded-full ring-4"
                   style={{ background: "var(--brand)" }}
                 />
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">

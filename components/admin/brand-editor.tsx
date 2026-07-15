@@ -12,13 +12,20 @@ import { Input } from "@/components/ui/input";
 import { Field, SectionCard } from "@/components/admin/field";
 import { DeleteButton } from "@/components/admin/delete-button";
 
-type Color = { id: string; name: string; value: string; role: string | null };
+type Color = {
+  id: string;
+  name: string;
+  value: string;
+  role: string | null;
+  group: string;
+};
 type Font = {
   id: string;
   name: string;
   category: string | null;
   weights: string | null;
   specimen: string | null;
+  bodySpecimen: string | null;
   url: string | null;
 };
 
@@ -52,7 +59,12 @@ export function BrandEditor({
                   style={{ background: c.value }}
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{c.name}</p>
+                  <p className="flex items-center gap-2 truncate text-sm font-medium">
+                    {c.name}
+                    <span className="text-muted-foreground bg-muted rounded-full px-2 py-0.5 text-[0.62rem] font-medium">
+                      {c.group}
+                    </span>
+                  </p>
                   <p className="text-muted-foreground font-mono text-[0.72rem]">
                     {c.value}
                     {c.role ? ` · ${c.role}` : ""}
@@ -67,16 +79,22 @@ export function BrandEditor({
           )}
         </div>
 
-        <form
-          action={addColor}
-          className="grid gap-2 sm:grid-cols-[1fr_1fr_1fr_auto]"
-        >
+        <form action={addColor} className="grid gap-2 sm:grid-cols-2">
           <input type="hidden" name="clientId" value={clientId} />
           <Input name="name" placeholder="Name (e.g. Primary)" required />
-          <Input name="value" placeholder="#hex or oklch(...)" required />
+          <Input
+            name="value"
+            placeholder="#hex (RGB/CMYK auto-derived)"
+            required
+          />
           <Input name="role" placeholder="Role (optional)" />
-          <Button type="submit" variant="secondary">
-            <Plus className="size-4" /> Add
+          <Input
+            name="group"
+            placeholder="Palette (e.g. Core, Accent)"
+            defaultValue="Core"
+          />
+          <Button type="submit" variant="secondary" className="sm:col-span-2">
+            <Plus className="size-4" /> Add color
           </Button>
         </form>
       </SectionCard>
@@ -137,10 +155,19 @@ export function BrandEditor({
             </Field>
           </div>
           <Field
-            label="Specimen"
-            hint="Sample text rendered on the Brand page."
+            label="Heading specimen"
+            hint="Large sample line on the Brand page."
           >
             <Input name="specimen" placeholder="The quick brown fox…" />
+          </Field>
+          <Field
+            label="Paragraph specimen"
+            hint="Body sample shown under the heading."
+          >
+            <Input
+              name="bodySpecimen"
+              placeholder="A longer sentence in this typeface…"
+            />
           </Field>
           <div>
             <Button type="submit" variant="secondary">

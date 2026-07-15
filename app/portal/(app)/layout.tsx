@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { requireClient } from "@/lib/auth";
+import { getTheme } from "@/lib/theme";
 import { getClientChrome, getClientDocsList } from "@/lib/portal-data";
 import { PortalSidebar } from "@/components/portal/portal-sidebar";
 import { PortalHeader } from "@/components/portal/portal-header";
@@ -28,8 +30,12 @@ export default async function PortalAppLayout({
   // Client was deleted out from under a live session.
   if (!chrome) redirect("/portal/login");
 
+  const theme = await getTheme();
+
   return (
     <SidebarProvider
+      data-theme-root
+      className={cn("bg-background", theme === "dark" && "dark")}
       style={
         {
           "--brand": chrome.accentColor,

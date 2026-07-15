@@ -39,6 +39,7 @@ export function AssetsEditor({
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [kind, setKind] = useState<string>("LOGO");
+  const [theme, setTheme] = useState<string>("DEFAULT");
   const [uploading, setUploading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -125,49 +126,87 @@ export function AssetsEditor({
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="grid gap-3 border-t pt-4 sm:grid-cols-[auto_1fr_auto]"
+        className="flex flex-col gap-3 border-t pt-4"
       >
         <input type="hidden" name="clientId" value={clientId} />
-        <Field label="Type">
-          <Select value={kind} onValueChange={(v) => setKind(v ?? "FILE")}>
-            <SelectTrigger className="w-32">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {KINDS.map((k) => (
-                <SelectItem key={k} value={k}>
-                  {k.charAt(0) + k.slice(1).toLowerCase()}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </Field>
-        <Field label="File">
-          <Input
-            name="file"
-            type="file"
-            required
-            className="file:text-foreground"
-          />
-        </Field>
-        <div className="flex items-end">
-          <Button
-            type="submit"
-            disabled={uploading}
-            className="w-full sm:w-auto"
-          >
-            {uploading ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <>
-                <Upload className="size-4" /> Upload
-              </>
-            )}
-          </Button>
+        <div className="grid gap-3 sm:grid-cols-[8rem_1fr]">
+          <Field label="Type">
+            <Select value={kind} onValueChange={(v) => setKind(v ?? "FILE")}>
+              <SelectTrigger className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {KINDS.map((k) => (
+                  <SelectItem key={k} value={k}>
+                    {k.charAt(0) + k.slice(1).toLowerCase()}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </Field>
+          <Field label="Display name" hint="Uses the filename if left blank.">
+            <Input name="name" placeholder="e.g. Primary logo" />
+          </Field>
+        </div>
+
+        {kind === "LOGO" ? (
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field
+              label="Background"
+              hint="Which backdrop this variant is for."
+            >
+              <Select
+                value={theme}
+                onValueChange={(v) => setTheme(v ?? "DEFAULT")}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="DEFAULT">Any</SelectItem>
+                  <SelectItem value="LIGHT">On light</SelectItem>
+                  <SelectItem value="DARK">On dark</SelectItem>
+                </SelectContent>
+              </Select>
+              <input type="hidden" name="theme" value={theme} />
+            </Field>
+            <Field
+              label="Download sizes (px)"
+              hint="Comma-separated: 128, 256, 512, 1024, 2048."
+            >
+              <Input name="sizes" placeholder="256, 512, 1024" />
+            </Field>
+          </div>
+        ) : null}
+
+        <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+          <Field label="File">
+            <Input
+              name="file"
+              type="file"
+              required
+              className="file:text-foreground"
+            />
+          </Field>
+          <div className="flex items-end">
+            <Button
+              type="submit"
+              disabled={uploading}
+              className="w-full sm:w-auto"
+            >
+              {uploading ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <>
+                  <Upload className="size-4" /> Upload
+                </>
+              )}
+            </Button>
+          </div>
         </div>
       </form>
       <p className="text-muted-foreground mt-2 text-[0.7rem]">
-        Optional display name uses the filename if left blank. Max 25 MB.
+        Logo PNGs are generated on download at the sizes you set. Max 25 MB.
       </p>
     </SectionCard>
   );

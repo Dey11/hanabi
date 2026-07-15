@@ -24,11 +24,12 @@ model Client {
   logoUrl      String?
   status       ClientStatus @default(ACTIVE)
 
-  colors  BrandColor[]
-  fonts   BrandFont[]
-  assets  Asset[]
-  docs    Doc[]
-  updates Update[]
+  colors       BrandColor[]
+  fonts        BrandFont[]
+  assets       Asset[]
+  docs         Doc[]
+  updates      Update[]
+  testimonials Testimonial[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -48,8 +49,9 @@ model BrandColor {
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   name  String // e.g. "Primary", "Ink", "Paper"
-  value String // hex or oklch string, copied verbatim
+  value String // hex string, copied verbatim; RGB/CMYK derived on render
   role  String? // optional note, e.g. "Backgrounds"
+  group String @default("Core") // palette this color belongs to, e.g. "Core", "Accent", "Neutral"
   order Int    @default(0)
 
   @@index([clientId])
@@ -61,12 +63,13 @@ model BrandFont {
   clientId String
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
-  name     String // e.g. "Geist"
-  category String? // e.g. "Sans / Body"
-  weights  String? // e.g. "400, 500, 700"
-  url      String? // link to the font source / download
-  specimen String? // sample string to render
-  order    Int     @default(0)
+  name         String // e.g. "Geist"
+  category     String? // e.g. "Sans / Body"
+  weights      String? // e.g. "400, 500, 700"
+  url          String? // link to the font source / download
+  specimen     String? // heading sample string to render
+  bodySpecimen String? // paragraph sample string to render
+  order        Int     @default(0)
 
   @@index([clientId])
 }
@@ -77,12 +80,14 @@ model Asset {
   clientId String
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
-  name     String
-  kind     AssetKind @default(FILE)
-  url      String // public R2 URL
-  mime     String?
+  name      String
+  kind      AssetKind  @default(FILE)
+  url       String // public R2 URL
+  mime      String?
   sizeBytes Int?
-  order    Int    @default(0)
+  theme     AssetTheme @default(DEFAULT) // for logos: which background this variant is for
+  sizes     String? // for logos: comma-separated px widths offered for download, e.g. "256,512,1024"
+  order     Int        @default(0)
 
   createdAt DateTime @default(now())
 
@@ -94,6 +99,12 @@ enum AssetKind {
   ICON
   BANNER
   FILE
+}
+
+enum AssetTheme {
+  DEFAULT
+  LIGHT
+  DARK
 }
 
 /// A handoff document authored in the admin, stored as markdown.
@@ -139,4 +150,22 @@ model Update {
 enum UpdateSource {
   MANUAL
   GITHUB
+}
+
+/// Feedback / testimonial submitted by a client from the portal.
+model Testimonial {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  author String? // optional name the client signs with
+  role   String? // optional role/title
+  body   String  @db.Text
+  rating Int? // optional 1-5
+  /// whether the studio may use this publicly as a testimonial
+  consent Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([clientId, createdAt])
 }

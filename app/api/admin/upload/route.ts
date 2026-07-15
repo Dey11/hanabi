@@ -3,10 +3,20 @@ import { getAdminSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { r2Configured, uploadToR2 } from "@/lib/r2";
 import { slugify } from "@/lib/utils";
-import { AssetKind } from "@/lib/generated/prisma/enums";
+import { AssetKind, AssetTheme } from "@/lib/generated/prisma/enums";
 
 const MAX_BYTES = 25 * 1024 * 1024; // 25 MB
 const KINDS = new Set(Object.values(AssetKind));
+const THEMES = new Set(Object.values(AssetTheme));
+
+/** Normalize a comma-separated px list, e.g. "256, 512x, foo, 1024" -> "256,512,1024". */
+function normalizeSizes(input: string): string | null {
+  const list = input
+    .split(",")
+    .map((s) => parseInt(s.trim(), 10))
+    .filter((n) => Number.isFinite(n) && n > 0 && n <= 4096);
+  return list.length ? Array.from(new Set(list)).join(",") : null;
+}
 
 export async function POST(req: Request) {
   if (!(await getAdminSession())) {
@@ -26,6 +36,15 @@ export async function POST(req: Request) {
   const kind = KINDS.has(kindRaw as AssetKind)
     ? (kindRaw as AssetKind)
     : AssetKind.FILE;
+  const themeRaw = String(form.get("theme") ?? "DEFAULT");
+  const theme =
+    kind === AssetKind.LOGO && THEMES.has(themeRaw as AssetTheme)
+      ? (themeRaw as AssetTheme)
+      : AssetTheme.DEFAULT;
+  const sizes =
+    kind === AssetKind.LOGO
+      ? normalizeSizes(String(form.get("sizes") ?? ""))
+      : null;
 
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "No file provided." }, { status: 400 });
@@ -70,6 +89,8 @@ export async function POST(req: Request) {
       kind,
       mime: file.type || null,
       sizeBytes: file.size,
+      theme,
+      sizes,
       order,
     },
   });

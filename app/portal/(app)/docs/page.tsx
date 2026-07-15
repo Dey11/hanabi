@@ -35,8 +35,10 @@ export default async function DocsPage() {
         <div className="flex flex-col gap-8">
           {[...groups.entries()].map(([category, items]) => (
             <section key={category}>
-              <h2 className="text-muted-foreground mb-3 text-[0.7rem] font-medium tracking-[0.14em] uppercase">
-                {category}
+              <h2 className="mb-3">
+                <span className="bg-muted text-muted-foreground inline-block rounded-full px-2.5 py-0.5 text-[0.72rem] font-medium">
+                  {category}
+                </span>
               </h2>
               <div className="bg-card divide-y rounded-2xl border">
                 {items.map((doc) => (

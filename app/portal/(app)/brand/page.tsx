@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { requireClient } from "@/lib/auth";
 import { getClientPortal } from "@/lib/portal-data";
 import { PageHeading } from "@/components/portal/page-heading";
-import { CopyButton } from "@/components/portal/copy-button";
+import { ColorCard } from "@/components/portal/color-card";
+import { LogoCard, type LogoAsset } from "@/components/portal/logo-card";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Brand" };
@@ -14,6 +15,15 @@ export default async function BrandPage() {
 
   const logos = client.assets.filter((a) => a.kind === "LOGO");
 
+  // Group colors by palette, preserving first-seen order.
+  const palettes: { name: string; colors: typeof client.colors }[] = [];
+  for (const c of client.colors) {
+    const key = c.group || "Core";
+    const existing = palettes.find((p) => p.name === key);
+    if (existing) existing.colors.push(c);
+    else palettes.push({ name: key, colors: [c] });
+  }
+
   return (
     <div>
       <PageHeading
@@ -22,44 +32,37 @@ export default async function BrandPage() {
       />
 
       {/* Colors */}
-      <section className="mb-12">
-        <h2 className="mb-4 text-sm font-semibold tracking-tight">Colors</h2>
+      <section className="mb-14">
+        <div className="mb-4 flex items-center gap-2">
+          <h2 className="text-sm font-semibold tracking-tight">Colors</h2>
+        </div>
         {client.colors.length === 0 ? (
           <EmptyRow label="No colors defined yet." />
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {client.colors.map((c) => (
-              <CopyButton
-                key={c.id}
-                value={c.value}
-                label={`Copy ${c.name} (${c.value})`}
-                className="group hover:border-foreground/20 bg-card flex-col items-stretch overflow-hidden rounded-2xl border text-left transition-colors [&>span:last-child]:hidden"
-              >
-                <span
-                  className="block h-20 w-full border-b"
-                  style={{ background: c.value }}
-                />
-                <span className="flex flex-col gap-0.5 p-3">
-                  <span className="flex items-center justify-between">
-                    <span className="text-sm font-medium">{c.name}</span>
-                  </span>
-                  <span className="text-muted-foreground font-mono text-[0.72rem] lowercase">
-                    {c.value}
-                  </span>
-                  {c.role ? (
-                    <span className="text-muted-foreground/70 text-[0.68rem]">
-                      {c.role}
-                    </span>
-                  ) : null}
+          <div className="flex flex-col gap-8">
+            {palettes.map((p) => (
+              <div key={p.name}>
+                <span className="bg-muted text-muted-foreground mb-3 inline-block rounded-full px-2.5 py-0.5 text-[0.72rem] font-medium">
+                  {p.name}
                 </span>
-              </CopyButton>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                  {p.colors.map((c) => (
+                    <ColorCard
+                      key={c.id}
+                      name={c.name}
+                      value={c.value}
+                      role={c.role}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         )}
       </section>
 
       {/* Typography */}
-      <section className="mb-12">
+      <section className="mb-14">
         <h2 className="mb-4 text-sm font-semibold tracking-tight">
           Typography
         </h2>
@@ -84,15 +87,21 @@ export default async function BrandPage() {
                     </span>
                   ) : null}
                 </div>
-                <p className="text-foreground/90 mt-3 text-2xl tracking-tight">
+
+                <p className="text-foreground/90 mt-4 text-3xl font-semibold tracking-tight">
                   {f.specimen ?? "The quick brown fox jumps over the lazy dog."}
                 </p>
+                <p className="text-muted-foreground mt-2 max-w-prose text-[0.95rem] leading-7">
+                  {f.bodySpecimen ??
+                    "Whereupon a jovial quartz sphinx, vexed by the lazy dog, quickly jumped over five boxes — 1234567890."}
+                </p>
+
                 {f.url ? (
                   <a
                     href={f.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-muted-foreground hover:text-foreground mt-3 inline-block text-[0.75rem] underline underline-offset-4"
+                    className="text-muted-foreground hover:text-foreground mt-4 inline-block text-[0.75rem] underline underline-offset-4"
                   >
                     Font source →
                   </a>
@@ -109,31 +118,9 @@ export default async function BrandPage() {
         {logos.length === 0 ? (
           <EmptyRow label="No logo files uploaded yet." />
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {logos.map((l) => (
-              <a
-                key={l.id}
-                href={l.url}
-                download
-                className="group hover:border-foreground/20 bg-card flex flex-col rounded-2xl border transition-colors"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <span className="grid h-24 place-items-center overflow-hidden border-b bg-[repeating-conic-gradient(#00000008_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] p-4">
-                  <img
-                    src={l.url}
-                    alt={l.name}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </span>
-                <span className="flex items-center justify-between p-3">
-                  <span className="truncate text-[0.8rem] font-medium">
-                    {l.name}
-                  </span>
-                  <span className="text-muted-foreground group-hover:text-foreground text-[0.7rem]">
-                    Download
-                  </span>
-                </span>
-              </a>
+              <LogoCard key={l.id} logo={l as LogoAsset} />
             ))}
           </div>
         )}

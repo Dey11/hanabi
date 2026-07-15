@@ -9,6 +9,7 @@ import { BrandEditor } from "@/components/admin/brand-editor";
 import { AssetsEditor } from "@/components/admin/assets-editor";
 import { DocsEditor } from "@/components/admin/docs-editor";
 import { UpdatesEditor } from "@/components/admin/updates-editor";
+import { TestimonialsView } from "@/components/admin/testimonials-view";
 
 export const dynamic = "force-dynamic";
 
@@ -72,6 +73,7 @@ export default async function ClientEditorPage({
           <TabsTrigger value="assets">Assets</TabsTrigger>
           <TabsTrigger value="docs">Docs</TabsTrigger>
           <TabsTrigger value="updates">Updates</TabsTrigger>
+          <TabsTrigger value="feedback">Feedback</TabsTrigger>
         </TabsList>
 
         <TabsContent value="settings">
@@ -109,6 +111,20 @@ export default async function ClientEditorPage({
               bodyMd: u.bodyMd,
               date: u.date.toISOString(),
               source: u.source,
+            }))}
+          />
+        </TabsContent>
+        <TabsContent value="feedback">
+          <TestimonialsView
+            clientId={client.id}
+            testimonials={client.testimonials.map((t) => ({
+              id: t.id,
+              author: t.author,
+              role: t.role,
+              body: t.body,
+              rating: t.rating,
+              consent: t.consent,
+              createdAt: t.createdAt.toISOString(),
             }))}
           />
         </TabsContent>

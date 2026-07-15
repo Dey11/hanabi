@@ -4,12 +4,35 @@
  *
  *   bun run prisma/seed.ts   (or: bunx prisma db seed)
  *
- * Each client's portal password is printed at the end — note them down.
+ * Re-runnable: brand data (colors, fonts, assets, docs, updates) is refreshed
+ * on each run. Client passwords and any submitted testimonials are preserved.
+ * Each client's portal password is printed at the end.
  */
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { db } from "../lib/db";
-import { AssetKind, UpdateSource } from "../lib/generated/prisma/enums";
+import {
+  AssetKind,
+  AssetTheme,
+  UpdateSource,
+} from "../lib/generated/prisma/enums";
+
+type Color = { name: string; value: string; role?: string; group?: string };
+type Font = {
+  name: string;
+  category: string;
+  weights?: string;
+  specimen?: string;
+  bodySpecimen?: string;
+};
+type Asset = {
+  name: string;
+  kind: AssetKind;
+  url: string;
+  mime?: string;
+  theme?: AssetTheme;
+  sizes?: string;
+};
 
 type SeedClient = {
   slug: string;
@@ -17,29 +40,41 @@ type SeedClient = {
   tagline: string;
   accentColor: string;
   password: string;
-  colors: { name: string; value: string; role?: string }[];
-  fonts: {
-    name: string;
-    category: string;
-    weights: string;
-    specimen?: string;
-  }[];
+  colors: Color[];
+  fonts: Font[];
+  assets: Asset[];
   docs: { title: string; slug: string; category: string; contentMd: string }[];
   updates: { title: string; bodyMd: string; tag: string }[];
 };
+
+const LOGO =
+  "https://pub-f870ea32a227460d9c0d65fc419082a8.r2.dev/placeholder-logo.svg";
 
 const clients: SeedClient[] = [
   {
     slug: "gotnext",
     name: "GotNext",
     tagline: "Pickup basketball, organized.",
-    accentColor: "oklch(0.62 0.19 40)",
+    accentColor: "#F0562E",
     password: "gotnext-2026",
     colors: [
-      { name: "Court Orange", value: "#F0562E", role: "Primary / CTAs" },
-      { name: "Ink", value: "#141414", role: "Text" },
-      { name: "Paper", value: "#FAFAFA", role: "Backgrounds" },
-      { name: "Line", value: "#E7E7E7", role: "Borders" },
+      {
+        group: "Core",
+        name: "Court Orange",
+        value: "#F0562E",
+        role: "Primary / CTAs",
+      },
+      { group: "Core", name: "Ink", value: "#141414", role: "Text" },
+      { group: "Core", name: "Paper", value: "#FAFAFA", role: "Backgrounds" },
+      { group: "Neutral", name: "Line", value: "#E7E7E7", role: "Borders" },
+      { group: "Neutral", name: "Slate", value: "#6B7280", role: "Muted text" },
+      {
+        group: "Accent",
+        name: "Hardwood",
+        value: "#B7793C",
+        role: "Warm accent",
+      },
+      { group: "Accent", name: "Net", value: "#2FB574", role: "Success" },
     ],
     fonts: [
       {
@@ -47,8 +82,47 @@ const clients: SeedClient[] = [
         category: "Sans / Body",
         weights: "400, 500, 600",
         specimen: "Run the play.",
+        bodySpecimen:
+          "GotNext turns a group chat into an organized run. Set the time, share a link, and let hoopers claim their spots.",
       },
-      { name: "Geist Mono", category: "Mono / Labels", weights: "400, 500" },
+      {
+        name: "Geist Mono",
+        category: "Mono / Labels",
+        weights: "400, 500",
+        specimen: "48 MIN · 5v5",
+        bodySpecimen:
+          "Scores, timers, and stat lines render in tabular mono for clean alignment.",
+      },
+    ],
+    assets: [
+      {
+        name: "GotNext Logo — Light",
+        kind: AssetKind.LOGO,
+        url: LOGO,
+        mime: "image/svg+xml",
+        theme: AssetTheme.LIGHT,
+        sizes: "256,512,1024",
+      },
+      {
+        name: "GotNext Logo — Dark",
+        kind: AssetKind.LOGO,
+        url: LOGO,
+        mime: "image/svg+xml",
+        theme: AssetTheme.DARK,
+        sizes: "256,512,1024",
+      },
+      {
+        name: "App Icon",
+        kind: AssetKind.ICON,
+        url: LOGO,
+        mime: "image/svg+xml",
+      },
+      {
+        name: "Launch Banner",
+        kind: AssetKind.BANNER,
+        url: LOGO,
+        mime: "image/svg+xml",
+      },
     ],
     docs: [
       {
@@ -84,15 +158,47 @@ const clients: SeedClient[] = [
     slug: "aurora",
     name: "Aurora Labs",
     tagline: "Research tooling for the curious.",
-    accentColor: "oklch(0.55 0.16 265)",
+    accentColor: "#5B6CFF",
     password: "aurora-2026",
     colors: [
-      { name: "Aurora", value: "#5B6CFF", role: "Primary" },
-      { name: "Deep", value: "#0B1020", role: "Text / dark surfaces" },
-      { name: "Mist", value: "#F4F6FB", role: "Backgrounds" },
+      { group: "Core", name: "Aurora", value: "#5B6CFF", role: "Primary" },
+      {
+        group: "Core",
+        name: "Deep",
+        value: "#0B1020",
+        role: "Text / dark surfaces",
+      },
+      { group: "Core", name: "Mist", value: "#F4F6FB", role: "Backgrounds" },
+      { group: "Accent", name: "Signal", value: "#00C2A8", role: "Highlights" },
+      { group: "Neutral", name: "Fog", value: "#C7CCD9", role: "Borders" },
     ],
     fonts: [
-      { name: "Inter", category: "Sans / Body", weights: "400, 500, 700" },
+      {
+        name: "Inter",
+        category: "Sans / Body",
+        weights: "400, 500, 700",
+        specimen: "Think in systems.",
+        bodySpecimen:
+          "Aurora Labs builds research tooling that keeps pace with your thinking — fast capture, structured recall, and calm defaults.",
+      },
+    ],
+    assets: [
+      {
+        name: "Aurora Logo — Light",
+        kind: AssetKind.LOGO,
+        url: LOGO,
+        mime: "image/svg+xml",
+        theme: AssetTheme.LIGHT,
+        sizes: "256,512",
+      },
+      {
+        name: "Aurora Logo — Dark",
+        kind: AssetKind.LOGO,
+        url: LOGO,
+        mime: "image/svg+xml",
+        theme: AssetTheme.DARK,
+        sizes: "256,512",
+      },
     ],
     docs: [
       {
@@ -115,14 +221,34 @@ const clients: SeedClient[] = [
     slug: "marigold",
     name: "Marigold & Co.",
     tagline: "Slow goods, made well.",
-    accentColor: "oklch(0.75 0.15 85)",
+    accentColor: "#E8B23A",
     password: "marigold-2026",
     colors: [
-      { name: "Marigold", value: "#E8B23A", role: "Primary" },
-      { name: "Clay", value: "#3A2E23", role: "Text" },
-      { name: "Cream", value: "#FBF7EE", role: "Backgrounds" },
+      { group: "Core", name: "Marigold", value: "#E8B23A", role: "Primary" },
+      { group: "Core", name: "Clay", value: "#3A2E23", role: "Text" },
+      { group: "Core", name: "Cream", value: "#FBF7EE", role: "Backgrounds" },
+      { group: "Accent", name: "Sage", value: "#8A9A5B", role: "Secondary" },
     ],
-    fonts: [{ name: "Geist", category: "Sans / Body", weights: "400, 500" }],
+    fonts: [
+      {
+        name: "Geist",
+        category: "Sans / Body",
+        weights: "400, 500",
+        specimen: "Made to last.",
+        bodySpecimen:
+          "Marigold & Co. makes slow goods for people who notice the details. Every piece is built to be kept, not replaced.",
+      },
+    ],
+    assets: [
+      {
+        name: "Marigold Logo",
+        kind: AssetKind.LOGO,
+        url: LOGO,
+        mime: "image/svg+xml",
+        theme: AssetTheme.LIGHT,
+        sizes: "512,1024",
+      },
+    ],
     docs: [
       {
         title: "Brand voice",
@@ -145,40 +271,50 @@ const clients: SeedClient[] = [
 async function main() {
   for (const c of clients) {
     const passwordHash = await bcrypt.hash(c.password, 12);
-    await db.client.upsert({
+
+    const client = await db.client.upsert({
       where: { slug: c.slug },
-      update: {},
+      update: {
+        name: c.name,
+        tagline: c.tagline,
+        accentColor: c.accentColor,
+        logoUrl: LOGO,
+      },
       create: {
         slug: c.slug,
         name: c.name,
         tagline: c.tagline,
         accentColor: c.accentColor,
+        logoUrl: LOGO,
         passwordHash,
+      },
+      select: { id: true },
+    });
+
+    // Refresh brand data (leave testimonials untouched).
+    await db.$transaction([
+      db.brandColor.deleteMany({ where: { clientId: client.id } }),
+      db.brandFont.deleteMany({ where: { clientId: client.id } }),
+      db.asset.deleteMany({ where: { clientId: client.id } }),
+      db.doc.deleteMany({ where: { clientId: client.id } }),
+      db.update.deleteMany({ where: { clientId: client.id } }),
+    ]);
+
+    await db.client.update({
+      where: { id: client.id },
+      data: {
         colors: {
           create: c.colors.map((color, i) => ({ ...color, order: i })),
         },
-        fonts: {
-          create: c.fonts.map((font, i) => ({ ...font, order: i })),
-        },
-        assets: {
-          create: [
-            {
-              name: `${c.name} Logo (SVG)`,
-              kind: AssetKind.LOGO,
-              url: "https://example.com/placeholder-logo.svg",
-              mime: "image/svg+xml",
-              order: 0,
-            },
-          ],
-        },
-        docs: {
-          create: c.docs.map((doc, i) => ({ ...doc, order: i })),
-        },
+        fonts: { create: c.fonts.map((font, i) => ({ ...font, order: i })) },
+        assets: { create: c.assets.map((a, i) => ({ ...a, order: i })) },
+        docs: { create: c.docs.map((doc, i) => ({ ...doc, order: i })) },
         updates: {
           create: c.updates.map((u) => ({ ...u, source: UpdateSource.MANUAL })),
         },
       },
     });
+
     console.log(`✓ ${c.name}  →  slug: ${c.slug}  password: ${c.password}`);
   }
   console.log(

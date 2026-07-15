@@ -1,65 +1,30 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useState } from "react";
 import { loginClient, type LoginState } from "@/app/portal/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
-type Project = { slug: string; name: string };
-
-export function LoginForm({ projects }: { projects: Project[] }) {
+export function LoginForm() {
   const [state, action, pending] = useActionState<LoginState, FormData>(
     loginClient,
     {},
   );
-  const [slug, setSlug] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <form action={action} className="flex flex-col gap-3">
-      {/* Project */}
-      {projects.length > 0 ? (
-        <>
-          <input type="hidden" name="slug" value={slug} />
-          <Select value={slug} onValueChange={(v) => setSlug(v ?? "")}>
-            <SelectTrigger
-              className="bg-card h-11 w-full rounded-xl text-[0.9rem] shadow-xs"
-              aria-label="Project"
-            >
-              <SelectValue placeholder="Select your project" />
-            </SelectTrigger>
-            <SelectContent>
-              {projects.map((p) => (
-                <SelectItem key={p.slug} value={p.slug}>
-                  {p.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </>
-      ) : (
-        <Input
-          name="slug"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          placeholder="Project handle"
-          autoCapitalize="none"
-          autoCorrect="off"
-          spellCheck={false}
-          className="h-11 rounded-xl text-[0.9rem] shadow-xs"
-        />
-      )}
+      <Input
+        name="slug"
+        placeholder="Project name"
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck={false}
+        autoFocus
+        className="h-11 rounded-xl text-[0.9rem] shadow-xs"
+      />
 
-      {/* Password */}
       <div className="relative">
         <Input
           name="password"

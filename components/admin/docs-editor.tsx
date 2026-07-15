@@ -57,7 +57,7 @@ export function DocsEditor({
                 <p className="flex items-center gap-2 truncate text-sm font-medium">
                   {d.title}
                   {!d.published ? (
-                    <span className="text-muted-foreground bg-muted rounded-full px-1.5 py-0.5 text-[0.6rem] font-medium uppercase">
+                    <span className="text-muted-foreground bg-muted rounded-full px-2 py-0.5 text-[0.66rem] font-medium">
                       Draft
                     </span>
                   ) : null}

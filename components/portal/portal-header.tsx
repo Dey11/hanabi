@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Feedback } from "@/components/portal/feedback";
 
 const titles: { match: (p: string) => boolean; label: string }[] = [
   { match: (p) => p === "/portal", label: "Overview" },
@@ -20,6 +21,9 @@ export function PortalHeader() {
       <SidebarTrigger className="-ml-1" />
       <div className="bg-border mx-1 h-4 w-px" />
       <span className="text-sm font-medium">{label}</span>
+      <div className="ml-auto">
+        <Feedback />
+      </div>
     </header>
   );
 }

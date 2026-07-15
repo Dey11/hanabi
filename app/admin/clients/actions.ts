@@ -108,7 +108,14 @@ export async function addColor(fd: FormData) {
   if (!clientId || !name || !value) return;
   const count = await db.brandColor.count({ where: { clientId } });
   await db.brandColor.create({
-    data: { clientId, name, value, role: s(fd, "role") || null, order: count },
+    data: {
+      clientId,
+      name,
+      value,
+      role: s(fd, "role") || null,
+      group: s(fd, "group") || "Core",
+      order: count,
+    },
   });
   revalidateClient(clientId);
 }
@@ -137,6 +144,7 @@ export async function addFont(fd: FormData) {
       category: s(fd, "category") || null,
       weights: s(fd, "weights") || null,
       specimen: s(fd, "specimen") || null,
+      bodySpecimen: s(fd, "bodySpecimen") || null,
       url: s(fd, "url") || null,
       order: count,
     },
@@ -287,5 +295,16 @@ export async function deleteUpdate(fd: FormData) {
   const clientId = s(fd, "clientId");
   if (!id) return;
   await db.update.delete({ where: { id } });
+  revalidateClient(clientId);
+}
+
+// ── Testimonials ─────────────────────────────────────────────
+
+export async function deleteTestimonial(fd: FormData) {
+  await requireAdmin();
+  const id = s(fd, "id");
+  const clientId = s(fd, "clientId");
+  if (!id) return;
+  await db.testimonial.delete({ where: { id } });
   revalidateClient(clientId);
 }
