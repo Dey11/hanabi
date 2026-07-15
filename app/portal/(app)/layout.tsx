@@ -6,6 +6,7 @@ import { getTheme } from "@/lib/theme";
 import { getClientChrome, getClientDocsList } from "@/lib/portal-data";
 import { PortalSidebar } from "@/components/portal/portal-sidebar";
 import { PortalHeader } from "@/components/portal/portal-header";
+import { ThemeSync } from "@/components/theme-sync";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -35,7 +36,10 @@ export default async function PortalAppLayout({
   return (
     <SidebarProvider
       data-theme-root
-      className={cn("bg-background", theme === "dark" && "dark")}
+      className={cn(
+        "bg-background text-foreground",
+        theme === "dark" && "dark",
+      )}
       style={
         {
           "--brand": chrome.accentColor,
@@ -55,6 +59,7 @@ export default async function PortalAppLayout({
         </div>
       </SidebarInset>
       <Toaster position="bottom-right" />
+      <ThemeSync theme={theme} />
     </SidebarProvider>
   );
 }

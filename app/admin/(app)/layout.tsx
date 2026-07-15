@@ -6,6 +6,7 @@ import { getTheme } from "@/lib/theme";
 import { logoutAdmin } from "@/app/admin/actions";
 import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggleButton } from "@/components/theme-toggle";
+import { ThemeSync } from "@/components/theme-sync";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -27,7 +28,10 @@ export default async function AdminLayout({
   return (
     <div
       data-theme-root
-      className={cn("bg-muted/30 min-h-svh", theme === "dark" && "dark")}
+      className={cn(
+        "bg-muted/30 text-foreground min-h-svh",
+        theme === "dark" && "dark",
+      )}
     >
       <header className="bg-background/90 sticky top-0 z-20 border-b backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
@@ -50,6 +54,7 @@ export default async function AdminLayout({
       </header>
       <main className="mx-auto max-w-5xl px-5 py-8">{children}</main>
       <Toaster position="bottom-right" />
+      <ThemeSync theme={theme} />
     </div>
   );
 }

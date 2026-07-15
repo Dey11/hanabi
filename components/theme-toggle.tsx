@@ -25,6 +25,8 @@ function useThemeToggle() {
     if (!root) return;
     const next = !root.classList.contains("dark");
     root.classList.toggle("dark", next);
+    // Mirror onto <body> so portaled overlays (selects, dialogs, toasts) match.
+    document.body.classList.toggle("dark", next);
     document.cookie = `hanabi_theme=${next ? "dark" : "light"}; path=/; max-age=31536000; samesite=lax`;
     setDark(next);
   }
