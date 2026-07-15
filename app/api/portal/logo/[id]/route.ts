@@ -36,7 +36,13 @@ export async function GET(
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }
 
-  const source = await fetch(asset.url);
+  // Seeded portal assets may be served from this app's public directory, while
+  // admin uploads use an absolute R2 URL. Resolve local paths against the
+  // incoming origin so both download paths can be rasterized consistently.
+  const sourceUrl = asset.url.startsWith("/")
+    ? new URL(asset.url, req.url).toString()
+    : asset.url;
+  const source = await fetch(sourceUrl);
   if (!source.ok) {
     return NextResponse.json({ error: "Source unavailable." }, { status: 502 });
   }

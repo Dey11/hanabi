@@ -6,7 +6,7 @@
  *
  * Re-runnable: brand data (colors, fonts, assets, docs, updates) is refreshed
  * on each run. Client passwords and any submitted testimonials are preserved.
- * Each client's portal password is printed at the end.
+ * Set PORTAL_SEED_CLIENT=<slug> to refresh one client only.
  */
 import "dotenv/config";
 import bcrypt from "bcryptjs";
@@ -39,6 +39,7 @@ type SeedClient = {
   name: string;
   tagline: string;
   accentColor: string;
+  logoUrl?: string;
   password: string;
   colors: Color[];
   fonts: Font[];
@@ -49,108 +50,132 @@ type SeedClient = {
 
 const LOGO =
   "https://pub-f870ea32a227460d9c0d65fc419082a8.r2.dev/placeholder-logo.svg";
+const GOTNEXT_WORDMARK = "/portal/gotnext/gotnext-logo.svg";
+const GOTNEXT_ICON = "/portal/gotnext/gotnext-favicon.svg";
 
 const clients: SeedClient[] = [
   {
     slug: "gotnext",
     name: "GotNext",
-    tagline: "Pickup basketball, organized.",
-    accentColor: "#F0562E",
+    tagline: "Competition operations, built for the next play.",
+    accentColor: "#E63946",
+    logoUrl: GOTNEXT_ICON,
     password: "gotnext-2026",
     colors: [
       {
         group: "Core",
-        name: "Court Orange",
-        value: "#F0562E",
-        role: "Primary / CTAs",
+        name: "Arena Black",
+        value: "#0A0A0A",
+        role: "Page canvas / depth",
       },
-      { group: "Core", name: "Ink", value: "#141414", role: "Text" },
-      { group: "Core", name: "Paper", value: "#FAFAFA", role: "Backgrounds" },
-      { group: "Neutral", name: "Line", value: "#E7E7E7", role: "Borders" },
-      { group: "Neutral", name: "Slate", value: "#6B7280", role: "Muted text" },
       {
-        group: "Accent",
-        name: "Hardwood",
-        value: "#B7793C",
-        role: "Warm accent",
+        group: "Core",
+        name: "Competition White",
+        value: "#FAFAFA",
+        role: "Primary copy / wordmark",
       },
-      { group: "Accent", name: "Net", value: "#2FB574", role: "Success" },
+      {
+        group: "Signal",
+        name: "GotNext Red",
+        value: "#E63946",
+        role: "Primary actions / live state",
+      },
+      {
+        group: "Signal",
+        name: "Opponent Blue",
+        value: "#2563EB",
+        role: "Comparison / secondary signal",
+      },
+      {
+        group: "Surfaces",
+        name: "Card Surface",
+        value: "#141414",
+        role: "Panels and cards",
+      },
+      {
+        group: "Surfaces",
+        name: "Raised Surface",
+        value: "#1F1F1F",
+        role: "Hover states and insets",
+      },
+      {
+        group: "Surfaces",
+        name: "Quiet Border",
+        value: "#242424",
+        role: "Surface edges",
+      },
     ],
     fonts: [
       {
-        name: "Geist",
-        category: "Sans / Body",
-        weights: "400, 500, 600",
-        specimen: "Run the play.",
+        name: "GT America Standard",
+        category: "Sans / Body + headings",
+        weights: "400, 500, 700",
+        specimen: "Run the next play.",
         bodySpecimen:
-          "GotNext turns a group chat into an organized run. Set the time, share a link, and let hoopers claim their spots.",
+          "The primary voice for navigation, body copy, page headings, and product controls.",
       },
       {
-        name: "Geist Mono",
-        category: "Mono / Labels",
-        weights: "400, 500",
-        specimen: "48 MIN · 5v5",
+        name: "GT America Condensed",
+        category: "Display / events",
+        weights: "400, 500, 700, 800",
+        specimen: "PLAY FOR MORE.",
         bodySpecimen:
-          "Scores, timers, and stat lines render in tabular mono for clean alignment.",
+          "Use for event names, display moments, and high-energy competition surfaces.",
+      },
+      {
+        name: "GT America Mono",
+        category: "Mono / records",
+        weights: "400, 500, 700",
+        specimen: "03 · 48 MIN · 5v5",
+        bodySpecimen:
+          "Use for scores, timers, ELO, ranks, seeds, IDs, and other tabular data.",
       },
     ],
     assets: [
       {
-        name: "GotNext Logo — Light",
+        name: "GotNext Wordmark",
         kind: AssetKind.LOGO,
-        url: LOGO,
+        url: GOTNEXT_WORDMARK,
         mime: "image/svg+xml",
         theme: AssetTheme.LIGHT,
         sizes: "256,512,1024",
       },
       {
-        name: "GotNext Logo — Dark",
-        kind: AssetKind.LOGO,
-        url: LOGO,
+        name: "GotNext Brand Mark",
+        kind: AssetKind.ICON,
+        url: GOTNEXT_ICON,
         mime: "image/svg+xml",
         theme: AssetTheme.DARK,
-        sizes: "256,512,1024",
-      },
-      {
-        name: "App Icon",
-        kind: AssetKind.ICON,
-        url: LOGO,
-        mime: "image/svg+xml",
-      },
-      {
-        name: "Launch Banner",
-        kind: AssetKind.BANNER,
-        url: LOGO,
-        mime: "image/svg+xml",
       },
     ],
     docs: [
       {
-        title: "Getting started",
-        slug: "getting-started",
-        category: "Handoff",
+        title: "Brand foundations",
+        slug: "brand-foundations",
+        category: "Brand system",
         contentMd:
-          "# Getting started\n\nWelcome to the GotNext handoff. This portal is your single source of truth for the brand and build.\n\n## What's here\n\n- **Brand** — colors, type, and logo files\n- **Assets** — download-ready icons and banners\n- **Docs** — everything you need to run the project yourself\n- **Updates** — a running log of progress\n\n## Running the app locally\n\n```bash\nbun install\nbun run dev\n```\n\nOpen `http://localhost:3000` and you're off.",
+          "# Brand foundations\n\nGotNext is a competition-native product. The system carries its identity through **deep contrast, compact hierarchy, and clear signals** rather than decorative UI.\n\n## Core palette\n\n- **Arena Black** is the page canvas.\n- **Competition White** is primary copy and wordmark ink.\n- **GotNext Red** marks action and live state.\n- **Opponent Blue** is a comparison signal, not a second primary.\n\n## Surface scale\n\nUse the canvas, card, and raised-surface tokens to create depth. Keep borders quiet and let the hierarchy do the work.",
       },
       {
-        title: "Deployment",
-        slug: "deployment",
-        category: "Handoff",
+        title: "Type and UI rules",
+        slug: "type-and-ui-rules",
+        category: "Brand system",
         contentMd:
-          "# Deployment\n\nThe app deploys to Vercel on every push to `main`.\n\n1. Connect the repo in the Vercel dashboard\n2. Add the environment variables from `.env.example`\n3. Push to `main`\n\n> Rollbacks are one click from the Vercel **Deployments** tab.",
+          "# Type and UI rules\n\n## Typography\n\n- **GT America Standard** handles interface copy, headings, and navigation.\n- **GT America Condensed** is reserved for display and event moments.\n- **GT America Mono** is for true data: scores, ELO, ranks, seeds, IDs, and timers.\n\n## Components\n\nReduce text before adding UI. Cards should scan like competition panels: compact metadata, a stable action position, and clear status. Use red to communicate action or live state, not as decoration.\n\n## Accessibility\n\nMaintain visible focus, sufficient contrast, and labels that explain controls without repeating what the layout already makes clear.",
       },
     ],
     updates: [
       {
-        title: "Brand system delivered",
+        title: "Design system imported",
         bodyMd:
-          "Final logo lockups, color tokens, and type scale are live in the Brand section.",
+          "GotNext brand tokens, type roles, and downloadable marks are now available in the portal.",
         tag: "Design",
       },
       {
-        title: "Homepage build underway",
-        bodyMd: "Hero, marquee, and projects sections are in progress.",
-        tag: "Build",
+        title: "Client portal initialized",
+        bodyMd:
+          "The portal now contains the focused brand-system reference for the current product surface.",
+        tag: "Portal",
       },
     ],
   },
@@ -269,7 +294,16 @@ const clients: SeedClient[] = [
 ];
 
 async function main() {
-  for (const c of clients) {
+  const selectedSlug = process.env.PORTAL_SEED_CLIENT?.trim().toLowerCase();
+  const clientsToSeed = selectedSlug
+    ? clients.filter((client) => client.slug === selectedSlug)
+    : clients;
+
+  if (selectedSlug && clientsToSeed.length === 0) {
+    throw new Error(`No sample client found for slug: ${selectedSlug}`);
+  }
+
+  for (const c of clientsToSeed) {
     const passwordHash = await bcrypt.hash(c.password, 12);
 
     const client = await db.client.upsert({
@@ -278,14 +312,14 @@ async function main() {
         name: c.name,
         tagline: c.tagline,
         accentColor: c.accentColor,
-        logoUrl: LOGO,
+        logoUrl: c.logoUrl ?? LOGO,
       },
       create: {
         slug: c.slug,
         name: c.name,
         tagline: c.tagline,
         accentColor: c.accentColor,
-        logoUrl: LOGO,
+        logoUrl: c.logoUrl ?? LOGO,
         passwordHash,
       },
       select: { id: true },
@@ -315,11 +349,9 @@ async function main() {
       },
     });
 
-    console.log(`✓ ${c.name}  →  slug: ${c.slug}  password: ${c.password}`);
+    console.log(`✓ ${c.name}  →  slug: ${c.slug}`);
   }
-  console.log(
-    "\nSeed complete. Log in at /portal with the slug + password above.",
-  );
+  console.log("\nSeed complete. Log in at /portal with the client details above.");
 }
 
 main()
