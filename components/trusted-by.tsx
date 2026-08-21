@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import {
   SeamlessMarquee,
@@ -56,7 +56,7 @@ const CLIENTS: Client[] = [
     },
     glow: "rgba(0, 86, 178, 0.18)",
     testimonial:
-      "We worked with Shreyan and his team on the full restructure, migration and redesign of Down The Cove, moving from our old WooCommerce website to a much more modern ecommerce setup.\n\nFrom the start, they were really responsive and easy to work with. They kept us updated throughout the project, explained what was happening and were always there to help whenever we had questions or ran into any issues. That made the whole process feel a lot less stressful.\n\nWhat we really appreciated was that they did not just do the work and disappear. They shared their knowledge, explained why certain things were being done and helped us understand the technical side of the project better. Whether it was staging, DNS, deployment, integrations or stock sync, they were patient and clear with us.\n\nThe new Down The Cove website is a big improvement on what we had before. It looks much cleaner, works well across mobile and desktop and feels far more professional. The structure is better, the customer journey is smoother and the whole site feels more suited to ecommerce now.\n\nThey also supported us properly when issues came up and worked through things with us instead of leaving us to figure it out. It felt like they genuinely cared about getting the website right.\n\nOverall, we are really happy with the work Shreyan and his team did. They were reliable, knowledgeable, responsive and supportive throughout the project. We would happily recommend them to anyone looking for help with an ecommerce migration, redesign or development project.",
+      "We worked with Shreyan and his team on the full restructure, migration and redesign of Down The Cove, moving from our old WooCommerce website to a much more modern ecommerce setup. From the start, they were really responsive and easy to work with, keeping us updated throughout and explaining what was happening. They shared their technical knowledge clearly, including staging, DNS, deployment and integrations, so we understood the process. The new site is a big improvement: cleaner, more professional and smoother across mobile and desktop. They were always there to help when issues came up and we felt supported throughout. They were reliable, knowledgeable and we would happily recommend them for an ecommerce migration or redesign.",
     person: "Behzad",
     role: "Down the Cove",
   },
@@ -245,11 +245,47 @@ function MarqueeClient({ client }: { client: Client }) {
   const isDuplicate = useSeamlessMarqueeDuplicate();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const suppressOpenRef = useRef(false);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const dismissOnScroll = () => {
+      suppressOpenRef.current = true;
+      setOpen(false);
+      setExpanded(false);
+    };
+
+    window.addEventListener("scroll", dismissOnScroll, {
+      capture: true,
+      passive: true,
+    });
+    window.addEventListener("wheel", dismissOnScroll, {
+      capture: true,
+      passive: true,
+    });
+    window.addEventListener("touchmove", dismissOnScroll, {
+      capture: true,
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", dismissOnScroll, true);
+      window.removeEventListener("wheel", dismissOnScroll, true);
+      window.removeEventListener("touchmove", dismissOnScroll, true);
+    };
+  }, [open]);
 
   return (
     <Tooltip
       open={open}
       onOpenChange={(nextOpen, details) => {
+        if (nextOpen && suppressOpenRef.current) {
+          return;
+        }
+
         if (!nextOpen && expanded && details.reason === "trigger-hover") {
           return;
         }
@@ -265,6 +301,12 @@ function MarqueeClient({ client }: { client: Client }) {
         className="group relative isolate flex h-28 w-48 shrink-0 cursor-default items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-black/15 sm:h-30 sm:w-56"
         tabIndex={isDuplicate ? -1 : undefined}
         aria-label={`Read ${client.name} testimonial`}
+        onPointerLeave={() => {
+          suppressOpenRef.current = false;
+        }}
+        onFocus={() => {
+          suppressOpenRef.current = false;
+        }}
       >
         <span
           className="pointer-events-none absolute top-1/2 left-1/2 h-20 w-44 -translate-x-1/2 -translate-y-1/2 scale-50 rounded-[50%] opacity-0 transition-[opacity,scale] duration-500 ease-out group-hover:scale-100 group-hover:opacity-70 group-focus-visible:scale-100 group-focus-visible:opacity-70"
@@ -284,7 +326,7 @@ function MarqueeClient({ client }: { client: Client }) {
           fallbackAxisSide: "none",
         }}
         showArrow={false}
-        className="max-h-[min(36rem,calc(100vh-2rem))] w-[min(32rem,calc(100vw-2rem))] max-w-none overflow-y-auto overscroll-contain rounded-xl border-black/10 bg-white p-5 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset]"
+        className="max-h-[min(36rem,calc(100vh-2rem))] w-[min(32rem,calc(100vw-2rem))] max-w-none origin-[var(--transform-origin)] overflow-y-auto overscroll-contain rounded-xl border-black/10 bg-white p-5 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset] data-[ending-style]:scale-[0.78] data-[ending-style]:opacity-0 data-[ending-style]:duration-[190ms] data-[ending-style]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:data-[ending-style]:scale-100 motion-reduce:data-[ending-style]:duration-0"
       >
         <TestimonialCopy
           testimonial={client.testimonial}
