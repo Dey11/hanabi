@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useId, useState } from "react";
 
 import { SeamlessMarquee } from "@/components/seamless-marquee";
 import {
@@ -17,6 +18,7 @@ type Client = {
     width: number;
     height: number;
     monoClass?: string;
+    imageClass?: string;
     /** White source artwork is rendered as a mask so it can reveal its brand color. */
     treatment?: "mask";
   };
@@ -24,7 +26,6 @@ type Client = {
   testimonial: string;
   person: string;
   role: string;
-  featured?: boolean;
 };
 
 // Add a client here to include it in both the marquee and its hover testimonial.
@@ -35,13 +36,12 @@ const CLIENTS: Client[] = [
       src: "/client-logos/thomas-bewick.webp",
       width: 128,
       height: 98,
-      monoClass: "opacity-45 brightness-0 grayscale",
+      monoClass: "opacity-65 brightness-0 grayscale",
     },
     glow: "rgba(133, 62, 30, 0.18)",
-    testimonial:
-      "Hanabi brought clarity to every decision and gave us a digital home that feels distinctly ours.",
-    person: "Emily Carter",
-    role: "Founder, Thomas Bewick",
+    testimonial: "Would recommend",
+    person: "Mustafa",
+    role: "Thomas Bewick",
   },
   {
     name: "Down the Cove",
@@ -53,9 +53,9 @@ const CLIENTS: Client[] = [
     },
     glow: "rgba(0, 86, 178, 0.18)",
     testimonial:
-      "Thoughtful, responsive, and a pleasure to work with. The finished experience is beautifully considered.",
-    person: "Liam Hayes",
-    role: "Co-founder, Down the Cove",
+      "We worked with Shreyan and his team on the full restructure, migration and redesign of Down The Cove, moving from our old WooCommerce website to a much more modern ecommerce setup.\n\nFrom the start, they were really responsive and easy to work with. They kept us updated throughout the project, explained what was happening and were always there to help whenever we had questions or ran into any issues. That made the whole process feel a lot less stressful.\n\nWhat we really appreciated was that they did not just do the work and disappear. They shared their knowledge, explained why certain things were being done and helped us understand the technical side of the project better. Whether it was staging, DNS, deployment, integrations or stock sync, they were patient and clear with us.\n\nThe new Down The Cove website is a big improvement on what we had before. It looks much cleaner, works well across mobile and desktop and feels far more professional. The structure is better, the customer journey is smoother and the whole site feels more suited to ecommerce now.\n\nThey also supported us properly when issues came up and worked through things with us instead of leaving us to figure it out. It felt like they genuinely cared about getting the website right.\n\nOverall, we are really happy with the work Shreyan and his team did. They were reliable, knowledgeable, responsive and supportive throughout the project. We would happily recommend them to anyone looking for help with an ecommerce migration, redesign or development project.",
+    person: "Behzad",
+    role: "Down the Cove",
   },
   {
     name: "CompOps",
@@ -67,9 +67,9 @@ const CLIENTS: Client[] = [
     },
     glow: "rgba(238, 50, 72, 0.17)",
     testimonial:
-      "The team made a complex product feel exceptionally simple. We could not be happier with the result.",
-    person: "Maya Patel",
-    role: "Product Lead, CompOps",
+      "I've been working with Krish for about six months now, and he's easily one of the best collaborators I've had on the design side. Quick to grasp what I'm building, sharp instincts on the details, and the kind of person who pushes back when something can be better instead of just shipping what I asked for. The work consistently lands above what I expected. If you're considering Krish, you should hire him.",
+    person: "Brock Shelton",
+    role: "CompOps",
   },
   {
     name: "Ballarat Box Sports",
@@ -77,13 +77,13 @@ const CLIENTS: Client[] = [
       src: "/client-logos/ballarat-box-sports.png",
       width: 575,
       height: 800,
-      monoClass: "opacity-45 brightness-0 grayscale",
+      monoClass: "opacity-80 grayscale invert",
     },
     glow: "rgba(54, 198, 120, 0.18)",
     testimonial:
-      "They understood our energy from day one, then translated it into a site our community loves using.",
-    person: "Jordan Lee",
-    role: "Director, Ballarat Box Sports",
+      "They were really good with the work and delivered much before the deadline. It was nice working with them",
+    person: "Jasman",
+    role: "Ballarat Box Sports",
   },
   {
     name: "2X Sales",
@@ -95,10 +95,9 @@ const CLIENTS: Client[] = [
     },
     glow: "rgba(0, 86, 178, 0.18)",
     testimonial:
-      "The new experience gave our team a confident, focused way to tell the story behind what we do.",
-    person: "Taylor Reed",
-    role: "Co-founder, 2X Sales",
-    featured: true,
+      "AI will replace all aspects of IT jobs. Except reliability, due to its nature, it will always have a probability to fail. That’s where Shreyan differs. I can talk about all the sleepless nights he had for a dream we built or all the “impossible” problems he solved. But that’s mundane, AI will do most of that stuff if it isn’t doing already.\n\nOn the other hand, if you don’t have the technical capabilities to build a Shreyan bot which I would estimate not many people do, Shreyan comes in handy there as well. Basically, he is the unbreakable link you can have with tech, always countable and always on his stuff.",
+    person: "Teoman",
+    role: "2X Sales",
   },
   {
     name: "Stealth",
@@ -110,24 +109,23 @@ const CLIENTS: Client[] = [
     },
     glow: "rgba(87, 93, 110, 0.2)",
     testimonial:
-      "A thoughtful partner from the first sketch through to the details that made the finished work feel complete.",
-    person: "Casey Morgan",
-    role: "Founder, Stealth",
+      "Shreyan genuinely cares about doing good work, and it shows. Definitely recommend!",
+    person: "Anonymous",
+    role: "Stealth",
   },
   {
-    name: "Moai",
+    name: "Go Gym",
     logo: {
-      src: "/client-logos/moai.png",
-      width: 882,
-      height: 1280,
-      monoClass: "opacity-80 brightness-75 contrast-30 grayscale",
+      src: "/client-logos/go-gym.svg",
+      width: 724,
+      height: 405,
+      monoClass: "opacity-45 brightness-0 grayscale",
     },
-    glow: "rgba(255, 187, 0, 0.2)",
+    glow: "rgba(190, 255, 0, 0.2)",
     testimonial:
-      "They made the complex feel effortless and gave us a brand experience people actually remember.",
-    person: "Jamie Park",
-    role: "Product Lead, Moai",
-    featured: true,
+      "I had the team do a full audit of my startup before going to testing and they did a great in-depth review. It’s clear they understood the code and the best practices, and it really helped make my product much stronger before launch. Hope to work with them again in the future.",
+    person: "Tomo",
+    role: "Go Gym",
   },
 ];
 
@@ -163,7 +161,7 @@ function ClientLogo({ client }: { client: Client }) {
         width={client.logo.width}
         height={client.logo.height}
         sizes="200px"
-        className="absolute inset-0 h-full w-full object-contain opacity-0 transition-[opacity,scale] duration-200 ease-out group-hover:scale-105 group-hover:opacity-100 group-focus-visible:scale-105 group-focus-visible:opacity-100"
+        className={`absolute inset-0 h-full w-full object-contain opacity-0 transition-[opacity,scale] duration-200 ease-out group-hover:scale-105 group-hover:opacity-100 group-focus-visible:scale-105 group-focus-visible:opacity-100 ${client.logo.imageClass ?? ""}`}
       />
       <Image
         src={client.logo.src}
@@ -172,15 +170,93 @@ function ClientLogo({ client }: { client: Client }) {
         width={client.logo.width}
         height={client.logo.height}
         sizes="200px"
-        className={`pointer-events-none absolute inset-0 h-full w-full object-contain transition-opacity duration-200 ease-out group-hover:opacity-0 group-focus-visible:opacity-0 ${client.logo.monoClass}`}
+        className={`pointer-events-none absolute inset-0 h-full w-full object-contain transition-opacity duration-200 ease-out group-hover:opacity-0 group-focus-visible:opacity-0 ${client.logo.monoClass} ${client.logo.imageClass ?? ""}`}
       />
     </span>
   );
 }
 
-function MarqueeClient({ client }: { client: Client }) {
+const TESTIMONIAL_PREVIEW_LENGTH = 240;
+
+function getTestimonialPreview(testimonial: string) {
+  if (testimonial.length <= TESTIMONIAL_PREVIEW_LENGTH) {
+    return testimonial;
+  }
+
+  const boundary = testimonial.lastIndexOf(" ", TESTIMONIAL_PREVIEW_LENGTH);
+  const splitAt = boundary > 0 ? boundary : TESTIMONIAL_PREVIEW_LENGTH;
+
+  return testimonial.slice(0, splitAt).trimEnd();
+}
+
+function TestimonialCopy({
+  testimonial,
+  expanded,
+  onExpandedChange,
+}: {
+  testimonial: string;
+  expanded: boolean;
+  onExpandedChange: (expanded: boolean) => void;
+}) {
+  const preview = getTestimonialPreview(testimonial);
+  const hasMore = preview.length < testimonial.length;
+  const contentId = useId();
+
+  if (!hasMore) {
+    return (
+      <p className="text-sm leading-relaxed font-medium tracking-[-0.02em] whitespace-pre-line text-[#252525]">
+        {testimonial}
+      </p>
+    );
+  }
+
+  if (!expanded) {
+    return (
+      <p className="text-sm leading-relaxed font-medium tracking-[-0.02em] text-[#252525]">
+        <span>{preview}</span>
+        <span aria-hidden="true">… </span>
+        <button
+          type="button"
+          className="font-medium text-[#555] transition-colors duration-150 ease-out hover:text-black focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/40 motion-reduce:transition-none"
+          aria-expanded={false}
+          aria-controls={contentId}
+          onClick={() => onExpandedChange(true)}
+        >
+          More
+        </button>
+      </p>
+    );
+  }
+
   return (
-    <Tooltip>
+    <p
+      id={contentId}
+      className="text-sm leading-relaxed font-medium tracking-[-0.02em] whitespace-pre-line text-[#252525]"
+    >
+      {testimonial}
+    </p>
+  );
+}
+
+function MarqueeClient({ client }: { client: Client }) {
+  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <Tooltip
+      open={open}
+      onOpenChange={(nextOpen, details) => {
+        if (!nextOpen && expanded && details.reason === "trigger-hover") {
+          return;
+        }
+
+        setOpen(nextOpen);
+
+        if (!nextOpen) {
+          setExpanded(false);
+        }
+      }}
+    >
       <TooltipTrigger
         className="group relative isolate flex h-28 w-48 shrink-0 cursor-default items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-black/15 sm:h-30 sm:w-56"
         aria-label={`Read ${client.name} testimonial`}
@@ -197,14 +273,22 @@ function MarqueeClient({ client }: { client: Client }) {
       <TooltipContent
         side="top"
         sideOffset={12}
-        className="w-[min(20rem,calc(100vw-2rem))] rounded-xl border-black/10 bg-white p-4 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset]"
+        collisionAvoidance={{
+          side: "shift",
+          align: "shift",
+          fallbackAxisSide: "none",
+        }}
+        showArrow={false}
+        className="max-h-[min(36rem,calc(100vh-2rem))] w-[min(32rem,calc(100vw-2rem))] max-w-none overflow-y-auto overscroll-contain rounded-xl border-black/10 bg-white p-5 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset]"
       >
-        <p className="text-sm leading-snug font-medium tracking-[-0.02em] text-[#252525]">
-          <span className="mr-0.5 font-serif text-xl leading-none text-[#FF5A1F]">
-            “
-          </span>
-          {client.testimonial}
-        </p>
+        <TestimonialCopy
+          testimonial={client.testimonial}
+          expanded={expanded}
+          onExpandedChange={(nextExpanded) => {
+            setExpanded(nextExpanded);
+            setOpen(true);
+          }}
+        />
         <div className="mt-3 border-t border-black/8 pt-2.5">
           <p className="text-sm font-medium text-black">{client.person}</p>
           <p className="mt-0.5 text-xs font-medium text-[#777]">
@@ -216,73 +300,16 @@ function MarqueeClient({ client }: { client: Client }) {
   );
 }
 
-function StitchedTestimonial({
-  client,
-  dark,
-}: {
-  client: Client;
-  dark: boolean;
-}) {
-  return (
-    <article className="group relative min-h-[19rem] rounded-[1.55rem] bg-[#151515] p-[4px] shadow-[0_18px_34px_-24px_rgba(0,0,0,0.42),0_2px_0_rgba(255,255,255,0.75)_inset] transition-transform duration-300 ease-out hover:-translate-y-1 sm:min-h-[20rem]">
-      <span
-        className="pointer-events-none absolute inset-[2px] rounded-[1.42rem] border-2 border-dashed border-[#FF6600]"
-        aria-hidden="true"
-      />
-      <div
-        className={[
-          "relative flex min-h-[19rem] flex-col rounded-[1.28rem] border p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-12px_20px_rgba(0,0,0,0.1)] sm:min-h-[20rem] sm:p-7",
-          dark
-            ? "border-white/8 bg-[#171717] text-white"
-            : "border-black/8 bg-white text-[#161616]",
-        ].join(" ")}
-      >
-        <Image
-          src="/logo-dark.svg"
-          alt=""
-          width={168}
-          height={135}
-          className={[
-            "h-7 w-auto object-contain",
-            dark ? "brightness-0 invert" : "brightness-0",
-          ].join(" ")}
-          aria-hidden="true"
-        />
-
-        <blockquote className="mt-7 max-w-[28ch] text-[clamp(1.4rem,2.2vw,2rem)] leading-[1.08] font-medium tracking-[-0.045em] text-balance">
-          “{client.testimonial}”
-        </blockquote>
-
-        <footer className="mt-auto pt-6">
-          <p className="text-base font-medium tracking-[-0.035em]">
-            {client.person}
-          </p>
-          <p
-            className={[
-              "mt-1 text-xs font-medium",
-              dark ? "text-white/55" : "text-[#777]",
-            ].join(" ")}
-          >
-            {client.role}
-          </p>
-        </footer>
-      </div>
-    </article>
-  );
-}
-
 export default function TrustedBy() {
-  const featuredClients = CLIENTS.filter((client) => client.featured);
-
   return (
     <section
       aria-labelledby="trusted-by-heading"
       className="relative overflow-hidden bg-[#F6F6F6] pt-4 pb-16 sm:pt-6 sm:pb-20"
     >
       <div className="mx-auto flex max-w-[1248px] flex-col items-center px-5 text-center">
-        <p className="font-mono text-xs font-medium tracking-[0.1em] text-[#777] uppercase sm:text-sm">
-          In good company
-        </p>
+        <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+          Testimonials
+        </h3>
         <h2
           id="trusted-by-heading"
           className="mt-2 max-w-xl text-center text-2xl leading-[1.1] font-medium tracking-[-0.04em] text-balance sm:text-3xl"
@@ -310,16 +337,6 @@ export default function TrustedBy() {
           />
         </div>
       </TooltipProvider>
-
-      <div className="mx-auto mt-10 grid max-w-[1180px] gap-5 px-5 md:mt-14 md:grid-cols-2 md:gap-6">
-        {featuredClients.map((client, index) => (
-          <StitchedTestimonial
-            key={client.name}
-            client={client}
-            dark={index === 1}
-          />
-        ))}
-      </div>
     </section>
   );
 }
