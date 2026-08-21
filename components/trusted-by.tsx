@@ -234,7 +234,7 @@ function TestimonialCopy({
   return (
     <p
       id={contentId}
-      className="text-sm leading-relaxed font-medium tracking-[-0.02em] whitespace-pre-line text-[#252525]"
+      className="text-sm leading-relaxed font-medium tracking-[-0.02em] whitespace-pre-line text-[#252525] opacity-100 transition-[opacity,transform] duration-[180ms] ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:translate-y-0 motion-reduce:transition-none starting:translate-y-0.5 starting:opacity-0"
     >
       {testimonial}
     </p>
@@ -326,7 +326,7 @@ function MarqueeClient({ client }: { client: Client }) {
           fallbackAxisSide: "none",
         }}
         showArrow={false}
-        className="max-h-[min(36rem,calc(100vh-2rem))] w-[min(32rem,calc(100vw-2rem))] max-w-none origin-[var(--transform-origin)] overflow-y-auto overscroll-contain rounded-xl border-black/10 bg-white p-5 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset] data-[ending-style]:scale-[0.78] data-[ending-style]:opacity-0 data-[ending-style]:duration-[190ms] data-[ending-style]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:data-[ending-style]:scale-100 motion-reduce:data-[ending-style]:duration-0"
+        className="max-h-[min(36rem,calc(100vh-2rem))] w-[min(32rem,calc(100vw-2rem))] max-w-none origin-[var(--transform-origin)] overflow-y-auto overscroll-contain rounded-xl border-black/10 bg-white p-5 text-left shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.95)_inset] data-[ending-style]:scale-[0.86] data-[ending-style]:opacity-0 data-[ending-style]:duration-[320ms] data-[ending-style]:ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:data-[ending-style]:scale-100 motion-reduce:data-[ending-style]:duration-0"
       >
         <TestimonialCopy
           testimonial={client.testimonial}
