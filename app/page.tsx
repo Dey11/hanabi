@@ -7,6 +7,7 @@ import MarqueeComponent from "@/components/marquee-component";
 import { Reveal } from "@/components/reveal";
 import ServiceCards from "@/components/services/service-cards";
 import StudiosQuoteSection from "@/components/studios-quote-section";
+import TrustedBy from "@/components/trusted-by";
 import WhyUsCards from "@/components/why-us-cards";
 import WorkProjectsList from "@/components/work-projects-list";
 import { workProjects } from "@/data/work-projects";
@@ -121,6 +122,8 @@ export default function Home() {
 
           <ServiceCards heroProjects={heroProjects} />
         </section>
+
+        <TrustedBy />
 
         <section
           id="why-us"

@@ -138,7 +138,7 @@ export function SeamlessMarquee({
         <div ref={groupRef} className="flex shrink-0">
           {children}
         </div>
-        <div className="flex shrink-0" aria-hidden="true">
+        <div className="flex shrink-0" aria-hidden="true" inert>
           {children}
         </div>
       </div>
