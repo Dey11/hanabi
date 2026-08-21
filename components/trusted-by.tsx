@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { useId, useState } from "react";
 
-import { SeamlessMarquee } from "@/components/seamless-marquee";
+import {
+  SeamlessMarquee,
+  useSeamlessMarqueeDuplicate,
+} from "@/components/seamless-marquee";
 import {
   Tooltip,
   TooltipContent,
@@ -239,6 +242,7 @@ function TestimonialCopy({
 }
 
 function MarqueeClient({ client }: { client: Client }) {
+  const isDuplicate = useSeamlessMarqueeDuplicate();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -259,10 +263,11 @@ function MarqueeClient({ client }: { client: Client }) {
     >
       <TooltipTrigger
         className="group relative isolate flex h-28 w-48 shrink-0 cursor-default items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-black/15 sm:h-30 sm:w-56"
+        tabIndex={isDuplicate ? -1 : undefined}
         aria-label={`Read ${client.name} testimonial`}
       >
         <span
-          className="pointer-events-none absolute top-1/2 left-1/2 h-24 w-52 -translate-x-1/2 -translate-y-1/2 scale-25 rounded-[50%] opacity-0 transition-[opacity,scale] duration-500 ease-out group-hover:scale-110 group-hover:opacity-100 group-focus-visible:scale-110 group-focus-visible:opacity-100"
+          className="pointer-events-none absolute top-1/2 left-1/2 h-20 w-44 -translate-x-1/2 -translate-y-1/2 scale-50 rounded-[50%] opacity-0 transition-[opacity,scale] duration-500 ease-out group-hover:scale-100 group-hover:opacity-70 group-focus-visible:scale-100 group-focus-visible:opacity-70"
           style={{
             background: `radial-gradient(ellipse at center, ${client.glow} 0%, transparent 72%)`,
           }}
