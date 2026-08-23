@@ -245,7 +245,7 @@ function MarqueeClient({ client }: { client: Client }) {
   const isDuplicate = useSeamlessMarqueeDuplicate();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const suppressOpenRef = useRef(false);
+  const touchInteractionRef = useRef({ isTouch: false, wasOpen: false });
 
   useEffect(() => {
     if (!open) {
@@ -253,7 +253,6 @@ function MarqueeClient({ client }: { client: Client }) {
     }
 
     const dismissOnScroll = () => {
-      suppressOpenRef.current = true;
       setOpen(false);
       setExpanded(false);
     };
@@ -282,10 +281,6 @@ function MarqueeClient({ client }: { client: Client }) {
     <Tooltip
       open={open}
       onOpenChange={(nextOpen, details) => {
-        if (nextOpen && suppressOpenRef.current) {
-          return;
-        }
-
         if (!nextOpen && expanded && details.reason === "trigger-hover") {
           return;
         }
@@ -301,11 +296,26 @@ function MarqueeClient({ client }: { client: Client }) {
         className="group relative isolate flex h-28 w-48 shrink-0 cursor-default items-center justify-center px-5 outline-none focus-visible:ring-2 focus-visible:ring-black/15 sm:h-30 sm:w-56"
         tabIndex={isDuplicate ? -1 : undefined}
         aria-label={`Read ${client.name} testimonial`}
-        onPointerLeave={() => {
-          suppressOpenRef.current = false;
+        closeOnClick={false}
+        onPointerDown={(event) => {
+          if (event.pointerType === "touch") {
+            touchInteractionRef.current = { isTouch: true, wasOpen: open };
+          } else {
+            touchInteractionRef.current.isTouch = false;
+          }
         }}
-        onFocus={() => {
-          suppressOpenRef.current = false;
+        onClick={() => {
+          if (!touchInteractionRef.current.isTouch) {
+            return;
+          }
+
+          const nextOpen = !touchInteractionRef.current.wasOpen;
+          touchInteractionRef.current.isTouch = false;
+          setOpen(nextOpen);
+
+          if (!nextOpen) {
+            setExpanded(false);
+          }
         }}
       >
         <span
@@ -365,7 +375,7 @@ export default function TrustedBy() {
         </h2>
       </div>
 
-      <TooltipProvider delay={120} closeDelay={80}>
+      <TooltipProvider delay={80} closeDelay={80}>
         <div className="relative mt-7 py-2 sm:mt-9">
           <span
             className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-linear-to-r from-[#F6F6F6] to-transparent sm:w-24"
