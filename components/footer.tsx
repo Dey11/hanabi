@@ -5,13 +5,14 @@ import Image from "next/image";
 import { Sawarabi_Gothic } from "next/font/google";
 import { EMAIL, INSTAGRAM, LINKEDIN, TELEGRAM } from "@/lib/constants";
 import { siInstagram, siTelegram, type SimpleIcon } from "simple-icons";
+import { marketingAssetUrl } from "@/lib/marketing-assets";
 
 const sawarabiGothic = Sawarabi_Gothic({
   weight: "400",
   subsets: ["latin"],
 });
 
-const FOOTER_IMAGE = "/footer-orange.webp";
+const FOOTER_IMAGE = marketingAssetUrl("footer-orange.webp");
 const SHOW_FOOTER_TRANSITION_SECTION = false;
 
 const SOCIAL_LINKS = [
@@ -111,7 +112,7 @@ export default function Footer({ isActive = false }: { isActive?: boolean }) {
           aria-label="Footer artwork"
         >
           <Image
-            src="/footer-transition-orange.webp"
+            src={marketingAssetUrl("footer-transition-orange.webp")}
             alt=""
             fill
             quality={90}

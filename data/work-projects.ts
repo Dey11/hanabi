@@ -1,3 +1,5 @@
+import { marketingAssetUrl } from "@/lib/marketing-assets";
+
 export type WorkProjectImage = {
   src: string;
   alt: string;
@@ -47,11 +49,11 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["krish", "dey"],
     images: [
       {
-        src: "/projects/tradeMoai1.png",
+        src: marketingAssetUrl("projects/tradeMoai1.png"),
         alt: "Trade Moai interface overview",
       },
       {
-        src: "/projects/tradeMoai2.png",
+        src: marketingAssetUrl("projects/tradeMoai2.png"),
         alt: "Trade Moai trading dashboard",
       },
     ],
@@ -65,15 +67,15 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["krish", "dey"],
     images: [
       {
-        src: "/projects/dtc1.png",
+        src: marketingAssetUrl("projects/dtc1.png"),
         alt: "Down The Cove hero screen",
       },
       {
-        src: "/projects/dtc2.png",
+        src: marketingAssetUrl("projects/dtc2.png"),
         alt: "Down The Cove feature section",
       },
       {
-        src: "/projects/dtc3.png",
+        src: marketingAssetUrl("projects/dtc3.png"),
         alt: "Down The Cove overview",
       },
     ],
@@ -87,15 +89,15 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["krish", "dey"],
     images: [
       {
-        src: "/projects/ballaratboxsports1.png",
+        src: marketingAssetUrl("projects/ballaratboxsports1.png"),
         alt: "Ballarat Box Sports hero screen",
       },
       {
-        src: "/projects/ballaratboxsports2.png",
+        src: marketingAssetUrl("projects/ballaratboxsports2.png"),
         alt: "Ballarat Box Sports feature section",
       },
       {
-        src: "/projects/ballaratboxsports3.png",
+        src: marketingAssetUrl("projects/ballaratboxsports3.png"),
         alt: "Ballarat Box Sports overview",
       },
     ],
@@ -109,15 +111,15 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["dey", "sagarika"],
     images: [
       {
-        src: "/projects/wabisabi1.png",
+        src: marketingAssetUrl("projects/wabisabi1.png"),
         alt: "Wabisabi hero screen",
       },
       {
-        src: "/projects/wabisabi2.png",
+        src: marketingAssetUrl("projects/wabisabi2.png"),
         alt: "Wabisabi feature section",
       },
       {
-        src: "/projects/wabisabi3.png",
+        src: marketingAssetUrl("projects/wabisabi3.png"),
         alt: "Wabisabi brand detail",
       },
     ],
@@ -131,11 +133,11 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["krish"],
     images: [
       {
-        src: "/projects/gotnextHero.png",
+        src: marketingAssetUrl("projects/gotnextHero.png"),
         alt: "Got Next hero screen",
       },
       {
-        src: "/projects/gotnextDashboard.png",
+        src: marketingAssetUrl("projects/gotnextDashboard.png"),
         alt: "Got Next dashboard overview",
       },
     ],
@@ -149,11 +151,11 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["dey", "sagarika"],
     images: [
       {
-        src: "/projects/thomasbewick1.png",
+        src: marketingAssetUrl("projects/thomasbewick1.png"),
         alt: "Thomas Bewick hero and gallery",
       },
       {
-        src: "/projects/thomasbewick2.png",
+        src: marketingAssetUrl("projects/thomasbewick2.png"),
         alt: "Thomas Bewick engraving detail",
       },
     ],
@@ -167,11 +169,11 @@ export const workProjects: readonly WorkProject[] = [
     contributors: ["arsh", "roy"],
     images: [
       {
-        src: "/projects/leadly1.png",
+        src: marketingAssetUrl("projects/leadly1.png"),
         alt: "Leadly dashboard overview",
       },
       {
-        src: "/projects/leadly2.png",
+        src: marketingAssetUrl("projects/leadly2.png"),
         alt: "Leadly lead details view",
       },
     ],

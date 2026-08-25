@@ -3,6 +3,7 @@
 import { SeamlessMarquee } from "@/components/seamless-marquee";
 import Image from "next/image";
 import { memo } from "react";
+import { marketingAssetUrl } from "@/lib/marketing-assets";
 
 const MARQUEE_SPEED = 64;
 const HERO_PROJECT_ASPECT_RATIO = "45 / 32";
@@ -23,7 +24,7 @@ const MarqueeItem = memo(function MarqueeItem({
       style={{ aspectRatio: HERO_PROJECT_ASPECT_RATIO }}
     >
       <Image
-        src={`/hero-projects/${item}.png`}
+        src={marketingAssetUrl(`hero-projects/${item}.png`)}
         alt={item}
         fill
         sizes="(max-width: 640px) 293px, (max-width: 768px) 405px, 450px"

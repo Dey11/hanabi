@@ -9,16 +9,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { marketingAssetUrl } from "@/lib/marketing-assets";
 
 const CONTRIBUTOR_META: Record<
   WorkProjectContributor,
   { name: string; mask: string }
 > = {
-  krish: { name: "Krish", mask: "/team/krish.png" },
-  roy: { name: "Roy", mask: "/team/roy.png" },
-  dey: { name: "Dey", mask: "/team/dey.png" },
-  sagarika: { name: "Sagarika", mask: "/team/sagarika.png" },
-  arsh: { name: "Arsh", mask: "/team/arsh.png" },
+  krish: { name: "Krish", mask: marketingAssetUrl("team/krish.png") },
+  roy: { name: "Roy", mask: marketingAssetUrl("team/roy.png") },
+  dey: { name: "Dey", mask: marketingAssetUrl("team/dey.png") },
+  sagarika: {
+    name: "Sagarika",
+    mask: marketingAssetUrl("team/sagarika.png"),
+  },
+  arsh: { name: "Arsh", mask: marketingAssetUrl("team/arsh.png") },
 };
 
 export default function ProjectContributorMasks({
