@@ -163,7 +163,7 @@ export const workProjects: readonly WorkProject[] = [
   {
     title: "LEADLY",
     category: "WEB APP | PRODUCT UI",
-    liveUrl: "https://leadly.live",
+    liveUrl: "https://leadly.tryhanabi.com",
     description:
       "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
     contributors: ["arsh", "roy"],
