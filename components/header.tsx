@@ -58,7 +58,9 @@ export default function Header() {
     >
       {/* Desktop / tablet header */}
       <header className="m-5 mx-auto hidden max-w-2xl items-center justify-between rounded-full bg-white p-1.5 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.2)] md:flex">
-        <Image src="/logo.svg" alt="logo" width={37} height={36} />
+        <Link href="/" aria-label="Hanabi home">
+          <Image src="/logo.svg" alt="" width={37} height={36} />
+        </Link>
 
         <nav className="flex gap-7" onMouseLeave={() => setItemHovered(null)}>
           {NAV_ITEMS.slice(0, 2).map((item) => (
@@ -119,20 +121,32 @@ export default function Header() {
       <header className="mx-auto w-full md:hidden">
         <div className="mx-4 mt-4 rounded-2xl border border-black/10 bg-white px-3 py-2 shadow-[0_0_3px_0.25px_rgba(0,0,0,0.16)] backdrop-blur">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Image src="/logo.svg" alt="logo" width={30} height={30} />
-              <div className={`${sawarabiGothic.className} text-xl`}>
+            <Link
+              href="/"
+              className="flex items-center gap-2"
+              aria-label="Hanabi home"
+            >
+              <Image src="/logo.svg" alt="" width={30} height={30} />
+              <span className={`${sawarabiGothic.className} text-xl`}>
                 Hanabi
-              </div>
-            </div>
+              </span>
+            </Link>
 
-            <BookCallLink className="text-background font-inter group relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 transition-shadow duration-300 text-shadow-neutral-500 text-shadow-xs hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_7px_18px_-18px_rgba(0,0,0,0.85)] active:scale-95">
-              <span
-                className="absolute inset-0 bg-linear-to-t from-white/0 via-white/6 to-white/14 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
-                aria-hidden
-              />
-              <span className="relative z-10">Book a Call</span>
-            </BookCallLink>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-neutral-600 hover:text-neutral-950"
+              >
+                Blog
+              </Link>
+              <BookCallLink className="text-background font-inter group relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-neutral-900 bg-linear-to-b from-neutral-900 to-black px-3 py-2 text-sm font-medium inset-shadow-sm inset-shadow-neutral-500 transition-shadow duration-300 text-shadow-neutral-500 text-shadow-xs hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_7px_18px_-18px_rgba(0,0,0,0.85)] active:scale-95">
+                <span
+                  className="absolute inset-0 bg-linear-to-t from-white/0 via-white/6 to-white/14 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+                  aria-hidden
+                />
+                <span className="relative z-10">Book a Call</span>
+              </BookCallLink>
+            </div>
           </div>
         </div>
       </header>
@@ -150,6 +164,11 @@ const NAV_ITEMS = [
     key: "works",
     label: "Our works",
     href: "/#works",
+  },
+  {
+    key: "blog",
+    label: "Blog",
+    href: "/blog",
   },
   {
     key: "why-us",

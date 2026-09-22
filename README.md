@@ -4,6 +4,8 @@ Hanabi is a Next.js portfolio site built with Tailwind CSS and Bun. The homepage
 
 It also hosts a password-protected **client & admin portal** (`/portal`, `/admin`) for delivering brand systems, assets, handoff docs, and progress updates to clients. See [`docs/PORTAL.md`](docs/PORTAL.md) for setup, environment, and the updates ingest API.
 
+The public blog is managed through Payload CMS at `/cms`. Its content model, database setup, media storage, publishing workflow, and SEO routes are documented in [`docs/BLOG.md`](docs/BLOG.md).
+
 ## Development
 
 Install dependencies:
@@ -26,6 +28,13 @@ Build for production:
 bun run build
 ```
 
+Apply both database systems' production migrations before the build:
+
+```bash
+bun run db:deploy
+bun run payload:migrate
+```
+
 Start the production server:
 
 ```bash
@@ -34,7 +43,11 @@ bun run start
 
 ## Project Structure
 
-- `app/page.tsx` composes the homepage sections, owns section-level spacing such as the larger services top padding before Why Us, and mounts the works section.
+- `app/(frontend)/page.tsx` composes the homepage sections, owns section-level spacing such as the larger services top padding before Why Us, and mounts the works section.
+- `app/(frontend)/blog` contains the public archive, article, author, category, and RSS routes.
+- `app/(payload)` mounts the Payload admin at `/cms` and REST API at `/cms-api` without colliding with the existing `/admin` portal.
+- `payload.config.ts`, `payload/collections`, and `payload-migrations` define the CMS, publishing access rules, and isolated `payload` Postgres schema.
+- `lib/blog` is the server-only data and presentation boundary used by public blog routes.
 - `data/work-projects.ts` is the source of truth for work project titles, categories, descriptions, and R2 image sets.
 - `lib/marketing-assets.ts` owns the versioned Cloudflare R2 base URL, URL construction, and the list of images that receive generated blur placeholders.
 - `lib/hero-projects.ts` is the explicit hero-project image manifest.

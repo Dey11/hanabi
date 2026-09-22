@@ -3,17 +3,11 @@ import { Agentation } from "agentation";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Geist } from "next/font/google";
 import Script from "next/script";
-import "./globals.css";
+import "../globals.css";
 import { cn } from "@/lib/utils";
+import { SITE_URL } from "@/lib/site-url";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000");
 const siteDescription =
   "Hanabi is a product design and web development studio that creates fast, elegant, and intuitive digital experiences for ambitious founders and forward-thinking enterprises.";
 const ogImage = {
@@ -36,16 +30,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   applicationName: "Hanabi",
   title: {
     default: "Hanabi",
     template: "%s | Hanabi",
   },
   description: siteDescription,
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -68,6 +59,12 @@ export const metadata: Metadata = {
     title: "Hanabi",
     description: siteDescription,
     images: [ogImage],
+  },
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": "/blog/feed.xml",
+    },
   },
 };
 

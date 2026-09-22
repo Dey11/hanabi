@@ -42,3 +42,6 @@ next-env.d.ts
 
 # prisma generated client
 /lib/generated
+
+# Payload local upload fallback
+/media
