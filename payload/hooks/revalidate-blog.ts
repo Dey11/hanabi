@@ -5,11 +5,15 @@ import type {
 } from "payload";
 
 function revalidateBlogPath(slug?: string | null) {
-  revalidatePath("/blog", "layout");
-  revalidatePath("/sitemap.xml");
-  revalidatePath("/blog/feed.xml");
+  try {
+    revalidatePath("/blog", "layout");
+    revalidatePath("/sitemap.xml");
+    revalidatePath("/blog/feed.xml");
 
-  if (slug) revalidatePath(`/blog/${slug}`);
+    if (slug) revalidatePath(`/blog/${slug}`);
+  } catch {
+    // Payload scripts run outside a Next.js request, where revalidation has no store.
+  }
 }
 
 export const revalidateBlogAfterChange: CollectionAfterChangeHook = ({
