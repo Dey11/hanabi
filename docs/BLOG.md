@@ -12,7 +12,9 @@ Payload manages the public blog at `/cms`. It is separate from Hanabi's existing
    bun run payload:migrate
    ```
 
-4. Start Hanabi and open `/cms`. Payload will present its create-first-user screen when no CMS users exist.
+4. Provision the first CMS user before exposing `/cms` publicly. Payload presents a create-first-user screen when no CMS users exist; leaving that screen public creates an account-takeover risk. Coordinate a short, controlled bootstrap window with the site owner.
+
+Payload email delivery is not configured yet. Until an email adapter is added, password-reset messages are logged by the server instead of reaching the user. Keep the first user's credentials in a secure password manager and plan email delivery before routine editorial use.
 
 Do not set `PAYLOAD_DB_PUSH=true` against a shared or production database. That switch is only for rapid work against a disposable local database.
 

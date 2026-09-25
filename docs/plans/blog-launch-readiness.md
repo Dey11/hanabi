@@ -24,8 +24,9 @@ Make the Payload blog buildable, keep its media durable in Cloudflare R2, make p
 ## Risks and status
 
 - The production database has 500 drafts and 1,500 media records. On September 25, the 6,239 referenced local files were uploaded under R2 `blog/`, verified by byte count and SHA-256, and all 1,500 media URLs were reconciled. The local source directory remains untouched.
-- PR #19 failed a Vercel TypeScript check at audit time. The importer type errors are fixed locally; the PR deployment must still pass before release.
+- PR #19 passes its Vercel deployment checks. Its preview is protected by Vercel login, so an unauthenticated visual check is still pending.
+- The production Payload database has no CMS user. Provision the owner's first account before exposing `/cms` publicly; otherwise the create-first-user screen is available to whoever reaches it first. Payload email delivery is not configured, so password reset email is not available yet.
 - Publishing or merging to production is a separate release decision; do not infer it from a passing local build.
 - Search indexing and field Core Web Vitals cannot be verified from code alone. The owner will submit the live sitemap to Search Console.
 
-Status: media repaired and local production build passing; PR deployment, production release, and first publication pending.
+Status: media repaired, local production build passing, and PR deployment checks passing. Production release, CMS account bootstrap, live-route validation, and first publication remain pending.
