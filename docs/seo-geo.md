@@ -43,9 +43,8 @@ Hanabi should not try to out-award the studios that already own the head terms. 
 | [basement.studio](https://basement.studio)                                                            | Taste-forward sites, motion, 3D, and engineering for tech companies. The work is the pitch.                                                        | A site that feels culturally current and is actually built.                         |
 | [Foundey](https://foundey.com), [Khod](https://www.khod.io), [Design Me](https://www.designme.agency) | Closer to Hanabi's buyer. They speak in seed stage, MVP, website-in-days, and "your engineering team stays on the product."                        | A senior design-and-build seat for a startup that does not want a 40-person agency. |
 
-What those sites do that Hanabi's homepage does not yet do:
+The homepage now names founders and the studio's work in its title and first screen. The larger content gaps remain:
 
-- They name the buyer (founder, seed to Series B, SaaS, AI) in the title and the first screen.
 - They split services into pages a search engine can rank, instead of one long homepage.
 - They publish process, pricing shape, and FAQs in sentences an AI answer can quote.
 - They attach proof to a business outcome, even when the outcome is qualitative.
@@ -79,15 +78,15 @@ Use these in the document title, the meta description, one heading, and the open
 | design system for startups   | Buy    | Extra-services row                                    |
 | hire a product design studio | Buy    | FAQ and a studio-practice article                     |
 
-Recommended title tag, about 55 characters:
+Current title tag:
 
 `Hanabi | Product Design & Web Development Studio`
 
-Recommended meta description, about 150 characters:
+Current meta description:
 
-`Hanabi designs and builds clear websites, brand systems, and product interfaces for founders. Book an intro call.`
+`Hanabi designs and builds clear websites, brand systems, and product interfaces for founders and small teams. Book an intro call.`
 
-The current H1, "Your Digital Impression. Simple and Beautiful," can stay as the brand line. Add a visible sentence that a crawler and a first-time visitor can both use: the studio designs and builds websites and product interfaces for founders. The existing subhead is close. Name the buyer in it.
+The H1, "Your Digital Impression. Simple and Beautiful," remains the brand line. The visible sentence beneath it names what the studio makes and who it serves.
 
 ### Terms to build with pages, not with the homepage alone
 
@@ -133,18 +132,17 @@ Use this when the homepage is redesigned. The visual standard stays Hanabi's. Th
 3. **Selected work.** Project name, what it is, and a link. A later version gives each project its own page with the problem, the decisions, and the stack.
 4. **How an engagement works.** A short sequence: intro call, scope, design, build, launch, portal handoff. AI answers quote sequences.
 5. **Fit.** Who the studio is a good partner for, and which projects are better served elsewhere. That specificity is more quotable than a list of adjectives.
-6. **FAQ.** Four to six real questions: timeline, what the client needs ready, what they own at the end, how revisions work, whether the studio writes and builds. Mark this up as `FAQPage` only when the questions are visible on the page.
+6. **FAQ.** Answer real buyer questions about timeline, required inputs, ownership, revisions, and delivery. Keep the answers useful even without a search enhancement.
 7. **Final call.** The same intro-call action as the hero.
 
 ### Structured data
 
 Add JSON-LD on the homepage, separate from the blog's article schema:
 
-- `Organization` or `ProfessionalService` with name Hanabi, url `https://tryhanabi.com`, logo, email, and the LinkedIn company URL `https://www.linkedin.com/company/hanabilabs`.
+- `Organization` with name Hanabi, canonical url `https://www.tryhanabi.com`, logo, email, and the LinkedIn company URL `https://www.linkedin.com/company/hanabilabs`.
 - `sameAs` for LinkedIn and Instagram (`https://www.instagram.com/okhanabi/`).
-- Visible FAQs may also be `FAQPage`.
 
-Article pages already emit `BlogPosting`, breadcrumbs, and FAQ schema when a post has FAQs. Keep using that. Every published post needs a real author, a date, a hero image with alt text, an excerpt that can stand alone as the meta description, and sources when a claim depends on someone else's number.
+Article pages emit `BlogPosting` and breadcrumbs. [Google retired FAQ rich results in 2026](https://developers.google.com/search/updates), so FAQ schema is not a launch target. Every published post needs an accurate author, release date, hero image with alt text, an excerpt that can stand alone as the meta description, and sources when a claim depends on someone else's number.
 
 ### Technical base already in the product
 
@@ -406,4 +404,4 @@ When drafts are approved, publish in this order so each cluster has a live hub b
 4. One ecommerce pillar: what to keep in a redesign, tied to the kind of migration Hanabi has already done.
 5. Then two or three posts a week, alternating a buy-intent post and a do-intent post.
 
-The homepage should gain the title tag, the buyer sentence, Organization schema, and a visible FAQ before the blog is used as the main acquisition channel. The blog sends people to a page that already says what Hanabi is.
+The homepage title, buyer sentence, and Organization schema are the first search signals. Add a visible FAQ only when it answers questions real buyers have raised. The blog should send people to a page that clearly says what Hanabi is.

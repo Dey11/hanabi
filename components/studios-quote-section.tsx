@@ -58,9 +58,9 @@ export default function StudiosQuoteSection() {
       className="relative overflow-hidden bg-[#F6F6F6] px-5 pt-10 pb-24 text-center sm:pt-14 sm:pb-28"
     >
       <Reveal>
-        <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+        <p className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
           Who We Are
-        </h3>
+        </p>
       </Reveal>
 
       <Reveal delay={0.06}>

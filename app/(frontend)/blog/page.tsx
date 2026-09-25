@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     description:
       "Practical notes on product design, web development, brand systems, and digital experiences.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hanabi Blog",
+    description:
+      "Practical notes on product design, web development, brand systems, and digital experiences.",
+  },
 };
 
 export default async function BlogPage() {
@@ -39,6 +45,7 @@ export default async function BlogPage() {
           url: absoluteUrl("/blog"),
           publisher: {
             "@type": "Organization",
+            "@id": absoluteUrl("/#organization"),
             name: "Hanabi",
             url: absoluteUrl("/"),
           },

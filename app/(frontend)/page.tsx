@@ -2,6 +2,7 @@ import BookCallLink from "@/components/book-call-link";
 import { CalPopupButton } from "@/components/cal-popup-button";
 import FooterReveal from "@/components/footer-reveal";
 import Header from "@/components/header";
+import { JsonLd } from "@/components/blog/json-ld";
 import HeroKites from "@/components/hero-kites";
 import MarqueeComponent from "@/components/marquee-component";
 import { Reveal } from "@/components/reveal";
@@ -13,6 +14,7 @@ import WorkProjectsList from "@/components/work-projects-list";
 import { workProjects } from "@/data/work-projects";
 import { getHeroProjects } from "@/lib/hero-projects";
 import { shuffleArray } from "@/lib/utils";
+import { absoluteUrl } from "@/lib/site-url";
 import Link from "next/link";
 
 export default function Home() {
@@ -22,6 +24,34 @@ export default function Home() {
   return (
     <FooterReveal>
       <main className="font-inter">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": absoluteUrl("/#organization"),
+                name: "Hanabi",
+                url: absoluteUrl("/"),
+                logo: absoluteUrl("/logo.svg"),
+                description:
+                  "Product design and web development studio for founders and small teams.",
+                email: "workwithhanabi@gmail.com",
+                sameAs: [
+                  "https://www.instagram.com/okhanabi/",
+                  "https://www.linkedin.com/company/hanabilabs",
+                ],
+              },
+              {
+                "@type": "WebSite",
+                "@id": absoluteUrl("/#website"),
+                name: "Hanabi",
+                url: absoluteUrl("/"),
+                publisher: { "@id": absoluteUrl("/#organization") },
+              },
+            ],
+          }}
+        />
         <section
           id="hero"
           className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden text-center text-pretty"
@@ -41,11 +71,10 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={0.08}>
-                <h2 className="mx-auto max-w-2xl pt-5 text-lg font-medium text-pretty text-[#6C6C6C]">
-                  We build refreshingly simple and beautiful websites and
-                  digital experiences that captivate your audience and elevate
-                  your brand.
-                </h2>
+                <p className="mx-auto max-w-2xl pt-5 text-lg font-medium text-pretty text-[#6C6C6C]">
+                  Hanabi designs and builds websites, brand systems, and product
+                  interfaces for founders and small teams.
+                </p>
               </Reveal>
             </div>
 
@@ -107,9 +136,9 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-linear-to-b from-white via-[#F6F6F6] via-18% to-[#F6F6F6] px-5 pt-24 pb-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+            <p className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Our Services
-            </h3>
+            </p>
           </Reveal>
 
           <Reveal delay={0.06}>
@@ -130,9 +159,9 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-10 pb-20"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+            <p className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Why Us
-            </h3>
+            </p>
           </Reveal>
 
           <Reveal delay={0.06}>
@@ -149,9 +178,9 @@ export default function Home() {
           className="flex flex-col items-center justify-center bg-[#F6F6F6] px-5 pt-14 pb-10"
         >
           <Reveal>
-            <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+            <p className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
               Our Works
-            </h3>
+            </p>
           </Reveal>
 
           <Reveal delay={0.06}>

@@ -6,17 +6,15 @@ import {
   revalidateBlogAfterChange,
   revalidateBlogAfterDelete,
 } from "../hooks/revalidate-blog";
+import { SITE_URL } from "../../lib/site-url";
 
 const previewUrl = (slug?: string | null) => {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "http://localhost:3000";
   const params = new URLSearchParams({
     slug: slug ?? "",
     secret: process.env.PAYLOAD_PREVIEW_SECRET ?? "",
   });
 
-  return `${siteUrl}/api/draft?${params.toString()}`;
+  return `${SITE_URL}/api/draft?${params.toString()}`;
 };
 
 export const Posts: CollectionConfig = {

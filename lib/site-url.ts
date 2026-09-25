@@ -4,7 +4,11 @@ function resolveSiteUrl() {
     process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
   const url = explicitUrl ?? (vercelUrl ? `https://${vercelUrl}` : null);
 
-  return (url ?? "http://localhost:3000").replace(/\/$/, "");
+  const parsed = new URL(url ?? "http://localhost:3000");
+  if (parsed.hostname === "tryhanabi.com") {
+    parsed.hostname = "www.tryhanabi.com";
+  }
+  return parsed.toString().replace(/\/$/, "");
 }
 
 export const SITE_URL = resolveSiteUrl();

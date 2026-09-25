@@ -364,9 +364,9 @@ export default function TrustedBy() {
       className="relative overflow-hidden bg-[#F6F6F6] pt-4 pb-16 sm:pt-6 sm:pb-20"
     >
       <div className="mx-auto flex max-w-[1248px] flex-col items-center px-5 text-center">
-        <h3 className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
+        <p className="font-mono text-lg font-medium text-[#6C6C6C] uppercase sm:text-xl">
           Testimonials
-        </h3>
+        </p>
         <h2
           id="trusted-by-heading"
           className="mt-2 max-w-xl text-center text-2xl leading-[1.1] font-medium tracking-[-0.04em] text-balance sm:text-3xl"

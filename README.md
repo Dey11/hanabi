@@ -6,6 +6,8 @@ It also hosts a password-protected **client & admin portal** (`/portal`, `/admin
 
 The public blog is managed through Payload CMS at `/cms`. Its content model, database setup, media storage, publishing workflow, and SEO routes are documented in [`docs/BLOG.md`](docs/BLOG.md).
 
+The canonical public host is `https://www.tryhanabi.com`. `/robots.txt` points to `/sitemap.xml`; the sitemap lists the homepage, blog, published indexable articles, and only author/topic archives that contain published articles. Unpublished drafts and portal routes are not submitted. The site owner submits the live sitemap in Google Search Console after release.
+
 ## Development
 
 Install dependencies:

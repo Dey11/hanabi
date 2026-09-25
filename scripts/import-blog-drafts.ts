@@ -7,6 +7,7 @@ import {
   convertMarkdownToLexical,
   editorConfigFactory,
 } from "@payloadcms/richtext-lexical";
+import type { Post } from "../payload-types";
 
 type Faq = { question: string; answer: string };
 type Source = { title: string; url: string; publisher?: string };
@@ -34,20 +35,8 @@ type PlanItem = {
   category: string;
 };
 
-type LexicalNode = {
-  type: string;
-  tag?: string;
-  children?: LexicalNode[];
-  [key: string]: unknown;
-};
-
-type LexicalContent = {
-  root: {
-    children: LexicalNode[];
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-};
+type LexicalContent = Post["content"];
+type LexicalNode = LexicalContent["root"]["children"][number];
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -148,13 +137,7 @@ async function main() {
   if (!process.env.PAYLOAD_SECRET) {
     process.env.PAYLOAD_SECRET = "local-draft-import-secret";
   }
-  delete process.env.PAYLOAD_R2_BUCKET;
-  delete process.env.PAYLOAD_R2_ACCESS_KEY_ID;
-  delete process.env.PAYLOAD_R2_SECRET_ACCESS_KEY;
-  delete process.env.PAYLOAD_R2_ENDPOINT;
-  delete process.env.PAYLOAD_MEDIA_BASE_URL;
-
-  const importedConfig = (await import("../payload.config.ts")).default as
+  const importedConfig = (await import("../payload.config")).default as
     | SanitizedConfig
     | Promise<SanitizedConfig>;
   const config = await importedConfig;
@@ -221,7 +204,11 @@ async function main() {
       (await payload.create({
         collection: "categories",
         overrideAccess: true,
-        data: { name, description },
+        data: {
+          name,
+          description,
+          slug: name.toLowerCase().replace(/\s+/g, "-"),
+        },
       }));
     categoryIds.set(name, doc.id);
   }

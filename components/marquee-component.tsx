@@ -25,7 +25,7 @@ const MarqueeItem = memo(function MarqueeItem({
     >
       <Image
         src={marketingAssetUrl(`hero-projects/${item}.png`)}
-        alt={item}
+        alt=""
         fill
         sizes="(max-width: 640px) 293px, (max-width: 768px) 405px, 450px"
         className="object-cover"

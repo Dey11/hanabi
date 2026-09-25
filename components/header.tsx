@@ -82,11 +82,11 @@ export default function Header() {
           ))}
         </nav>
 
-        <h1
+        <span
           className={`${sawarabiGothic.className} pb-1 text-2xl tracking-[-0.02em]`}
         >
           Hanabi
-        </h1>
+        </span>
 
         <nav className="flex gap-7" onMouseLeave={() => setItemHovered(null)}>
           {NAV_ITEMS.slice(2).map((item) => (

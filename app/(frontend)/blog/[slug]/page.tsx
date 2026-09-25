@@ -107,12 +107,16 @@ export default async function PostPage({ params }: PageProps) {
     datePublished: post.publishedAt || undefined,
     dateModified: post.updatedAt,
     author: authors.map((author) => ({
-      "@type": "Person",
+      "@type": author.slug === "hanabi" ? "Organization" : "Person",
+      ...(author.slug === "hanabi"
+        ? { "@id": absoluteUrl("/#organization") }
+        : {}),
       name: author.name,
       url: absoluteUrl(`/blog/author/${author.slug}`),
     })),
     publisher: {
       "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
       name: "Hanabi",
       url: absoluteUrl("/"),
       logo: {
@@ -148,19 +152,6 @@ export default async function PostPage({ params }: PageProps) {
     <main className="pt-32 pb-28 lg:pt-40">
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
-      {faqs.length ? (
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((faq) => ({
-              "@type": "Question",
-              name: faq.question,
-              acceptedAnswer: { "@type": "Answer", text: faq.answer },
-            })),
-          }}
-        />
-      ) : null}
 
       {isEnabled ? (
         <div className="fixed inset-x-0 bottom-5 z-[100] mx-auto flex w-fit items-center gap-3 rounded-full bg-neutral-950 px-4 py-2 text-sm tracking-normal text-white shadow-xl">

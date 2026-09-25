@@ -26,6 +26,11 @@ export async function generateMetadata({
       title: category.name,
       description: category.description,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} | Hanabi Blog`,
+      description: category.description,
+    },
   };
 }
 
@@ -34,6 +39,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const category = await getCategoryBySlug(slug);
   if (!category) notFound();
   const result = await getPosts({ categoryId: category.id, limit: 24 });
+  if (result.totalDocs === 0) notFound();
 
   return (
     <main className="px-5 pt-36 pb-28 sm:px-8 lg:pt-44">

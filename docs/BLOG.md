@@ -4,7 +4,7 @@ Payload manages the public blog at `/cms`. It is separate from Hanabi's existing
 
 ## First-time setup
 
-1. Set `NEXT_PUBLIC_SITE_URL`, `PAYLOAD_SECRET`, `PAYLOAD_PREVIEW_SECRET`, and `PAYLOAD_CRON_SECRET` in the target environment. See `.env.example`.
+1. Set `NEXT_PUBLIC_SITE_URL=https://www.tryhanabi.com`, `PAYLOAD_SECRET`, `PAYLOAD_PREVIEW_SECRET`, and `PAYLOAD_CRON_SECRET` in production. See `.env.example`. The apex redirects to `www`, so canonical URLs must use `www`.
 2. Point `PAYLOAD_DATABASE_URL` at the CMS database, or leave it empty to use `DATABASE_URL`. Payload owns only the `payload` Postgres schema; Prisma continues to own the existing `public` schema.
 3. Apply the checked-in Payload migrations before building or starting the application:
 
@@ -25,9 +25,11 @@ Create content in this order:
 3. Create one or more categories with clear descriptions.
 4. Create the post, write its direct summary in `excerpt`, and fill the SEO fields.
 5. Add sources for factual claims and FAQs only when they are genuinely answered by the article.
-6. Use Preview to inspect the draft, then publish or schedule it.
+6. Use Preview to inspect the draft, check that all internal article links point to published posts, set `publishedAt` to the actual release time, then publish or schedule it.
 
 Only records with `_status=published` and a `publishedAt` time in the past are exposed publicly. Saving or deleting a post revalidates blog, feed, and sitemap paths.
+
+For the initial release, `bun run payload:publish-initial` checks the four reviewed, mutually linked drafts, their media, and their source URLs. It is a dry run by default. Run it only after the deployed blog and R2 images work, using `NEXT_PUBLIC_SITE_URL=https://www.tryhanabi.com`, `PAYLOAD_MEDIA_BASE_URL`, `PAYLOAD_SECRET`, and the production `DATABASE_URL`. To publish after inspecting its output, add `--apply --confirm-site=www.tryhanabi.com`. The script sets the publication date at release time and skips posts already published. The other drafts remain unpublished for later editorial review. This command uses Node for the Payload/Lexical runtime because Bun currently hits a Lexical module initialization error; Bun remains the script runner.
 
 Scheduled publishing also needs a job runner. On a long-running host, run:
 
@@ -47,7 +49,7 @@ On a serverless host, call `/cms-api/payload-jobs/run?queue=default` at least on
 - `/sitemap.xml`: public URLs from Payload
 - `/robots.txt`: crawler rules, with portal and CMS paths blocked
 
-Article pages emit `BlogPosting`, `BreadcrumbList`, and optional `FAQPage` JSON-LD. They also expose canonical, Open Graph, Twitter, author, publication, and modification metadata.
+Article pages emit `BlogPosting` and `BreadcrumbList` JSON-LD. FAQs remain visible content, but [Google retired FAQ rich results in 2026](https://developers.google.com/search/updates). Articles also expose canonical, Open Graph, Twitter, author, publication, and modification metadata.
 
 ## Media storage
 
@@ -61,7 +63,11 @@ Local development falls back to the ignored `media/` directory. Production shoul
 
 These credentials are deliberately distinct from the client portal's `R2_*` variables. Blog objects use the `blog/` prefix.
 
-Payload uploads directly from the browser when R2 is enabled. The bucket CORS policy must allow `PUT` requests from `NEXT_PUBLIC_SITE_URL` and allow the `Content-Type` and `If-None-Match` request headers.
+The 500 imported drafts originally created media in the ignored local `media/` directory. To reconcile those existing production records, run `scripts/sync-blog-media-to-r2.ts` with `DIRECT_URL` and the five `PAYLOAD_R2_*`/`PAYLOAD_MEDIA_BASE_URL` variables above. The script is a dry run by default; it verifies filenames and byte counts before any write. After checking the exact bucket and public URL in its output, run it with `--apply --confirm-bucket=<bucket>`. It uploads only referenced files, verifies R2 object byte counts and hashes, then updates the media URLs in one database transaction. Never remove local source files until the public image URLs have been tested.
+
+New CMS uploads use the same `blog/` prefix and receive unique per-upload object keys. Do not repurpose the portal bucket or overwrite existing blog objects.
+
+Payload uploads directly from the browser when R2 is enabled. The bucket CORS policy must allow `PUT` requests from the canonical `www` origin and allow the `Content-Type` and `If-None-Match` request headers.
 
 Use this policy as the starting point, replacing the example origin with the exact production origin:
 

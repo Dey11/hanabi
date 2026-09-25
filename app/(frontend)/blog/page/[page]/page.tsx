@@ -26,6 +26,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `/blog/page/${page}`,
     },
+    openGraph: {
+      type: "website",
+      url: `/blog/page/${page}`,
+      title: `Hanabi Blog, page ${page}`,
+      description: `Browse page ${page} of Hanabi's writing on product design and web development.`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Hanabi Blog, page ${page}`,
+      description: `Browse page ${page} of Hanabi's writing on product design and web development.`,
+    },
   };
 }
 

@@ -26,6 +26,17 @@ export async function generateMetadata({
     title: `${author.name}, page ${page}`,
     description: `Articles by ${author.name}. Page ${page}.`,
     alternates: { canonical: `/blog/author/${author.slug}/page/${page}` },
+    openGraph: {
+      type: "website",
+      url: `/blog/author/${author.slug}/page/${page}`,
+      title: `${author.name} articles, page ${page}`,
+      description: `Articles by ${author.name}. Page ${page}.`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${author.name} articles, page ${page}`,
+      description: `Articles by ${author.name}. Page ${page}.`,
+    },
   };
 }
 

@@ -21,6 +21,17 @@ export async function generateMetadata({
     title: `${author.name}, author`,
     description: author.bio,
     alternates: { canonical: `/blog/author/${author.slug}` },
+    openGraph: {
+      type: "website",
+      url: `/blog/author/${author.slug}`,
+      title: `${author.name} | Hanabi Blog`,
+      description: author.bio,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${author.name} | Hanabi Blog`,
+      description: author.bio,
+    },
   };
 }
 
@@ -31,17 +42,23 @@ export default async function AuthorPage({ params }: PageProps) {
     getPosts({ authorId: author.id, limit: 24 }),
     Promise.resolve(imageSource(author.avatar, "thumbnail")),
   ]);
+  if (result.totalDocs === 0) notFound();
 
   return (
     <main className="px-5 pt-36 pb-28 sm:px-8 lg:pt-44">
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "Person",
+          "@type": author.slug === "hanabi" ? "Organization" : "Person",
+          ...(author.slug === "hanabi"
+            ? { "@id": absoluteUrl("/#organization") }
+            : {}),
           name: author.name,
           description: author.bio,
           image: avatar ? absoluteUrl(avatar.url) : undefined,
-          jobTitle: author.role ?? undefined,
+          ...(author.slug === "hanabi"
+            ? {}
+            : { jobTitle: author.role ?? undefined }),
           sameAs: [author.website, author.linkedIn].filter(Boolean),
           url: absoluteUrl(`/blog/author/${author.slug}`),
         }}

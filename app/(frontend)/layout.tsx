@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 import { SITE_URL } from "@/lib/site-url";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const siteTitle = "Hanabi | Product Design & Web Development Studio";
 const siteDescription =
-  "Hanabi is a product design and web development studio that creates fast, elegant, and intuitive digital experiences for ambitious founders and forward-thinking enterprises.";
+  "Hanabi designs and builds clear websites, brand systems, and product interfaces for founders and small teams. Book an intro call.";
 const ogImage = {
   url: "/og-image.png",
   width: 1200,
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: "Hanabi",
   title: {
-    default: "Hanabi",
+    default: siteTitle,
     template: "%s | Hanabi",
   },
   description: siteDescription,
@@ -49,14 +50,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Hanabi",
-    title: "Hanabi",
+    title: siteTitle,
     description: siteDescription,
     images: [ogImage],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hanabi",
+    title: siteTitle,
     description: siteDescription,
     images: [ogImage],
   },
