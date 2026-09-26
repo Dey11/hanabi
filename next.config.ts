@@ -1,5 +1,13 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 import { MARKETING_ASSET_BASE_URL } from "./lib/marketing-assets";
+
+const remotePatterns = [new URL(`${MARKETING_ASSET_BASE_URL}/**`)];
+if (process.env.PAYLOAD_MEDIA_BASE_URL) {
+  remotePatterns.push(
+    new URL(`${process.env.PAYLOAD_MEDIA_BASE_URL.replace(/\/$/, "")}/**`),
+  );
+}
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
@@ -14,8 +22,8 @@ const nextConfig: NextConfig = {
     imageSizes: [32, 48, 64, 96, 128, 180, 256, 320, 384, 512, 640],
     minimumCacheTTL: 31536000,
     qualities: [70, 75, 80, 82, 85, 90, 92],
-    remotePatterns: [new URL(`${MARKETING_ASSET_BASE_URL}/**`)],
+    remotePatterns,
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);
