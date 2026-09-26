@@ -288,7 +288,7 @@ export interface Post {
   authors: (number | Author)[];
   categories: (number | Category)[];
   /**
-   * Optional. Visible on the article and emitted as FAQ structured data.
+   * Optional. Visible on the article; no FAQ structured data is emitted.
    */
   faqs?:
     | {

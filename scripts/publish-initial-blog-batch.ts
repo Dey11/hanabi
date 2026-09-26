@@ -5,7 +5,10 @@ import { getPayload } from "payload";
 import type { Media, Post } from "../payload-types";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const initialDraftNumbers = [2, 9, 10, 49] as const;
+const initialDraftNumbers = Array.from(
+  { length: 100 },
+  (_, index) => index + 1,
+);
 const apply = process.argv.includes("--apply");
 const confirmedSite = process.argv
   .find((arg) => arg.startsWith("--confirm-site="))
@@ -15,6 +18,9 @@ type Draft = {
   n: number;
   slug: string;
   title: string;
+  metaTitle: string;
+  excerpt: string;
+  primaryKeyword: string;
   markdown: string;
   faqs: { question: string; answer: string }[];
   sources: { title: string; url: string }[];
@@ -39,6 +45,18 @@ const editorialRevisions: Record<
   ],
   49: [
     ["https://tryhanabi.com/#services", "https://www.tryhanabi.com/#services"],
+  ],
+  91: [
+    [
+      "Hanabi's article pages can include FAQ schema when a post has FAQs, next to the article data.",
+      "Hanabi's article pages show FAQs but emit article and breadcrumb schema, not FAQ schema. Google retired FAQ rich results, so the visible answers matter more than adding that markup.",
+    ],
+  ],
+  95: [
+    [
+      "Hanabi's articles can emit FAQ schema when a post includes FAQs, along with the article data and breadcrumbs.",
+      "Hanabi's articles show their FAQs but emit article and breadcrumb schema, not FAQ schema. Google retired FAQ rich results, so the visible answers matter more than adding that markup.",
+    ],
   ],
 };
 
@@ -67,7 +85,10 @@ function revisedContent(content: Post["content"], draft: Draft) {
             counts.set(original, (counts.get(original) ?? 0) + 1);
           }
         }
-        node[key] = updated;
+        node[key] = updated.replaceAll(
+          "https://tryhanabi.com/",
+          "https://www.tryhanabi.com/",
+        );
       } else {
         visit(child);
       }
@@ -127,14 +148,18 @@ async function verifyMedia(media: Media, publicBase: string) {
   if (!urls.length || !media.alt?.trim()) {
     throw new Error(`Media ${media.id} lacks a URL or alt text`);
   }
-  for (const url of urls) {
-    if (!url.startsWith(publicBase)) {
-      throw new Error(`Media ${media.id} has a non-R2 URL: ${url}`);
-    }
-    const response = await fetch(url, { method: "HEAD" });
-    if (!response.ok)
-      throw new Error(`Media ${media.id} returned ${response.status}`);
-  }
+  await Promise.all(
+    urls.map(async (url) => {
+      if (!url.startsWith(publicBase)) {
+        throw new Error(`Media ${media.id} has a non-R2 URL: ${url}`);
+      }
+      const response = await fetch(url, { method: "HEAD" });
+      if (!response.ok)
+        throw new Error(
+          `Media ${media.id} returned ${response.status}: ${url}`,
+        );
+    }),
+  );
 }
 
 async function main() {
@@ -163,7 +188,29 @@ async function main() {
       ) as Draft,
   );
   const batchSlugs = new Set(drafts.map((draft) => draft.slug));
+  const titles = new Set<string>();
+  const metaTitles = new Set<string>();
+  const keywords = new Set<string>();
   for (const draft of drafts) {
+    const words = draft.markdown.trim().split(/\s+/).length;
+    if (
+      words < 900 ||
+      !draft.metaTitle?.trim() ||
+      draft.metaTitle.length > 60 ||
+      draft.excerpt.length < 80 ||
+      draft.excerpt.length > 220 ||
+      !draft.primaryKeyword?.trim()
+    ) {
+      throw new Error(`${draft.slug} needs content or metadata review`);
+    }
+    for (const [set, value] of [
+      [titles, draft.title.toLowerCase()],
+      [metaTitles, draft.metaTitle.toLowerCase()],
+      [keywords, draft.primaryKeyword.toLowerCase()],
+    ] as const) {
+      if (set.has(value)) throw new Error(`${draft.slug} duplicates ${value}`);
+      set.add(value);
+    }
     const linkedSlugs = [
       ...draft.markdown.matchAll(/\]\(\/blog\/([a-z0-9-]+)(?:[?#][^)]*)?\)/g),
     ].map((match) => match[1]);
@@ -189,7 +236,7 @@ async function main() {
   const posts: Post[] = [];
   const revisions = new Map<number, Post["content"]>();
   const checkedMedia = new Set<number>();
-  for (const draft of drafts) {
+  for (const [index, draft] of drafts.entries()) {
     const result = await payload.find({
       collection: "posts",
       where: { slug: { equals: draft.slug } },
@@ -210,6 +257,16 @@ async function main() {
     if (post._status !== "draft" && post._status !== "published") {
       throw new Error(`${draft.slug} has an unexpected status`);
     }
+    const storedLinkedSlugs = [
+      ...JSON.stringify(post.content).matchAll(/\/blog\/([a-z0-9-]+)/g),
+    ].map((match) => match[1]);
+    for (const slug of storedLinkedSlugs) {
+      if (!batchSlugs.has(slug)) {
+        throw new Error(
+          `${draft.slug} stores an unpublished article link: ${slug}`,
+        );
+      }
+    }
     posts.push(post);
     revisions.set(post.id, revisedContent(post.content, draft));
 
@@ -225,6 +282,9 @@ async function main() {
       });
       await verifyMedia(media, publicBase);
       checkedMedia.add(id);
+    }
+    if ((index + 1) % 10 === 0) {
+      console.log(`Verified ${index + 1}/${drafts.length} posts`);
     }
   }
 
@@ -245,9 +305,11 @@ async function main() {
   );
   if (!apply) return;
 
-  const publishedAt = new Date().toISOString();
-  for (const post of posts) {
+  for (const [index, post] of posts.entries()) {
     if (post._status === "published") continue;
+    const draft = drafts[index];
+    const heroImage =
+      typeof post.heroImage === "number" ? post.heroImage : post.heroImage.id;
     await payload.update({
       collection: "posts",
       id: post.id,
@@ -255,7 +317,13 @@ async function main() {
       overrideAccess: true,
       data: {
         _status: "published",
-        publishedAt,
+        publishedAt: new Date().toISOString(),
+        excerpt: draft.excerpt,
+        meta: {
+          title: draft.metaTitle,
+          description: draft.excerpt,
+          image: heroImage,
+        },
         content: revisions.get(post.id),
       },
     });

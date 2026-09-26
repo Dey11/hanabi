@@ -102,7 +102,7 @@ export const Posts: CollectionConfig = {
       type: "array",
       admin: {
         description:
-          "Optional. Visible on the article and emitted as FAQ structured data.",
+          "Optional. Visible on the article; no FAQ structured data is emitted.",
       },
       fields: [
         {

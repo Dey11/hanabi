@@ -12,7 +12,7 @@ Payload manages the public blog at `/cms`. It is separate from Hanabi's existing
    bun run payload:migrate
    ```
 
-4. Provision the first CMS user before exposing `/cms` publicly. Payload presents a create-first-user screen when no CMS users exist; leaving that screen public creates an account-takeover risk. Coordinate a short, controlled bootstrap window with the site owner.
+4. Sign in to the existing Hanabi admin at `/admin`, then open `/admin/cms-setup`. Enter a new CMS password there to create the first Payload account for `deydevelops@gmail.com`. The public Payload first-user page and registration endpoint are blocked, so a stranger cannot claim the account before you do.
 
 Payload email delivery is not configured yet. Until an email adapter is added, password-reset messages are logged by the server instead of reaching the user. Keep the first user's credentials in a secure password manager and plan email delivery before routine editorial use.
 
@@ -31,7 +31,7 @@ Create content in this order:
 
 Only records with `_status=published` and a `publishedAt` time in the past are exposed publicly. Saving or deleting a post revalidates blog, feed, and sitemap paths.
 
-For the initial release, `bun run payload:publish-initial` checks the four reviewed, mutually linked drafts, their media, and their source URLs. It is a dry run by default. Run it only after the deployed blog and R2 images work, using `NEXT_PUBLIC_SITE_URL=https://www.tryhanabi.com`, `PAYLOAD_MEDIA_BASE_URL`, `PAYLOAD_SECRET`, and the production `DATABASE_URL`. To publish after inspecting its output, add `--apply --confirm-site=www.tryhanabi.com`. The script sets the publication date at release time and skips posts already published. The other drafts remain unpublished for later editorial review. This command uses Node for the Payload/Lexical runtime because Bun currently hits a Lexical module initialization error; Bun remains the script runner.
+For the initial release, `bun run payload:publish-initial` checks the first 100 mutually linked drafts, their metadata, media, and source URLs. It is a dry run by default. Run it only after the deployed blog and R2 images work, using `NEXT_PUBLIC_SITE_URL=https://www.tryhanabi.com`, `PAYLOAD_MEDIA_BASE_URL`, `PAYLOAD_SECRET`, and the production `DATABASE_URL`. To publish after inspecting its output, add `--apply --confirm-site=www.tryhanabi.com`. The script sets each publication date at release time, reconciles older imported excerpts and SEO titles against the reviewed draft files, and skips posts already published. The other 400 drafts remain unpublished for later editorial review. This command uses Node for the Payload/Lexical runtime because Bun currently hits a Lexical module initialization error; Bun remains the script runner.
 
 Scheduled publishing also needs a job runner. On a long-running host, run:
 
