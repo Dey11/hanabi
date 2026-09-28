@@ -32,13 +32,13 @@ Write one JSON file per assignment at `content/blog-drafts/NNN.json`, where NNN 
 
 ## Article
 
-- 1,500 to 1,900 words in `markdown`. This is the length that can rank for an agency query without padding. Do not stop at 1,100. Do not pass 1,900 by repeating a point.
+- 1,500 to 1,900 words in `markdown` for posts 101–500. The first 100 definition posts were written shorter and are checked against a 900-word floor. Do not pad any article to meet a count.
 - Start with the answer. Two short paragraphs a stranger could quote.
 - Then six or seven `##` sections. Use `###` only when a section has real parts. The importer places two photographs after later headings, so the sections must be real, not labels.
 - Short paragraphs. A list when the reader is choosing or checking.
 - Use the primary keyword in the title and once in the first paragraph. Do not repeat it as a slogan.
 - Cover the `angle` in the plan. That angle is what makes this post different from its neighbors.
-- Include the plan's `cta` URL once, in a sentence that matches the article. Anchor text should say what the reader gets, such as Hanabi's services, selected work, or an intro call. Also mention workwithhanabi@gmail.com only if the plan says to.
+- Include the plan's `cta` URL once, in a sentence that matches the article. The canonical `www.tryhanabi.com` version of an on-site URL is also accepted. Anchor text should say what the reader gets, such as Hanabi's services, selected work, or an intro call. Also mention workwithhanabi@gmail.com only if the plan says to.
 - Link one sibling with a markdown link to `/blog/{sibling}` using the sibling slug from the plan. The sentence should say why that piece is next.
 - Three FAQs. Each answer stands alone in two to four sentences.
 - `sources`: include two items from the approved list in `docs/seo-geo.md` only when the article actually uses that source. If the article does not need an outside number, still cite one relevant document you truly relied on, and do not invent a statistic to justify a citation.
@@ -58,7 +58,7 @@ For posts 001–100, `image` is the hero and `scene` is what is in the frame. Al
 - Title length <= 90
 - Meta title length <= 60
 - Excerpt length between 80 and 220
-- Word count between 1500 and 1900
+- Word count between 1500 and 1900 for posts 101–500; at least 900 for posts 001–100
 - The CTA URL appears once
 - The sibling `/blog/` link appears once
 - Valid JSON

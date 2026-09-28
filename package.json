@@ -22,6 +22,7 @@
     "payload:migrate": "payload migrate",
     "payload:migrate:create": "payload migrate:create",
     "payload:jobs": "payload jobs:run --cron \"* * * * *\" --queue default --handle-schedules",
+    "blog:validate": "bun run scripts/validate-blog-library.ts",
     "payload:publish-initial": "node --env-file=.env --import tsx scripts/publish-initial-blog-batch.ts"
   },
   "dependencies": {

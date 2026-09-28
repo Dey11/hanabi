@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BookCallLink from "@/components/book-call-link";
 import { BlogCard } from "@/components/blog/blog-card";
 import { JsonLd } from "@/components/blog/json-ld";
 import { getPostBySlug, getPosts } from "@/lib/blog/data";
@@ -342,6 +343,39 @@ export default async function PostPage({ params }: PageProps) {
             })}
           </section>
         ) : null}
+
+        <section
+          className="mx-auto mt-16 max-w-3xl px-5 sm:px-8"
+          aria-labelledby="article-project-help"
+        >
+          <div className="rounded-3xl bg-[#f0ede6] p-7 sm:p-10">
+            <p className="font-mono text-xs font-medium tracking-[0.08em] text-[#c43b1b] uppercase">
+              Work with Hanabi
+            </p>
+            <h2
+              id="article-project-help"
+              className="mt-3 text-2xl font-medium tracking-[-0.04em] sm:text-3xl"
+            >
+              Want help putting this into practice?
+            </h2>
+            <p className="mt-3 max-w-2xl leading-relaxed tracking-[-0.02em] text-neutral-700">
+              We design and build websites, brand systems, and product
+              interfaces for founders and small teams. See what we do, or tell
+              us about the project you have in mind.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/#services"
+                className="inline-flex min-h-11 items-center rounded-full bg-neutral-950 px-5 text-sm font-medium text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+              >
+                Explore our services
+              </Link>
+              <BookCallLink className="inline-flex min-h-11 items-center rounded-full border border-neutral-950 px-5 text-sm font-medium text-neutral-950 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950">
+                Book an intro call
+              </BookCallLink>
+            </div>
+          </div>
+        </section>
       </article>
 
       {relatedPosts.length ? (

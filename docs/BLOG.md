@@ -31,6 +31,8 @@ Create content in this order:
 
 Only records with `_status=published` and a `publishedAt` time in the past are exposed publicly. Published article and listing data is cached for up to five minutes to keep article responses fast. Draft previews bypass that cache. Saving or deleting a post invalidates the public data cache and revalidates blog, feed, and sitemap paths.
 
+Run `bun run blog:validate` to check all 500 source drafts against their editorial plans before import or review. This catches missing drafts, broken sibling links, metadata limits, and missing calls to action; it does not replace factual and editorial review. Public article pages also give readers direct links to Hanabi's services and intro call after the article.
+
 For the initial release, `bun run payload:publish-initial` checks the first 100 mutually linked drafts, their metadata, media, and source URLs. It is a dry run by default. Run it only after the deployed blog and R2 images work, using `NEXT_PUBLIC_SITE_URL=https://www.tryhanabi.com`, `PAYLOAD_MEDIA_BASE_URL`, `PAYLOAD_SECRET`, and the production `DATABASE_URL`. To publish after inspecting its output, add `--apply --confirm-site=www.tryhanabi.com`. The script sets each publication date at release time, reconciles older imported excerpts and SEO titles against the reviewed draft files, and skips posts already published. The other 400 drafts remain unpublished for later editorial review. This command uses Node for the Payload/Lexical runtime because Bun currently hits a Lexical module initialization error; Bun remains the script runner.
 
 Scheduled publishing also needs a job runner. On a long-running host, run:
