@@ -16,7 +16,6 @@ const CONTRIBUTOR_META: Record<
   { name: string; mask: string }
 > = {
   krish: { name: "Krish", mask: marketingAssetUrl("team/krish.png") },
-  roy: { name: "Roy", mask: marketingAssetUrl("team/roy.png") },
   dey: { name: "Dey", mask: marketingAssetUrl("team/dey.png") },
   sagarika: {
     name: "Sagarika",

@@ -11,14 +11,6 @@ const sawarabiGothic = Sawarabi_Gothic({
 
 const teamMembers = [
   {
-    name: "Roy",
-    role: "Developer",
-    avatarSrc: marketingAssetUrl("team/roy.png"),
-    bannerSrc: marketingAssetUrl("team/roy-banner.webp"),
-    quote: "Here to be myself",
-    unoptimizedBanner: true,
-  },
-  {
     name: "Krish",
     role: "Designer",
     avatarSrc: marketingAssetUrl("team/krish.png"),

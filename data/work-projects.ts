@@ -6,12 +6,7 @@ export type WorkProjectImage = {
   mobileSrc?: string;
 };
 
-export type WorkProjectContributor =
-  | "krish"
-  | "roy"
-  | "dey"
-  | "sagarika"
-  | "arsh";
+export type WorkProjectContributor = "krish" | "dey" | "sagarika" | "arsh";
 
 /**
  * Layout follows image count (see `work-card-gallery.tsx`):
@@ -36,6 +31,7 @@ export type WorkProject = {
   category: string;
   description: string;
   images: WorkProjectImages;
+  galleryLayout?: "screens";
   contributors: readonly WorkProjectContributor[];
   liveUrl?: string;
 };
@@ -55,6 +51,28 @@ export const workProjects: readonly WorkProject[] = [
       {
         src: marketingAssetUrl("projects/tradeMoai2.png"),
         alt: "Trade Moai trading dashboard",
+      },
+    ],
+  },
+  {
+    title: "GO GYM",
+    category: "APP DESIGN",
+    description:
+      "A fitness product concept with fluid onboarding, a bold visual identity, and a dashboard that turns daily activity into lasting habits.",
+    contributors: ["krish"],
+    galleryLayout: "screens",
+    images: [
+      {
+        src: marketingAssetUrl("projects/go-gym-splash.webp"),
+        alt: "Go Gym splash screen",
+      },
+      {
+        src: marketingAssetUrl("projects/go-gym-activity.webp"),
+        alt: "Go Gym physical activity selection",
+      },
+      {
+        src: marketingAssetUrl("projects/go-gym-workouts.webp"),
+        alt: "Go Gym workout library",
       },
     ],
   },
@@ -118,27 +136,22 @@ export const workProjects: readonly WorkProject[] = [
         src: marketingAssetUrl("projects/wabisabi2.png"),
         alt: "Wabisabi feature section",
       },
-      {
-        src: marketingAssetUrl("projects/wabisabi3.png"),
-        alt: "Wabisabi brand detail",
-      },
     ],
   },
   {
-    title: "GOT NEXT",
+    title: "COMP OPS",
     category: "WEB APP | PRODUCT UI",
-    liveUrl: "https://gotnext.gg",
     description:
-      "A clean and focused product interface designed to help users discover, track, and engage with what matters most.",
+      "A competitive gaming platform bringing tournaments, leagues, and communities together, with clear tools for players and organizers.",
     contributors: ["krish"],
     images: [
       {
-        src: marketingAssetUrl("projects/gotnextHero.png"),
-        alt: "Got Next hero screen",
+        src: marketingAssetUrl("projects/compops-dashboard.webp"),
+        alt: "Comp Ops game dashboard with upcoming tournaments and competition navigation",
       },
       {
-        src: marketingAssetUrl("projects/gotnextDashboard.png"),
-        alt: "Got Next dashboard overview",
+        src: marketingAssetUrl("projects/compops-organizations.webp"),
+        alt: "Comp Ops organization workspace with teams, members, and activity",
       },
     ],
   },
@@ -166,7 +179,7 @@ export const workProjects: readonly WorkProject[] = [
     liveUrl: "https://leadly.tryhanabi.com",
     description:
       "A streamlined lead management platform designed to help teams track, nurture, and convert prospects with clarity and speed.",
-    contributors: ["arsh", "roy"],
+    contributors: ["arsh", "krish", "dey"],
     images: [
       {
         src: marketingAssetUrl("projects/leadly1.png"),

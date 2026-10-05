@@ -16,10 +16,18 @@ export const blurPlaceholders: Record<string, string> = {
     "data:image/webp;base64,UklGRqYAAABXRUJQVlA4WAoAAAAQAAAADAAADwAAQUxQSBoAAAABF3D0/4iIwSDbSLt3nORUXyCi/8mLOoDqAFZQOCBmAAAA8AEAnQEqDQAQAAOAWiWwAnQAuDUh0JiQAP7iGlFojiHNAm4Vfw7kC6L2sjK6+Ns3KmdK2x8O7TNjQXnHIDByt6Gbn2AECWDXSvaJo+LM3ry31BKLYKUBjvoYK/yZyoubUYmCYAAA",
   [marketingAssetUrl("projects/dtc3.png")]:
     "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoHABAAA4BaJYwC7AD6A+y8AAD+8j08FoKbNMvvyRd+YNv2WbIq0ylbmWGe7ovj/1mUs861b75l2Bl7JK1BN3Sd46TpXDnRvwAAAA==",
-  [marketingAssetUrl("projects/gotnextDashboard.png")]:
-    "data:image/webp;base64,UklGRjAAAABXRUJQVlA4ICQAAABwAQCdASoQAAkAA4BaJaUwAAGIAAD+9F4uVkIDdbP4uwgAAAA=",
-  [marketingAssetUrl("projects/gotnextHero.png")]:
-    "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAACwAQCdASoQAAkAA4BaJYwAAp0uFFrAAP75GHKMWTqI/rFK8FeMMB7mXCHmk5lLda3qAAAA",
+  [marketingAssetUrl("projects/compops-dashboard.webp")]:
+    "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQAAsAA4BaJZwAAuduqKgH4kAA/vSeAAkbN+3K3090grCF6QjLqMwVOY9gO+l0sW9p28DCaAA=",
+  [marketingAssetUrl("projects/compops-organizations.webp")]:
+    "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoQAAsAA4BaJaQAA3AA/vNyhg4BPnOad4AAAA==",
+  [marketingAssetUrl("projects/go-gym-splash.webp")]:
+    "data:image/webp;base64,UklGRqYAAABXRUJQVlA4WAoAAAAQAAAACAAADwAAQUxQSD4AAAABT6CojRRoL/BvDBFo4I+OiAjwm+beQFEkSQ1ZCEoyUtbC/QkKomCeGIjofzig8El05bC26mc+6El0pQcKA1ZQOCBCAAAA0AEAnQEqCQAQAAOAWiWUAALdANQV4QAA/vat+giZnlLz/eRxY/s1itfQ1ngyIJytfHR6YtsH4cqtDoQBQOAUcAAA",
+  [marketingAssetUrl("projects/go-gym-activity.webp")]:
+    "data:image/webp;base64,UklGRpgAAABXRUJQVlA4WAoAAAAQAAAACAAADwAAQUxQSD4AAAABT6CojRRoL/BvDBFo4I+OiAjwm+beQFEkSQ1ZCEoyUtbC/QkKomCeGIjofzig8El05bC26mc+6El0pQcKA1ZQOCA0AAAAkAEAnQEqCQAQAAOAWiUAAFzouuAAAP75FCDc02/7ePM8mp6gfkh4m9k4tj8Kr244G2gAAA==",
+  [marketingAssetUrl("projects/go-gym-workouts.webp")]:
+    "data:image/webp;base64,UklGRp4AAABXRUJQVlA4WAoAAAAQAAAACAAADwAAQUxQSEIAAAABV6Aqsg3qPtC/mBAy+KdGRAR4RXO2H4xi22pDF4KSjpRv4e8pCqoAUoRmGQMR/Q8DkGhH3LxpneWnfpAH8eUWIBFWUDggNgAAANABAJ0BKgkAEAADgFolnAACnVzPlyAAAP73xskg6w3OoPDztuenIhO54zNefbnRlAdlgQAAAA==",
+  [marketingAssetUrl("projects/go-gym-me.webp")]:
+    "data:image/webp;base64,UklGRqoAAABXRUJQVlA4WAoAAAAQAAAACAAADwAAQUxQSD4AAAABT6CojRRoL/BvDBFo4I+OiAjwm+beQFEkSQ1ZCEoyUtbC/QkKomCeGIjofzig8El05bC26mc+6El0pQcKA1ZQOCBGAAAAsAEAnQEqCQAQAAOAWiWIAAL2nvr7mAD+9d2kyWM9dB3dYJUrL2D/TRBbqoOhIjjGoN3I/R3Sc6raz5CAsuUV3+DPi6uAAA==",
   [marketingAssetUrl("projects/leadly1.png")]:
     "data:image/webp;base64,UklGRl4AAABXRUJQVlA4WAoAAAAQAAAADwAACgAAQUxQSBMAAAABD3D//4iIIBZM8pfeG0JE/7MFAFZQOCAkAAAAMAEAnQEqEAALAAOAWiWkAANwAP7x4mGdttdfLQcRFsxs0AAA",
   [marketingAssetUrl("projects/leadly2.png")]:
@@ -36,8 +44,6 @@ export const blurPlaceholders: Record<string, string> = {
     "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAsAA4BaJQBdgCIGxlYNBoAA4n7U11oP122iMr4nkoVKxThBziPqQ4k4Pi7sLodS6WybyUt7QgwLDEHaOKBD9QDO9SLjtcnDTPbv1ggAAA==",
   [marketingAssetUrl("projects/wabisabi2.png")]:
     "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAsAA4BaJZwAAp/WzGVrSAAA/vK0vhNb4YXb0LtpoU3keVXSLleZkBxEMcZDCk829l7ar49MQFl6X5exBN+pLC974AAA",
-  [marketingAssetUrl("projects/wabisabi3.png")]:
-    "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAsAA4BaJZQCw7Ef27+5AsoAAP7ytSFN8jM4d/J3rEg5jxjGN+6c/qPkUCSQ8+VU7/dN29z0QMp41TcaajsIKaPtX9i9LIdMskXug9BIEVYAAAA=",
   [marketingAssetUrl("whyus/code.png")]:
     "data:image/webp;base64,UklGRs4AAABXRUJQVlA4WAoAAAAQAAAADwAADAAAQUxQSGoAAAAFuQpE9D/AMADSNmB/b0/ooUm6C53eEDEBCtu2QdqO4ZDxoFjsTmAABqfdouiRCfwZyCZ2MnkjEATq0OxkYr9Ij3ZvbV97y8Mv+yUfWmqSvQNLzjMdKPwTAxDbhRASiMiCXn34mhUW0rYQVlA4ID4AAADwAQCdASoQAA0AA4BaJbACdLoAAqSqnkAA/o07Tuds3YO5bZPbJfZIY2rSL4KD/gdkUUP8EKX7FNjszAAAAA==",
   [marketingAssetUrl("whyus/communication.png")]:

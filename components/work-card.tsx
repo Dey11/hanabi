@@ -12,6 +12,7 @@ export type WorkCardProps = {
   category: string;
   description: string;
   images: WorkProjectImages;
+  galleryLayout?: "screens";
   contributors: readonly WorkProjectContributor[];
   liveUrl?: string;
 };
@@ -23,6 +24,7 @@ export default function WorkCard({
   images,
   contributors,
   liveUrl,
+  galleryLayout,
 }: WorkCardProps) {
   return (
     <article className="flex w-full flex-col">
@@ -47,15 +49,18 @@ export default function WorkCard({
 
         <div className="relative flex flex-col overflow-visible rounded-xl">
           <div className="relative z-50 overflow-hidden rounded-t-xl rounded-b-none bg-[#FFF] shadow-sm inset-shadow-sm inset-shadow-black/20">
-            <HangingPaperCranes
-              seed={title}
-              variant="card"
-              className="hidden md:block"
-            />
+            {galleryLayout !== "screens" ? (
+              <HangingPaperCranes
+                seed={title}
+                variant="card"
+                className="hidden md:block"
+              />
+            ) : null}
             <div className="relative z-10 px-6 pt-4 pb-4 sm:px-9 sm:pt-5 sm:pb-5 md:px-12 md:pt-6 md:pb-6">
               <WorkCardGallery
+                layout={galleryLayout}
                 images={images}
-                mobileImageCorners={title === "GOT NEXT" ? "square" : "rounded"}
+                mobileImageCorners="rounded"
                 mobileThreeLayout={
                   title === "DOWN THE COVE" ? "side-by-side" : "stacked"
                 }

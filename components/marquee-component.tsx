@@ -2,12 +2,13 @@
 
 import { SeamlessMarquee } from "@/components/seamless-marquee";
 import Image from "next/image";
-import { memo } from "react";
+import ShowreelVideo from "@/components/showreel-video";
+import { Fragment, memo } from "react";
 import { marketingAssetUrl } from "@/lib/marketing-assets";
 
 const MARQUEE_SPEED = 64;
 const HERO_PROJECT_ASPECT_RATIO = "45 / 32";
-const KNOWN_LCP_ITEMS = new Set(["gotnextConcept"]);
+const KNOWN_LCP_ITEMS = new Set(["compopsDashboard"]);
 
 const MarqueeItem = memo(function MarqueeItem({
   item,
@@ -42,7 +43,10 @@ export default function MarqueeComponent({ items }: { items: string[] }) {
       <SeamlessMarquee speed={MARQUEE_SPEED}>
         <div className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6">
           {items.map((item, index) => (
-            <MarqueeItem key={`${item}-${index}`} item={item} index={index} />
+            <Fragment key={`${item}-${index}`}>
+              <MarqueeItem item={item} index={index} />
+              {index === 3 ? <ShowreelVideo /> : null}
+            </Fragment>
           ))}
         </div>
       </SeamlessMarquee>
